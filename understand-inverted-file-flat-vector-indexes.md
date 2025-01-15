@@ -107,4 +107,6 @@ In the case of an IVF approximate search, you can specify a target accuracy perc
   * If you do not specify any target accuracy in your approximate search query, then you will inherit the one set when the index was created. You will see that at index creation time, you can specify a target accuracy either using a percentage value or parameters values depending on the type of index you are creating. 
   * It is possible to specify a different target accuracy at index search, compared to the one set at index creation. For IVF indexes, you may probe more centroid partitions using the ` NEIGHBOR PARTITION PROBES ` parameter to get more accurate results. The target accuracy that you provide during index creation decides the index creation parameters and also acts as the default accuracy value for vector index searches. 
 
-**Parent topic:** [ About Neighbor Partition Vector Index ](neighbor-partition-vector-indexes.html)
+
+
+**Parent topic:** [ About Neighbor Partition Vector Index ](neighbor-partition-vector-indexes.md)

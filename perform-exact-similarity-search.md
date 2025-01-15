@@ -41,4 +41,4 @@ In the case of Euclidean distances, comparing squared distances is equivalent to
 
 [ *Oracle Database SQL Language Reference*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=SQLRF-GUID-CFA006CA-6FF1-4972-821E-6996142A51C6) for the full syntax of the ` ROW_LIMITING_CLAUSE `
 
-**Parent topic:** [ Query Data With Similarity and Hybrid Searches ](query-data-similarity-and-hybrid-searches.html)
+**Parent topic:** [ Query Data With Similarity and Hybrid Searches ](query-data-similarity-and-hybrid-searches.md)

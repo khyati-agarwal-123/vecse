@@ -8,6 +8,9 @@ This guide is intended for application developers, database administrators, data
 
   * Perform similarity searches on content, such as words, documents, audio tracks, or images 
 
+
+
+
 To use this document, you must have a basic familiarity with vector embedding and machine learning concepts, SQL, SQL*Plus, and PL/SQL. 
 
-**Parent topic:** [ Preface ](preface.html)
+**Parent topic:** [ Preface ](preface.md)

@@ -192,4 +192,7 @@ This tutorial demonstrates how you can vectorize relational data very efficientl
 
 [ *Oracle Machine Learning for SQL Concepts*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=DMCON-GUID-EA778C1F-7819-4C31-8E49-299F57C9B709) for more information about Feature Extraction algorithms 
 
-**Parent topic:** [ Generate Embeddings ](generate-embeddings.html)
+
+
+
+**Parent topic:** [ Generate Embeddings ](generate-embeddings.md)

@@ -120,4 +120,7 @@ Examples
     SELECT FROM_VECTOR(dataVec) FROM vecTab;
     ```
 
-**Parent topic:** [ Vector Serializers ](vector-serializers.html)
+
+
+
+**Parent topic:** [ Vector Serializers ](vector-serializers.md)

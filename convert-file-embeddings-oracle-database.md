@@ -22,6 +22,6 @@ This statement creates a relational table ( ` doc_chunks ` ) from unstructured t
 
 Note that each successive function depends on the output of the previous function, so the order of chains is important here. First, the output from ` utl_to_text ` ( ` dt.data ` column) is passed as an input for ` utl_to_chunks ` and then the output from ` utl_to_chunks ` is passed as an input for ` utl_to_embeddings ` . 
 
-For complete example, run [ SQL Quick Start Using a Vector Embedding Model Uploaded into the Database ](sql-quick-start-using-vector-embedding-model-uploaded-database.html#GUID-403EB84E-3047-4905-844C-BD4A8670B8A4) , where you can see how to embed Oracle Database Documentation books in the ` doc_chunks ` table and perform similarity searches using vector indexes. 
+For complete example, run [ SQL Quick Start Using a Vector Embedding Model Uploaded into the Database ](sql-quick-start-using-vector-embedding-model-uploaded-database.md#GUID-403EB84E-3047-4905-844C-BD4A8670B8A4) , where you can see how to embed Oracle Database Documentation books in the ` doc_chunks ` table and perform similarity searches using vector indexes. 
 
-**Parent topic:** [ Perform Chunking With Embedding ](perform-chunking-embedding.html)
+**Parent topic:** [ Perform Chunking With Embedding ](perform-chunking-embedding.md)

@@ -29,4 +29,7 @@ Examples
     exec dbms_vector.drop_credential('COHERE_CRED');
     ```
 
-**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.html)
+
+
+
+**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.md)

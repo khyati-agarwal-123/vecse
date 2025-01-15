@@ -72,4 +72,4 @@ You can also create the index using the following syntax:
 
 [ *Oracle Database SQL Language Reference*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=SQLRF-GUID-CFA006CA-6FF1-4972-821E-6996142A51C6) for the full syntax of the ` ROW_LIMITING_CLAUSE `
 
-**Parent topic:** [ Approximate Similarity Search Examples ](approximate-similarity-search-examples.html)
+**Parent topic:** [ Approximate Similarity Search Examples ](approximate-similarity-search-examples.md)

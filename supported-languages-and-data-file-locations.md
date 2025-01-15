@@ -64,6 +64,8 @@ URDU  |  ur  |  ` ctx/data/eos/dreosur.txt `
   
 **Related Topics**
 
-  * [ CREATE_LANG_DATA ](create_lang_data.html#GUID-C9756FA9-B0B6-4750-8D9C-ADEF8B67C675)
+  * [ CREATE_LANG_DATA ](create_lang_data.md#GUID-C9756FA9-B0B6-4750-8D9C-ADEF8B67C675)
 
-**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.html)
+
+
+**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.md)

@@ -648,7 +648,7 @@ Example output:
     }
     ```
 
-For information about the columns of the ` VECSYS.VECTOR$INDEX ` view, see [ VECSYS.VECTOR$INDEX ](vecsys-vectorindex.html#GUID-FA5183EA-3C60-470D-9C91-8215BE4FF138) . 
+For information about the columns of the ` VECSYS.VECTOR$INDEX ` view, see [ VECSYS.VECTOR$INDEX ](vecsys-vectorindex.md#GUID-FA5183EA-3C60-470D-9C91-8215BE4FF138) . 
 
   11. With the HNSW index created, create another explain plan for a similarity search on the ` genvec ` table. 
     
@@ -964,4 +964,7 @@ Example output:
     20 rows selected.
     ```
 
-**Parent topic:** [ Get Started ](get-started-node.html)
+
+
+
+**Parent topic:** [ Get Started ](get-started-node.md)

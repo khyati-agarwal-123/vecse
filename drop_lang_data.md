@@ -22,4 +22,4 @@ Example
     DBMS_VECTOR_CHAIN.DROP_LANG_DATA('indonesian');
     ```
 
-**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.html)
+**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.md)

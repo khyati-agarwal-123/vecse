@@ -14,6 +14,6 @@ Syntax
 
 Purpose 
 
-Refer to [ VECTOR_DIMENSION_COUNT ](vector_dimension_count.html#GUID-C3D937E0-7F9F-4C21-A214-0CFA31472E67) for full semantics. 
+Refer to [ VECTOR_DIMENSION_COUNT ](vector_dimension_count.md#GUID-C3D937E0-7F9F-4C21-A214-0CFA31472E67) for full semantics. 
 
-**Parent topic:** [ Constructors, Converters, and Descriptors ](constructors-converters-descriptors-and-arithmetic-functions.html)
+**Parent topic:** [ Constructors, Converters, and Descriptors ](constructors-converters-descriptors-and-arithmetic-functions.md)

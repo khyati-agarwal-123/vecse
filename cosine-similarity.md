@@ -7,4 +7,4 @@ The smaller the angle, the more similar are the two vectors. Cosine similarity m
   
 
 
-![Description of cosine_similarity_2x2.png follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/cosine_similarity_2x2.png)[ Description of the illustration cosine_similarity_2x2.png ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/cosine_similarity_2x2.md)**Parent topic:** [ Vector Distance Metrics ](vector-distance-metrics.html)
+![Description of cosine_similarity_2x2.png follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/cosine_similarity_2x2.png)[ Description of the illustration cosine_similarity_2x2.png ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/cosine_similarity_2x2.md)**Parent topic:** [ Vector Distance Metrics ](vector-distance-metrics.md)

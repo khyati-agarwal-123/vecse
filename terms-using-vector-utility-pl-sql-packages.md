@@ -10,4 +10,4 @@ Certain features of the database may allow you to access services offered separa
 
 Your use of these features is solely at your own risk, and you are solely responsible for complying with any terms and conditions related to use of any such third-party services. Notwithstanding any other terms and conditions related to the third-party services, your use of such database features constitutes your acceptance of that risk and express exclusion of Oracle's responsibility or liability for any damages resulting from such access. 
 
-**Parent topic:** [ About PL/SQL Packages to Generate Embeddings ](pl-sql-packages-generate-embeddings.html)
+**Parent topic:** [ About PL/SQL Packages to Generate Embeddings ](pl-sql-packages-generate-embeddings.md)

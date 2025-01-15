@@ -13,4 +13,4 @@ Note that normalizing vectors and using the dot product similarity is equivalent
   
 
 
-![Description of dot_product_similarity2.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/dot_product_similarity2.png)[ Description of the illustration dot_product_similarity2.eps ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/dot_product_similarity2.md)**Parent topic:** [ Vector Distance Metrics ](vector-distance-metrics.html)
+![Description of dot_product_similarity2.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/dot_product_similarity2.png)[ Description of the illustration dot_product_similarity2.eps ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/dot_product_similarity2.md)**Parent topic:** [ Vector Distance Metrics ](vector-distance-metrics.md)

@@ -8,4 +8,4 @@ Column Name  |  Data Type  |  Description
 ` FORMAT ` |  ` VARCHAR2(4) ` |  Format of the vocabulary, such as ` XLM ` , ` BERT ` , or ` GPT2 `  
 ` CASED ` |  ` VARCHAR2(7) ` |  Character-casing of the vocabulary, that is, vocabulary to be treated as cased or uncased   
   
-**Parent topic:** [ Text Processing Views ](text-processing-views.html)
+**Parent topic:** [ Text Processing Views ](text-processing-views.md)

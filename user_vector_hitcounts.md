@@ -12,4 +12,4 @@ Column Name  |  Data Type  |  Description
 ` TOTAL_COUNT ` |  ` NUMBER ` |  Total number of calls made to the third-party provider.   
 ` LAST_HIT ` |  ` TIMESTAMP(6) ` |  Time of the last call to the third-party provider   
   
-**Parent topic:** [ Text Processing Views ](text-processing-views.html)
+**Parent topic:** [ Text Processing Views ](text-processing-views.md)

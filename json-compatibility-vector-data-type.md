@@ -18,8 +18,13 @@ The following SQL/JSON functions and item methods are compatible for use with th
   * ` .string() `
   * ` .stringify() `
 
-> **note:** See Also: 
-    * [ *Oracle Database JSON Developer’s Guide*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ADJSN-GUID-E075CA14-DC89-4F9D-AD6F-C351F774575A) for more information about ` VECTOR ` as a data type for JSON data 
-    * [ *Oracle Database JSON Developer’s Guide*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ADJSN-GUID-8656CAB9-C293-4A99-BB62-F38F3CFC4C13) for information about SQL/JSON path expression item methods, including ` vector() `
 
-**Parent topic:** [ Use SQL Functions for Vector Operations ](use-sql-functions-vector-operations.html)
+
+> **note:** See Also: 
+
+  * [ *Oracle Database JSON Developer’s Guide*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ADJSN-GUID-E075CA14-DC89-4F9D-AD6F-C351F774575A) for more information about ` VECTOR ` as a data type for JSON data 
+  * [ *Oracle Database JSON Developer’s Guide*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ADJSN-GUID-8656CAB9-C293-4A99-BB62-F38F3CFC4C13) for information about SQL/JSON path expression item methods, including ` vector() `
+
+
+
+**Parent topic:** [ Use SQL Functions for Vector Operations ](use-sql-functions-vector-operations.md)

@@ -2,7 +2,9 @@
 
 Review the various vector memory pool views. 
 
-  * [ V$VECTOR_MEMORY_POOL ](vvector_memory_pool.html)   
+  * [ V$VECTOR_MEMORY_POOL ](vvector_memory_pool.md)   
 This view contains information about the space allocation for Vector Memory. 
 
-**Parent topic:** [ Oracle AI Vector Search Views ](oracle-ai-vector-search-views.html)
+
+
+**Parent topic:** [ Oracle AI Vector Search Views ](oracle-ai-vector-search-views.md)

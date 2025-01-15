@@ -12,15 +12,15 @@ This table describes the functions and properties of the ` EmbeddingModelConfig 
 
 Functions  |  Parameter Type  |  Returns  |  Description   
 ---|---|---|---  
-` from_template(name,**kwargs) ` | 
+` from_template(name,**kwargs) ` |  <ul>
 
 <li>
   * ` name ` ( ` String ` ): The name of the template </li> <li>
-  * ` **kwargs ` : template properties to override or add </li> |  Instance of ` EmbeddingModelConfig ` |  A static function that creates an ` EmbeddingModelConfig ` object based on a predefined template given by the name parameter. You can use named arguments to override the template properties.   
+  * ` **kwargs ` : template properties to override or add </li> </ul> |  Instance of ` EmbeddingModelConfig ` |  A static function that creates an ` EmbeddingModelConfig ` object based on a predefined template given by the name parameter. You can use named arguments to override the template properties.   
 ` show_templates() ` |  NA  |  List of existing templates  |  A static function that returns a list of existing templates by name.   
-` show_preconfigured() ` |  <li>
+` show_preconfigured() ` |  <ul> <li>
     * ` include_properties ` ( ` bool,optional ` ): A flag indicating whether properties should be included in the results. Defaults to ` False ` so only names will be included by default.  </li> <li>
-    * ` model_name ` ( ` str,optional ` ): A model name to filter by when including properties. This argument will be ignored if ` include_properties ` is ` False ` . Otherwise only the properties of this model will be included in the results. </li> |  A list of preconfigured model names or properties.  |  Shows a list of preconfigured model names, or properties. By default, this function returns a list of names only. If the properties are required, pass the ` include_properties ` parameter as ` True ` . The returned list will contain a single dict where each key of the dict is the name of a preconfigured model and the value is the property set for that model. Finally, if only a single set of properties for a specific model is required, pass the name of the model in the ` model_name ` parameter (the ` include_properties ` parameter should also be ` True ` ). This will return a list of a single dict with the properties for the specified model.   
+    * ` model_name ` ( ` str,optional ` ): A model name to filter by when including properties. This argument will be ignored if ` include_properties ` is ` False ` . Otherwise only the properties of this model will be included in the results. </li> </ul> |  A list of preconfigured model names or properties.  |  Shows a list of preconfigured model names, or properties. By default, this function returns a list of names only. If the properties are required, pass the ` include_properties ` parameter as ` True ` . The returned list will contain a single dict where each key of the dict is the name of a preconfigured model and the value is the property set for that model. Finally, if only a single set of properties for a specific model is required, pass the name of the model in the ` model_name ` parameter (the ` include_properties ` parameter should also be ` True ` ). This will return a list of a single dict with the properties for the specified model.   
   
 Template Properties 
 
@@ -55,17 +55,17 @@ This table describes the built-in post_processors and their configuration parame
 
 post_processor  |  Parameters  |  Description   
 ---|---|---  
-` Pooling ` |  <li>
+` Pooling ` |  <ul> <li>
       * ` name ` : ` Pooling ` .  </li> <li>
-      * ` type ` : Valid values should be ` mean ` (Default), ` max ` , ` cls ` </li> |  The Pooling post_processor summarizes the output of the transformer model into a fixed-length vector.   
-` Normalize ` |  <li>
-        * ` name ` : Specify ` Normalize ` </li> |  The Normalize post_processor bounds the vector values to a range using L2 normalization.   
-` Dense ` |  <li>
+      * ` type ` : Valid values should be ` mean ` (Default), ` max ` , ` cls ` </li> </ul> |  The Pooling post_processor summarizes the output of the transformer model into a fixed-length vector.   
+` Normalize ` |  <ul> <li>
+        * ` name ` : Specify ` Normalize ` </li> </ul> |  The Normalize post_processor bounds the vector values to a range using L2 normalization.   
+` Dense ` |  <ul> <li>
           * ` name ` : Dense </li> <li>
           * ` in_features ` : Input feature size </li> <li>
           * ` out_features ` : Output feature size </li> <li>
           * ` bias ` : Whether to learn an additive bias. The default value is ` True ` . </li> <li>
-          * ` activation_function ` : Activation function of the dense layer. Currently only supports ` Tanh ` as the activation function. </li> |  Applies transformation to the incoming data.   
+          * ` activation_function ` : Activation function of the dense layer. Currently only supports ` Tanh ` as the activation function. </li> </ul> |  Applies transformation to the incoming data.   
   
 Example: Configure post_processors 
 
@@ -86,10 +86,10 @@ This table describes the signature and properties of the ` EmbeddingModel ` clas
 
 Functions  |  Parameters  |  Description   
 ---|---|---  
-` EmbeddingModel(model_name,configuration=None,settings={}) ` |  <li>
+` EmbeddingModel(model_name,configuration=None,settings={}) ` |  <ul> <li>
             * ` model_name ` : The name of the model to be used. For example, ` medicalai/ClinicalBERT ` </li> <li>
             * ` configuration ` : An initialized ` EmbeddingModelConfig ` object. This parameter must be specified when using a template. If not specified, the model will be assumed to be a preconfigured model. </li> <li>
-            * ` settings ` : A dictionary of various settings that are global and control various operations such as logging levels and locations for files. </li> |  Creates a new instance of the ` EmbeddingModel ` class.   
+            * ` settings ` : A dictionary of various settings that are global and control various operations such as logging levels and locations for files. </li> </ul> |  Creates a new instance of the ` EmbeddingModel ` class.   
   
 Settings 
 
@@ -108,11 +108,11 @@ This table describes the function and properties of the ` EmbeddingModel ` class
 
 Function  |  Parameters  |  Description   
 ---|---|---  
-` export2file(export_name,output_dir=None) ` |  <li>
+` export2file(export_name,output_dir=None) ` |  <ul> <li>
               * ` export_name(string) ` : The name of the file. The file will be saved with the file extension ` .onnx ` </li> <li>
-              * ` output_dir(string) ` : An optional output directory. If not specified the file will be saved to the current directory </li> |  Exports the model to a file.   
-` export2db(export_name) ` |  <li>
-                * ` export_name ` ( ` string ` ): The name that will be used for the mining model object. This name must be compliant with existing rules for object names in the database. </li> |  Exports the model to the database.   
+              * ` output_dir(string) ` : An optional output directory. If not specified the file will be saved to the current directory </li> </ul> |  Exports the model to a file.   
+` export2db(export_name) ` |  <ul> <li>
+                * ` export_name ` ( ` string ` ): The name that will be used for the mining model object. This name must be compliant with existing rules for object names in the database. </li> </ul> |  Exports the model to the database.   
   
 Example: Preconfigured Model 
 
@@ -129,4 +129,4 @@ This example illustrates the preconfigured embedding model that comes with the P
                                     }
                                 ```
 
-**Parent topic:** [ Convert Pretrained Models to ONNX Format ](convert-trained-models-onnx-format.html)
+**Parent topic:** [ Convert Pretrained Models to ONNX Format ](convert-trained-models-onnx-format.md)

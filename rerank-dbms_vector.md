@@ -48,6 +48,9 @@ Where,
 
   * ` content ` specifies the input text corresponding to the index. 
 
+
+
+
 QUERY 
 
 Specify the search query (typically from an initial search) as ` CLOB ` . 
@@ -56,7 +59,8 @@ DOCUMENTS
 
 Specify a JSON array of strings (list of potentially relevant documents to rerank) in the following format: 
     
-        ```
+    
+    ```
     {
       "documents": [
       "string1",
@@ -70,7 +74,8 @@ PARAMS
 
 Specify the following list of parameters in JSON format. All these parameters are mandatory. 
     
-        ```
+    
+    ```
     {
       "provider"         : "",
       "credential_name"  : "",  
@@ -84,9 +89,11 @@ Specify the following list of parameters in JSON format. All these parameters ar
 
 Parameter  |  Description   
 ---|---  
-` provider ` |  Supported REST provider to access for reranking:  <li>
-    * ` cohere ` </li> <li>
-    * ` vertexai ` </li>  
+` provider ` |  Supported REST provider to access for reranking:  <ul>
+
+<li>
+  * ` cohere ` </li> <li>
+  * ` vertexai ` </li> </ul>  
 ` credential_name ` |  Name of the credential in the form: *`schema`* . *`credential_name`*  A credential name holds authentication credentials to enable access to your provider for making REST API calls.  You need to first set up your credential by calling the ` DBMS_VECTOR.CREATE_CREDENTIAL ` helper function to create and store a credential, and then refer to the credential name here.  See [ CREATE_CREDENTIAL ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-4BBCBF46-3903-4EBB-8BE8-A7690151CF25) .   
 ` url ` |  URL of the third-party provider endpoint for each REST call, as listed in [ Supported Third-Party Provider Operations and Endpoints ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-BE3EE403-CD10-4708-A15F-EFB1FA69DF09) .   
 ` model ` |  Name of the reranking model in the form: *`schema`* . *`model_name`*  If the model name is not schema-qualified, then the schema of the procedure invoker is used.   
@@ -96,98 +103,98 @@ Additional REST provider parameters  :
 Optionally, specify additional provider-specific parameters for reranking. 
 
 > **note:** Important: 
-      * The following examples are for illustration purposes. For accurate and up-to-date information on additional parameters to use, refer to your third-party provider's documentation. 
+    * The following examples are for illustration purposes. For accurate and up-to-date information on additional parameters to use, refer to your third-party provider's documentation. 
 
-      * For a list of all supported REST endpoints, see [ Supported Third-Party Provider Operations and Endpoints ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-BE3EE403-CD10-4708-A15F-EFB1FA69DF09) . 
+    * For a list of all supported REST endpoints, see [ Supported Third-Party Provider Operations and Endpoints ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-BE3EE403-CD10-4708-A15F-EFB1FA69DF09) . 
 
 Cohere example: 
-            
-                        ```
-            {
-              "provider"        : "cohere", 
-              "credential_name" : "COHERE_CRED",
-              "url"             : "https://api.cohere.example.com/rerank",
-              "model"           : "rerank-english-v3.0",
-              "return_documents": false,
-              "top_n"           : 3
-            }
-            ```
+    
+        ```
+    {
+      "provider"        : "cohere", 
+      "credential_name" : "COHERE_CRED",
+      "url"             : "https://api.cohere.example.com/rerank",
+      "model"           : "rerank-english-v3.0",
+      "return_documents": false,
+      "top_n"           : 3
+    }
+    ```
 
 Vertex AI example: 
-            
-                        ```
-            {
-              "provider"         : "vertexai",
-              "credential_name"  : "VERTEXAI_CRED",
-              "url"              : "https://googleapis.example.com/default_ranking_config:rank",
-              "model"            : "semantic-ranker-512@latest",
-              "ignoreRecordDetailsInResponse" : true,
-              "topN"             : 3
-              }
-            ```
+    
+        ```
+    {
+      "provider"         : "vertexai",
+      "credential_name"  : "VERTEXAI_CRED",
+      "url"              : "https://googleapis.example.com/default_ranking_config:rank",
+      "model"            : "semantic-ranker-512@latest",
+      "ignoreRecordDetailsInResponse" : true,
+      "topN"             : 3
+      }
+    ```
 
 **Table: Additional REST Provider Parameter Details** 
 
 Parameter  |  Description   
 ---|---  
-` return_documents ` |  Whether to return search results with original documents or input text ( ` content ` ):  <li>
-        * ` false ` (default, also recommended) to not return any input text (return only index and score)  </li> <li>
-        * ` true ` to return input text along with index and score  </li> Note  : With Cohere as the provider, Oracle recommends that you keep this option disabled for better performance. You may choose to enable it for debugging purposes when you need to view the original text.   
-` ignoreRecordDetailsInResponse ` |  Whether to return search results with original record details or input text ( ` content ` ):  <li>
-          * ` false ` (default) to return input text along with index and score  </li> <li>
-          * ` true ` (recommended) to not return any input text (return only index and score)  </li> Note  : With Vertex AI as the provider, Oracle recommends that you keep this option enabled for better performance. You may choose to disable it for debugging purposes when you need to view the original text.   
+` return_documents ` |  Whether to return search results with original documents or input text ( ` content ` ):  <ul> <li>
+    * ` false ` (default, also recommended) to not return any input text (return only index and score)  </li> <li>
+    * ` true ` to return input text along with index and score  </li> </ul> Note  : With Cohere as the provider, Oracle recommends that you keep this option disabled for better performance. You may choose to enable it for debugging purposes when you need to view the original text.   
+` ignoreRecordDetailsInResponse ` |  Whether to return search results with original record details or input text ( ` content ` ):  <ul> <li>
+      * ` false ` (default) to return input text along with index and score  </li> <li>
+      * ` true ` (recommended) to not return any input text (return only index and score)  </li> </ul> Note  : With Vertex AI as the provider, Oracle recommends that you keep this option enabled for better performance. You may choose to disable it for debugging purposes when you need to view the original text.   
 ` top_n ` or ` topN ` |  The number of most relevant documents to return.   
   
 Examples 
 
-            * Using Cohere: 
-                        
-                                                ```
-                        declare
-                          params clob;
-                          reranked_output json;
-                        begin
-                          params := '
-                        {
-                          "provider": "cohere",
-                          "credential_name": "COHERE_CRED",
-                          "url": "https://api.cohere.com/v1/rerank",
-                          "model": "rerank-english-v3.0",
-                          "return_documents": true,
-                          "top_n": 3
-                        }';
-                        
-                          reranked_output := dbms_vector.rerank(:query, json(:initial_retrieval_docs), json(params));
-                          dbms_output.put_line(json_serialize(reranked_output));
-                        end;
-                        /
-                        ```
+        * Using Cohere: 
+                
+                                ```
+                declare
+                  params clob;
+                  reranked_output json;
+                begin
+                  params := '
+                {
+                  "provider": "cohere",
+                  "credential_name": "COHERE_CRED",
+                  "url": "https://api.cohere.com/v1/rerank",
+                  "model": "rerank-english-v3.0",
+                  "return_documents": true,
+                  "top_n": 3
+                }';
+                
+                  reranked_output := dbms_vector.rerank(:query, json(:initial_retrieval_docs), json(params));
+                  dbms_output.put_line(json_serialize(reranked_output));
+                end;
+                /
+                ```
 
-            * Using Vertex AI: 
-                        
-                                                ```
-                        declare
-                          params clob;
-                          reranked_output json;
-                        begin
-                          params := '
-                        {
-                          "provider": "vertexai",
-                          "credential_name": "VERTEXAI_CRED",
-                          "url": "https://discoveryengine.googleapis.com/v1/projects/1085581009881/locations/global/rankingConfigs/default_ranking_config:rank",
-                          "model": "semantic-ranker-512@latest",
-                          "ignoreRecordDetailsInResponse": false,
-                          "topN": 3
-                        }';
-                        
-                          reranked_output := dbms_vector.rerank(:query, json(:initial_retrieval_docs), json(params));
-                          dbms_output.put_line(json_serialize(reranked_output));
-                        end;
-                        /
-                        ```
+        * Using Vertex AI: 
+                
+                                ```
+                declare
+                  params clob;
+                  reranked_output json;
+                begin
+                  params := '
+                {
+                  "provider": "vertexai",
+                  "credential_name": "VERTEXAI_CRED",
+                  "url": "https://discoveryengine.googleapis.com/v1/projects/1085581009881/locations/global/rankingConfigs/default_ranking_config:rank",
+                  "model": "semantic-ranker-512@latest",
+                  "ignoreRecordDetailsInResponse": false,
+                  "topN": 3
+                }';
+                
+                  reranked_output := dbms_vector.rerank(:query, json(:initial_retrieval_docs), json(params));
+                  dbms_output.put_line(json_serialize(reranked_output));
+                end;
+                /
+                ```
 
 End-to-end example  : 
 
 To run an end-to-end example scenario using this function, see [ Use Reranking for Better RAG Results ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-969CE0B6-FF30-46F0-AADC-90B406F4F645) . 
 
-**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.html)
+**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.md)

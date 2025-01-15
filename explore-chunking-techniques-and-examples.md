@@ -10,7 +10,9 @@ Note the following:
 
   * The lines are numbered as a reference for the explanations and include the word count in square brackets (for example, ` 1[15]  ` ). The blank lines are also noted. 
   * The start and end boundaries of chunks are represented with colored markers. 
-  * To perform examples with the ` BY VOCABULARY ` mode, you must create custom vocabulary beforehand (for example, ` DOC_VOCAB ` ). See [ Create and Use Custom Vocabulary ](create-and-use-custom-vocabulary.html#GUID-B6527DDC-8EF0-479E-8965-6C2459E7827A) . 
+  * To perform examples with the ` BY VOCABULARY ` mode, you must create custom vocabulary beforehand (for example, ` DOC_VOCAB ` ). See [ Create and Use Custom Vocabulary ](create-and-use-custom-vocabulary.md#GUID-B6527DDC-8EF0-479E-8965-6C2459E7827A) . 
+
+
 
 Example 4-1 BY chars MAX 200 OVERLAP 0 SPLIT BY none 
 
@@ -22,7 +24,8 @@ The text from the first chunk is split at an absolute maximum character of ` 200
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY chars MAX 200 OVERLAP 0
                                SPLIT BY none LANGUAGE american NORMALIZE none) C;
@@ -30,7 +33,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     -------------------------------------------------------------------------
     1	     200          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -56,7 +60,8 @@ The text from the first chunk is split after the second line because the third l
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY chars MAX 200 OVERLAP 0
                                SPLIT BY newline LANGUAGE american NORMALIZE none) C;
@@ -64,7 +69,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1	      138         Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -88,7 +94,8 @@ The first chunk is split after the first blank line because including the text a
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY chars MAX 200 OVERLAP 0
                                SPLIT BY recursively LANGUAGE american NORMALIZE none) C;
@@ -96,7 +103,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1            104          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -118,7 +126,8 @@ In this example, the text is split into three chunks at an absolute maximum word
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY words MAX 40 OVERLAP 0
                                SPLIT BY none LANGUAGE american NORMALIZE none) C;
@@ -126,7 +135,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1	     266          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -154,7 +164,8 @@ The first chunk (of 21 words) is split after the second line, as the third line 
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY words MAX 40 OVERLAP 0
                                SPLIT BY newline LANGUAGE american NORMALIZE none) C;
@@ -162,7 +173,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1	     138          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -186,7 +198,8 @@ The text after the second blank line exceeds the maximum words, so the first chu
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY words MAX 40 OVERLAP 0
                                SPLIT BY recursively LANGUAGE american NORMALIZE none) C;
@@ -194,7 +207,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1	     104          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -210,13 +224,14 @@ Output:
 
 Example 4-7 BY vocabulary MAX 40 OVERLAP 0 SPLIT BY none 
 
-In this example, the text is split into four chunks at an absolute maximum vocabulary token of 40, which contrasts with the three chunks produced in [ Example 4-4 ](explore-chunking-techniques-and-examples.html#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-A87E00B0-211B-4A8F-BFEB-011F18CA7BAF) . This is because vocabulary tokens include pieces of words, so the chunk text is generally smaller than simple word splitting. 
+In this example, the text is split into four chunks at an absolute maximum vocabulary token of 40, which contrasts with the three chunks produced in [ Example 4-4 ](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-A87E00B0-211B-4A8F-BFEB-011F18CA7BAF) . This is because vocabulary tokens include pieces of words, so the chunk text is generally smaller than simple word splitting. 
 
 ![Description of chunking_eg7.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg7.png)[ Description of the illustration chunking_eg7.eps ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg7.md)
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY vocabulary doc_vocab MAX 40 OVERLAP 0
                                SPLIT BY none LANGUAGE american NORMALIZE none) C;
@@ -224,7 +239,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1	     157          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -243,15 +259,16 @@ Output:
 
 Example 4-8 BY vocabulary MAX 40 OVERLAP 0 SPLIT BY newline 
 
-In this example, the text is split into five chunks with newlines, using an absolute maximum vocabulary token of 40, which contrasts with [ Example 4-5 ](explore-chunking-techniques-and-examples.html#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-B466EAF9-8FE5-4B98-88FB-747F117F477A) . 
+In this example, the text is split into five chunks with newlines, using an absolute maximum vocabulary token of 40, which contrasts with [ Example 4-5 ](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-B466EAF9-8FE5-4B98-88FB-747F117F477A) . 
 
-Vocabulary tokens include pieces of words, so the chunk text is generally smaller than simple word splitting. This example produces five chunks rather than three in [ Example 4-5 ](explore-chunking-techniques-and-examples.html#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-B466EAF9-8FE5-4B98-88FB-747F117F477A) , with the middle passage split into two, and the final word unable to fit into the fourth chunk. 
+Vocabulary tokens include pieces of words, so the chunk text is generally smaller than simple word splitting. This example produces five chunks rather than three in [ Example 4-5 ](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-B466EAF9-8FE5-4B98-88FB-747F117F477A) , with the middle passage split into two, and the final word unable to fit into the fourth chunk. 
 
 ![Description of chunking_eg8.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg8.png)[ Description of the illustration chunking_eg8.eps ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg8.md)
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY vocabulary doc_vocab MAX 40 OVERLAP 0
                                SPLIT BY newline LANGUAGE american NORMALIZE none) C;
@@ -259,7 +276,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1	     138          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -279,7 +297,7 @@ Output:
 
 Example 4-9 BY vocabulary MAX 40 OVERLAP 0 SPLIT BY recursively 
 
-In this example, the text is split into seven chunks recursively using blank lines, new lines, and spaces and an absolute maximum vocabulary token of 40, which contrasts with the three chunks produced in [ Example 4-6 ](explore-chunking-techniques-and-examples.html#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-C32C8D64-4205-42ED-8714-BF1AE9FD1D80) . 
+In this example, the text is split into seven chunks recursively using blank lines, new lines, and spaces and an absolute maximum vocabulary token of 40, which contrasts with the three chunks produced in [ Example 4-6 ](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-C32C8D64-4205-42ED-8714-BF1AE9FD1D80) . 
 
 Vocabulary tokens include pieces of words, so the chunk text is generally smaller than simple word splitting. This example produces seven chunks with the middle passage split into three and the final passage split into three. 
 
@@ -287,7 +305,8 @@ Vocabulary tokens include pieces of words, so the chunk text is generally smalle
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY vocabulary doc_vocab MAX 40 OVERLAP 0
                                SPLIT BY recursively LANGUAGE american NORMALIZE none) C;
@@ -295,7 +314,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1	     104          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -315,7 +335,7 @@ Output:
 
 Example 4-10 BY words MAX 40 OVERLAP 5 SPLIT BY none 
 
-This example is similar to [ Example 4-4 ](explore-chunking-techniques-and-examples.html#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-A87E00B0-211B-4A8F-BFEB-011F18CA7BAF) , except that an overlap of ` 5 ` is used here. 
+This example is similar to [ Example 4-4 ](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-A87E00B0-211B-4A8F-BFEB-011F18CA7BAF) , except that an overlap of ` 5 ` is used here. 
 
 The first chunk ends at the maximum 40 words (after ` workloads ` ). The second chunk overlaps with the last 5 words including parentheses of the first chunk, and ends after ` unstructured ` . The overlapping words are underlined below. The third chunk overlaps with the last 5 words, which are also underlined. 
 
@@ -323,7 +343,8 @@ The first chunk ends at the maximum 40 words (after ` workloads ` ). The second 
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY words MAX 40 OVERLAP 5
                                SPLIT BY none LANGUAGE american NORMALIZE none) C;
@@ -331,7 +352,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     -------------------------------------------------------------------------------------------------
     1	     266         Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -349,7 +371,7 @@ Output:
 
 Example 4-11 BY words MAX 40 OVERLAP 5 SPLIT BY newline 
 
-This example is similar to [ Example 4-5 ](explore-chunking-techniques-and-examples.html#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-B466EAF9-8FE5-4B98-88FB-747F117F477A) , except that an overlap of ` 5 ` is used here. The overlapping portion of a chunk must obey the same split condition, in this case must begin on a new line. 
+This example is similar to [ Example 4-5 ](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-B466EAF9-8FE5-4B98-88FB-747F117F477A) , except that an overlap of ` 5 ` is used here. The overlapping portion of a chunk must obey the same split condition, in this case must begin on a new line. 
 
 The first chunk ends at the second line, as the third line would exceed the maximum 40 words. The second chunk starts with the second line of 5 words of the first chunk (underlined below) and ends at the third line. The third chunk has no overlap because the preceding line exceeds the maximum of 5. 
 
@@ -357,7 +379,8 @@ The first chunk ends at the second line, as the third line would exceed the maxi
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY words MAX 40 OVERLAP 5
                                SPLIT BY newline LANGUAGE american NORMALIZE none) C;
@@ -365,7 +388,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     ---------------------------------------------------------------------------------------------------
     1	     138          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -383,7 +407,7 @@ Output:
 
 Example 4-12 BY words MAX 40 OVERLAP 5 SPLIT BY recursively 
 
-This example is similar to [ Example 4-6 ](explore-chunking-techniques-and-examples.html#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-C32C8D64-4205-42ED-8714-BF1AE9FD1D80) , except that an overlap of ` 5 ` is used here. The overlapping portion of a chunk must obey the same split condition, in this case must begin at either a blank line, new line, or space. 
+This example is similar to [ Example 4-6 ](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-C32C8D64-4205-42ED-8714-BF1AE9FD1D80) , except that an overlap of ` 5 ` is used here. The overlapping portion of a chunk must obey the same split condition, in this case must begin at either a blank line, new line, or space. 
 
 The text after the second blank line exceeds the maximum words, so the first chunk ends at the first blank line. The second chunk overlaps with 5 words (beginning on a space; underlined below) and includes the second line, but excludes the third line of 33 words. The third chunk overlaps 5 words and ends on the second blank line. The fourth chunk consumes the rest of the input. 
 
@@ -391,7 +415,8 @@ The text after the second blank line exceeds the maximum words, so the first chu
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY words MAX 40 OVERLAP 5
                                SPLIT BY recursively LANGUAGE american NORMALIZE none) C;
@@ -399,7 +424,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1	     104         Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -421,13 +447,14 @@ Output:
 
 Example 4-13 BY chars MAX 200 OVERLAP 0 SPLIT BY none NORMALIZE none 
 
-This example is the same as the first one ( [ Example 4-1 ](explore-chunking-techniques-and-examples.html#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-B9B2D553-AEA4-48C5-A4E2-B889B59CF53E) ), to contrast with the next example ( [ Example 4-14 ](explore-chunking-techniques-and-examples.html#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-474059EF-2955-435A-A994-65BDDB19F394) ) with normalization. 
+This example is the same as the first one ( [ Example 4-1 ](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-B9B2D553-AEA4-48C5-A4E2-B889B59CF53E) ), to contrast with the next example ( [ Example 4-14 ](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-474059EF-2955-435A-A994-65BDDB19F394) ) with normalization. 
 
 ![Description of chunking_eg13.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg13.png)[ Description of the illustration chunking_eg13.eps ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg13.md)
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY chars MAX 200 OVERLAP 0
                                SPLIT BY none LANGUAGE american NORMALIZE none) C;
@@ -435,7 +462,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1	     200          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -465,7 +493,8 @@ This example shows that the chunk length (normally in bytes) can differ from the
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY chars MAX 200 OVERLAP 0
                                SPLIT BY none LANGUAGE american NORMALIZE whitespace) C;
@@ -473,7 +502,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1	     208          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -500,7 +530,8 @@ You can use this technique to keep your text intact for chunks that contain many
 
 Syntax: 
     
-        ```
+    
+    ```
     SELECT C.*
     FROM documentation_tab D, VECTOR_CHUNKS(D.text BY words MAX 40 OVERLAP 0
                                SPLIT BY sentence LANGUAGE american NORMALIZE NONE) C;
@@ -508,7 +539,8 @@ Syntax:
 
 Output: 
     
-        ```
+    
+    ```
     CHUNK_OFFSET CHUNK_LENGTH CHUNK_TEXT
     --------------------------------------------------------------------------------------------------
     1            102          Oracle AI Vector Search stores and indexes vector embeddings for fast retrieval and similarity search.
@@ -532,7 +564,8 @@ The output contains four chunks, each ending at the periods:
 
 For the purpose of clarity, in this example, ` documentation_tab ` is a ` CLOB ` inserted with the following ` ChineseDoc.txt ` document: 
     
-        ```
+    
+    ```
     使用 My Oracle Support 之前，您的用户概要信息中必须至少具有一个客户服务号。客户服务号是
     标识您所在组织的唯一参考号。使用 My Oracle Support 门户向您的概要信息中添加一个客户服务
     号。有关详细信息，请参阅 My Oracle Support 帮助的“如何将客户服务号添加到概要信息？
@@ -540,7 +573,8 @@ For the purpose of clarity, in this example, ` documentation_tab ` is a ` CLOB `
 
 Perform the chunking operation as follows: 
     
-        ```
+    
+    ```
     -- create a relational table
     
     DROP TABLE IF EXISTS documentation_tab;
@@ -602,7 +636,8 @@ Perform the chunking operation as follows:
 
 Output: 
     
-        ```
+    
+    ```
     ID   POS  SIZ  BEG                          RNG END
     ---- ---- ---- ---------------------------  --- ------------------------
      1    1   103  使用 My Oracle Su             ... 中必须至少具有一个客户服务号。
@@ -613,7 +648,9 @@ Output:
 
 **Related Topics**
 
-    * [ VECTOR_CHUNKS ](vector_chunks.html#GUID-5927E2FA-6419-4744-A7CB-3E62DBB027AD)
-    * [ UTL_TO_CHUNKS ](utl_to_chunks-dbms_vector_chain.html#GUID-4E145629-7098-4C7C-804F-FC85D1F24240)
+  * [ VECTOR_CHUNKS ](vector_chunks.md#GUID-5927E2FA-6419-4744-A7CB-3E62DBB027AD)
+  * [ UTL_TO_CHUNKS ](utl_to_chunks-dbms_vector_chain.md#GUID-4E145629-7098-4C7C-804F-FC85D1F24240)
 
-**Parent topic:** [ Configure Chunking Parameters ](configure-chunking-parameters.html)
+
+
+**Parent topic:** [ Configure Chunking Parameters ](configure-chunking-parameters.md)

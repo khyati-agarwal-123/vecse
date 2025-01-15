@@ -14,7 +14,7 @@ Syntax
 
 Purpose 
 
-See [ FROM_VECTOR ](from_vector.html#GUID-AA60B3CB-FCB7-4944-9E06-976C272855B1) for semantics and examples. 
+See [ FROM_VECTOR ](from_vector.md#GUID-AA60B3CB-FCB7-4944-9E06-976C272855B1) for semantics and examples. 
 
 Examples 
     
@@ -83,4 +83,4 @@ Examples
     1 row selected.
     ```
 
-**Parent topic:** [ Vector Serializers ](vector-serializers.html)
+**Parent topic:** [ Vector Serializers ](vector-serializers.md)

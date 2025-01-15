@@ -24,7 +24,7 @@ Parameter  |  Description
 ` model_name ` |  The name of the model in the form ` [schema_name.]model_name ` . If you do not specify a schema, then your own schema is used.   
 ` credential ` |  The name of the credential to be used to access Object Store.   
 ` uri ` |  The URI of the ONNX model.   
-` metadata ` |  A JSON description of the metadata describing the model. The metadata at minimum must describe the machine learning function supported by the model. The model's metadata parameters are described in [ JSON Metadata Parameters for ONNX Models ](json-metadata-parameters-onnx-models.html#GUID-B6D784CE-0A52-43B5-A92C-231358416A4B) .   
+` metadata ` |  A JSON description of the metadata describing the model. The metadata at minimum must describe the machine learning function supported by the model. The model's metadata parameters are described in [ JSON Metadata Parameters for ONNX Models ](json-metadata-parameters-onnx-models.md#GUID-B6D784CE-0A52-43B5-A92C-231358416A4B) .   
   
 Examples 
 
@@ -58,6 +58,9 @@ The name of the model follows the same restrictions as those used for other mach
     );
     ```
 
+
+
+
 > **note:** See Also: [ *Oracle Machine Learning for SQL User’s Guide*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=DMPRG-GUID-A39EB438-4FAE-45C4-9E6B-FBEC7FA84BE8) for examples of using ONNX models for machine learning tasks 
 
-**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.html)
+**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.md)

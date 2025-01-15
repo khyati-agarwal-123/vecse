@@ -42,4 +42,4 @@ Finally, you store the extracted vectors in a vector index to implement combined
 
 Instead of creating a vector index alone, you can also choose to create a hybrid vector index, which is a combination of both vector index and Oracle Text search index. This lets you implement hybrid searches to retrieve more relevant search results by performing both vector-based similarity searches and text-based keyword searches on the same data, simultaneously. 
 
-**Parent topic:** [ About Vector Generation ](vector-generation.html)
+**Parent topic:** [ About Vector Generation ](vector-generation.md)

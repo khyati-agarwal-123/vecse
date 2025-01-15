@@ -35,4 +35,4 @@ You can use the following command to delete a valid ONNX model named ` doc_model
     /
     ```
 
-**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.html)
+**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.md)

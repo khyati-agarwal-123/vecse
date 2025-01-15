@@ -14,6 +14,8 @@ Column Name  |  Data Type  |  Description
   
 **Related Topics**
 
-  * [ Understand HNSW Index Population Mechanisms in Oracle RAC or Single Instance ](understand-hnsw-index-population-mechanisms-oracle-rac-and-single-instance.html#GUID-8604A7A5-3C96-4B55-85BC-BCF44562BDBB)
+  * [ Understand HNSW Index Population Mechanisms in Oracle RAC or Single Instance ](understand-hnsw-index-population-mechanisms-oracle-rac-and-single-instance.md#GUID-8604A7A5-3C96-4B55-85BC-BCF44562BDBB)
 
-**Parent topic:** [ Vector Index and Hybrid Vector Index Views ](vector-index-and-hybrid-vector-index-views.html)
+
+
+**Parent topic:** [ Vector Index and Hybrid Vector Index Views ](vector-index-and-hybrid-vector-index-views.md)

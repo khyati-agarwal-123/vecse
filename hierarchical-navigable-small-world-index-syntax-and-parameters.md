@@ -31,9 +31,12 @@ The valid range for HNSW vector index parameters are:
   * ` NEIGHBORS ` : > 0 and <= 2048 
   * ` EFCONSTRUCTION ` : > 0 and <= 65535 
 
+
+
 Examples 
     
-        ```
+    
+    ```
     CREATE VECTOR INDEX galaxies_hnsw_idx ON galaxies (embedding) ORGANIZATION INMEMORY NEIGHBOR GRAPH
     DISTANCE COSINE
     WITH TARGET ACCURACY 95;
@@ -45,4 +48,4 @@ Examples
 
 For detailed information, see [ CREATE VECTOR INDEX ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=SQLRF-GUID-B396C369-54BB-4098-A0DD-7C54B3A0D66F) in *Oracle Database SQL Language Reference* . 
 
-**Parent topic:** [ In-Memory Neighbor Graph Vector Index ](memory-neighbor-graph-vector-index.html)
+**Parent topic:** [ In-Memory Neighbor Graph Vector Index ](memory-neighbor-graph-vector-index.md)

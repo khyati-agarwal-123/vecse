@@ -20,4 +20,4 @@ Example
     DBMS_VECTOR_CHAIN.DROP_PREFERENCE ('scott_vectorizer');
     ```
 
-**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.html)
+**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.md)

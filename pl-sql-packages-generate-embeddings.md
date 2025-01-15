@@ -4,19 +4,23 @@ Choose to implement Vector Utility PL/SQL packages to perform chunking, embeddin
 
 These packages can work with both vector embedding models in ONNX format (by importing these models into the database) and third-party vector embedding models (by calling third-party REST APIs). Each package is made up of subprograms, such as *chainable utility functions* and *vector helper procedures* . 
 
-  * [ About Chainable Utility Functions and Common Use Cases ](chainable-utility-functions-and-common-use-cases.html)   
+  * [ About Chainable Utility Functions and Common Use Cases ](chainable-utility-functions-and-common-use-cases.md)   
 These are intended to be a set of chainable and flexible "stages" through which you pass your input data to transform into a different representation, including vectors. 
-  * [ About Vector Helper Procedures ](vector-helper-procedures.html)   
+  * [ About Vector Helper Procedures ](vector-helper-procedures.md)   
 Vector helper procedures let you configure authentication credentials, preferences, and language-specific data for use in chainable utility functions. 
-  * [ Supplied Vector Utility PL/SQL Packages ](supplied-vector-utility-pl-sql-packages.html)   
+  * [ Supplied Vector Utility PL/SQL Packages ](supplied-vector-utility-pl-sql-packages.md)   
 Use either a lightweight ` DBMS_VECTOR ` package or a more advanced ` DBMS_VECTOR_CHAIN ` package with full capabilities. 
-  * [ Terms of Using Vector Utility PL/SQL Packages ](terms-using-vector-utility-pl-sql-packages.html)   
+  * [ Terms of Using Vector Utility PL/SQL Packages ](terms-using-vector-utility-pl-sql-packages.md)   
 You must understand the terms of using REST APIs that are part of Vector Utility PL/SQL packages. 
-  * [ Validate JSON Input Parameters ](validate-json-input-parameters.html)   
+  * [ Validate JSON Input Parameters ](validate-json-input-parameters.md)   
 You can optionally validate the structure of your JSON input to the ` DBMS_VECTOR.UTL ` and ` DBMS_VECTOR_CHAIN.UTL ` functions, which use JSON to define their input parameters. 
+
+
 
 **Related Topics**
 
-    * [ Vector Generation Examples ](vector-generation-examples.html#GUID-843E4921-A390-41F8-8ED0-91D7B67007B6)
+  * [ Vector Generation Examples ](vector-generation-examples.md#GUID-843E4921-A390-41F8-8ED0-91D7B67007B6)
 
-**Parent topic:** [ About Vector Generation ](vector-generation.html)
+
+
+**Parent topic:** [ About Vector Generation ](vector-generation.md)

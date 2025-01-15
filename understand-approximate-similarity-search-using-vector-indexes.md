@@ -58,4 +58,4 @@ Due to the nature of vector indexes being approximate search structures, it's po
 
 For information on how to set up your vector indexes, see [ Create Vector Indexes ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-8AF956F3-D951-4968-9B79-A6E180E87456) . 
 
-**Parent topic:** [ Perform Approximate Similarity Search Using Vector Indexes ](perform-approximate-similarity-search-using-vector-indexes.html)
+**Parent topic:** [ Perform Approximate Similarity Search Using Vector Indexes ](perform-approximate-similarity-search-using-vector-indexes.md)

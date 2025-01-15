@@ -14,7 +14,7 @@ Syntax
 
 Purpose 
 
-See [ TO_VECTOR ](to_vector.html#GUID-2CCAB607-A28B-43F7-A71D-9800C0B9A380) for semantics and examples. 
+See [ TO_VECTOR ](to_vector.md#GUID-2CCAB607-A28B-43F7-A71D-9800C0B9A380) for semantics and examples. 
 
 > **note:** 
 
@@ -54,4 +54,4 @@ Examples
     [3.45999985E+001,7.78000031E+001,-8.93399963E+001]
     ```
 
-**Parent topic:** [ Vector Constructors ](vector-constructors.html)
+**Parent topic:** [ Vector Constructors ](vector-constructors.md)

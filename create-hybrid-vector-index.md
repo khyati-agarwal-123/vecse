@@ -18,38 +18,46 @@ To create a hybrid vector index, you can provide minimal information such as:
 
   * in-database ONNX embedding model for generating embeddings 
 
+
+
+
 For cases where multiple columns or tables need to be indexed together, you can specify the ` MULTI_COLUMN_DATASTORE ` or ` USER_DATASTORE ` preference. 
 
 All other indexing parameters are predefined to facilitate the indexing of documents without requiring you to be an expert in any text processing, chunking, or embedding strategies. If required, you can modify the predefined parameters using: 
 
-    * Vector search preferences for the *vector index* part of the index 
+  * Vector search preferences for the *vector index* part of the index 
 
-    * Text search preferences for the *text index* part of the index 
+  * Text search preferences for the *text index* part of the index 
 
-    * Index maintenance preferences for DML operations on the combined index 
+  * Index maintenance preferences for DML operations on the combined index 
+
+
+
 
 For detailed information on the creation process of a hybrid vector index or in general about what hybrid vector indexes are, see [ Understand Hybrid Vector Indexes ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-28C18166-43BB-4D2C-B8B3-8127D3485578) . 
 
 > **note:** There are some key points to note when creating and using hybrid vector indexes. See [ Guidelines and Restrictions for Hybrid Vector Indexes ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-8CFB2031-695D-4C9F-92AF-6628124DE82A) . 
 
 Syntax 
-        
-                ```
-        CREATE HYBRID VECTOR INDEX [schema.]index_name ON 
-          [schema.]table_name(column_name)
-           PARAMETERS ('paramstring') 
-          [FILTER BY filter_column[, filter_column]...]
-          [ORDER BY oby_column[desc|asc][, oby_column[desc|asc]]...]
-          [PARALLEL n];
-        ```
+    
+    
+    ```
+    CREATE HYBRID VECTOR INDEX [schema.]index_name ON 
+      [schema.]table_name(column_name)
+       PARAMETERS ('paramstring') 
+      [FILTER BY filter_column[, filter_column]...]
+      [ORDER BY oby_column[desc|asc][, oby_column[desc|asc]]...]
+      [PARALLEL n];
+    ```
 
 Here is an example DDL specified with only the minimum required parameters. 
-        
-                ```
-        CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
-          doc_table(text_column)
-          PARAMETERS('MODEL my_embed_model');
-        ```
+    
+    
+    ```
+    CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
+      doc_table(text_column)
+      PARAMETERS('MODEL my_embed_model');
+    ```
 
 More comprehensive examples are given at the end of this section. 
 
@@ -76,23 +84,23 @@ PARAMETERS (paramstring)
 
 Specify preferences in ` paramstring ` : 
 
-      * Vector Search Preferences  : 
+  * Vector Search Preferences  : 
 
 Configures the "vector index" part of a hybrid vector index, pertaining to processing input for vector search. 
 
 > **note:** You can either pass a minimal set of parameters (the required ` MODEL ` and the optional ` VECTOR_IDXTYPE ` parameters) directly in the ` PARAMETERS ` clause or use a vectorizer preference to specify a complete set of vector search parameters. You cannot use both (directly set parameters along with vectorizer) in the ` PARAMETERS ` clause. 
 
-        * With ` MODEL ` and ` VECTOR_IDXTYPE ` directly specified: 
-                
-                                ```
-                CREATE HYBRID VECTOR INDEX [schema.]index_name ON 
-                  [schema.]table_name(column_name)
-                   PARAMETERS ('MODEL  
-                               [VECTOR_IDXTYPE ]') 
-                  [FILTER BY filter_column[, filter_column]...]
-                  [ORDER BY oby_column[desc|asc][, oby_column[desc|asc]]...]
-                  [PARALLEL n];
+    * With ` MODEL ` and ` VECTOR_IDXTYPE ` directly specified: 
+        
                 ```
+        CREATE HYBRID VECTOR INDEX [schema.]index_name ON 
+          [schema.]table_name(column_name)
+           PARAMETERS ('MODEL  
+                       [VECTOR_IDXTYPE ]') 
+          [FILTER BY filter_column[, filter_column]...]
+          [ORDER BY oby_column[desc|asc][, oby_column[desc|asc]]...]
+          [PARALLEL n];
+        ```
 
 Here, ` MODEL ` specifies the vector embedding model that you import into the database for generating vector embeddings on your input data. 
 
@@ -100,52 +108,52 @@ Here, ` MODEL ` specifies the vector embedding model that you import into the da
 
 ` VECTOR_IDXTYPE ` specifies the type of vector index to create, such as ` IVF ` (default) for the Inverted File Flat (IVF) vector index and ` HNSW ` for the Hierarchical Navigable Small World (HNSW) vector index. If you omit this parameter, then the IVF vector index is created by default. 
 
-        * With the vectorizer preference: 
+    * With the vectorizer preference: 
 
 A vectorizer preference is a JSON object that collectively holds all indexing parameters related to chunking ( ` UTL_TO_CHUNKS ` or ` VECTOR_CHUNKS ` ), embedding ( ` UTL_TO_EMBEDDING ` , ` UTL_TO_EMBEDDINGS ` , or ` VECTOR_EMBEDDING ` ), and vector index ( ` distance ` , ` accuracy ` , or ` vector_idxtype ` ). 
 
 You use the ` DBMS_VECTOR_CHAIN.CREATE_PREFERENCE ` PL/SQL function to create a vectorizer preference. To create a vectorizer preference, see [ DBMS_VECTOR_CHAIN.CREATE_PREFERENCE ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-B83978CD-EAF8-4794-9652-F335C54C3385) . 
 
 After creating a vectorizer preference, you can use the ` VECTORIZER ` parameter to pass the preference name here. For example: 
-                
-                                ```
-                begin
-                  DBMS_VECTOR_CHAIN.CREATE_PREFERENCE(
-                    'my_vectorizer_pref',
-                     dbms_vector_chain.vectorizer,
-                    json('{
-                            "vector_idxtype":  "hnsw",
-                            "model"         :  "my_doc_model",
-                            "by"            :  "words",
-                            "max"           :  100,
-                            "overlap"       :  10,
-                            "split"         :  "recursively"
-                          }'
-                        ));
-                end;
-                /
-                
-                CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
-                  doc_table(text_column) 
-                    parameters('VECTORIZER my_vectorizer_pref');
+        
                 ```
+        begin
+          DBMS_VECTOR_CHAIN.CREATE_PREFERENCE(
+            'my_vectorizer_pref',
+             dbms_vector_chain.vectorizer,
+            json('{
+                    "vector_idxtype":  "hnsw",
+                    "model"         :  "my_doc_model",
+                    "by"            :  "words",
+                    "max"           :  100,
+                    "overlap"       :  10,
+                    "split"         :  "recursively"
+                  }'
+                ));
+        end;
+        /
+        
+        CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
+          doc_table(text_column) 
+            parameters('VECTORIZER my_vectorizer_pref');
+        ```
 
-        * Text Search Preferences  : 
+  * Text Search Preferences  : 
 
 Configures the "Oracle Text index" part of a hybrid vector index, pertaining to processing input for keyword search. 
 
 These parameters define the text processing and tokenization stages of a hybrid vector indexing pipeline. All these are the same set of parameters that you provide when working with Oracle Text indexes alone. 
-                
-                                ```
-                [DATASTORE datastore_pref]
-                [STORAGE storage_pref]
-                [MEMORY memsize]
-                [STOPLIST stoplist]
-                [LEXER lexer_pref] 
-                [FILTER filter_pref] 
-                [WORDLIST wordlist_pref]  
-                [SECTION GROUP section_group]
-                ```
+    
+        ```
+    [DATASTORE datastore_pref]
+    [STORAGE storage_pref]
+    [MEMORY memsize]
+    [STOPLIST stoplist]
+    [LEXER lexer_pref] 
+    [FILTER filter_pref] 
+    [WORDLIST wordlist_pref]  
+    [SECTION GROUP section_group]
+    ```
 
 DATASTORE datastore_pref 
     
@@ -167,10 +175,10 @@ MEMORY memsize
     
 
 Specify the amount of run-time memory to use for indexing. 
-                
-                                ```
-                memsize = number[K|M|G]
-                ```
+    
+        ```
+    memsize = number[K|M|G]
+    ```
 
 K is for kilobytes, M is for megabytes, and G is for gigabytes. 
 
@@ -215,17 +223,17 @@ Specify the name of your section group. Use section groups to create sections in
 
 Default: ` NULL_SECTION_GROUP `
 
-        * Index Maintenance Preferences  : 
+  * Index Maintenance Preferences  : 
 
 Configures the DML operations on the entire hybrid vector index, that is, how to synchronize and optimize the index. 
 
 Because a hybrid vector index is basically an Oracle Text search index type, so all maintenance-specific capabilities of an Oracle Text index are applicable. 
-                
-                                ```
-                [MAINTENANCE AUTO | MAINTENANCE MANUAL]
-                [SYNC (MANUAL | EVERY "interval-string" | ON COMMIT)]
-                [OPTIMIZE (MANUAL | AUTO_DAILY | EVERY "interval-string")]
-                ```
+    
+        ```
+    [MAINTENANCE AUTO | MAINTENANCE MANUAL]
+    [SYNC (MANUAL | EVERY "interval-string" | ON COMMIT)]
+    [OPTIMIZE (MANUAL | AUTO_DAILY | EVERY "interval-string")]
+    ```
 
 MAINTENANCE AUTO | MAINTENANCE MANUAL 
     
@@ -257,16 +265,16 @@ SYNC Type  |  Description
 With automatic ( ` EVERY ` ) synchronization, you can specify memory size and parallel synchronization. You can define repeating schedules in the *`interval-string`* argument using calendaring syntax values. These values are described in [ *Oracle Database PL/SQL Packages and Types Reference*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ARPLS-GUID-73622B78-EFF4-4D06-92F5-E358AB2D58F3) . 
 
 Syntax: 
-                
-                                ```
-                SYNC [EVERY "interval-string"] MEMORY mem_size PARALLEL paradegree
-                ```
+    
+        ```
+    SYNC [EVERY "interval-string"] MEMORY mem_size PARALLEL paradegree
+    ```
 
 For example, to sync the index at an interval of 20 seconds: 
-                
-                                ```
-                SYNC [EVERY "freq=secondly;interval=20"] MEMORY 500M PARALLEL 2
-                ```
+    
+        ```
+    SYNC [EVERY "freq=secondly;interval=20"] MEMORY 500M PARALLEL 2
+    ```
 
 OPTIMIZE (MANUAL | AUTO_DAILY | EVERY "interval-string) 
     
@@ -282,27 +290,30 @@ OPTIMIZE Type  |  Description
 With ` AUTO_DAILY | EVERY " *`interval-string`* " ` setting, you can specify parallel optimization. 
 
 Syntax: 
-                
-                                ```
-                OPTIMIZE [AUTO_DAILY | EVERY "interval-string"] PARALLEL paradegree ...
-                ```
+    
+        ```
+    OPTIMIZE [AUTO_DAILY | EVERY "interval-string"] PARALLEL paradegree ...
+    ```
 
 For example, to optimize the index at an interval of 20 minutes: 
-                
-                                ```
-                OPTIMIZE [EVERY "freq=minutely;interval=20"] PARALLEL 2
-                ```
+    
+        ```
+    OPTIMIZE [EVERY "freq=minutely;interval=20"] PARALLEL 2
+    ```
+
+
+
 
 FILTER BY filter_column 
     
 
 Specify the structured indexed column on which a range or equality predicate in the ` WHERE ` clause of a mixed query will operate. You can specify one or more structured columns for ` filter_column ` , on which the relational predicates are expected to be specified along with the ` CONTAINS() ` predicate in a query. 
 
-          * You can use these relational operators: 
+  * You can use these relational operators: 
 
 ` < ` , ` <= ` , ` = ` , ` >= ` , ` > ` , ` between ` , and ` LIKE ` (for ` VARCHAR2 ` ) 
 
-          * These columns can only be of ` CHAR ` , ` NUMBER ` , ` DATE ` , ` VARCHAR2 ` , or ` RAW ` type. Additionally, ` CHAR ` , ` VARCHAR2 ` and ` VARCHAR2 ` types are supported only if the maximum length is specified and does not exceed 249 bytes. 
+  * These columns can only be of ` CHAR ` , ` NUMBER ` , ` DATE ` , ` VARCHAR2 ` , or ` RAW ` type. Additionally, ` CHAR ` , ` VARCHAR2 ` and ` VARCHAR2 ` types are supported only if the maximum length is specified and does not exceed 249 bytes. 
 
 If the maximum length of a ` CHAR ` or ` VARCHAR2 ` column is specified in characters, for example, ` VARCHAR2 ` (50 ` CHAR ` ), then it cannot exceed ` FLOOR ` (249/ ` max_char_width ` ), where ` max_char_width ` is the maximum width of any character in the database character set. 
 
@@ -310,9 +321,12 @@ For example, the maximum specified column length cannot exceed 62 characters, if
 
 An error is raised for all other data types. Expressions, for example, ` func(cola) ` , and virtual columns are not allowed. 
 
-          * ` txt_column ` is allowed in the ` FILTER ` ` BY ` column list. 
+  * ` txt_column ` is allowed in the ` FILTER ` ` BY ` column list. 
 
-          * DML operations on ` FILTER ` ` BY ` columns are always transactional. 
+  * DML operations on ` FILTER ` ` BY ` columns are always transactional. 
+
+
+
 
 ORDER BY oby_column[desc|asc] 
     
@@ -323,11 +337,14 @@ You can specify a list of structured *`oby_columns`* . These columns can only be
 
 The order of the specified columns matters. The ` ORDER BY ` clause in a query can contain: 
 
-            * The entire ordered ` ORDER BY ` columns 
+  * The entire ordered ` ORDER BY ` columns 
 
-            * Only the prefix of the ordered ` ORDER BY ` columns 
+  * Only the prefix of the ordered ` ORDER BY ` columns 
 
-            * The score followed by the prefix of the ordered ` ORDER BY ` columns 
+  * The score followed by the prefix of the ordered ` ORDER BY ` columns 
+
+
+
 
 ` DESC ` sorts the results in a descending order (from highest to lowest), while ` ASC ` (default) sorts the results in an ascending order (from lowest to highest). 
 
@@ -342,105 +359,110 @@ The indexing memory size specified in the parameter clause applies to each paral
 
 Examples 
 
-              * With vector search preferences directly specified  : 
+  * With vector search preferences directly specified  : 
 
 In this example, only the required parameter ` model ` is specified in the ` PARAMETERS ` clause: 
-                            
-                                                        ```
-                            CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
-                              doc_table(text_column)
-                              parameters('MODEL my_doc_model');
-                            ```
+    
+        ```
+    CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
+      doc_table(text_column)
+      parameters('MODEL my_doc_model');
+    ```
 
 In this example, both the parameters ` model ` and ` vector_idxtype ` are specified: 
-                            
-                                                        ```
-                            CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
-                              doc_table(text_column)
-                              parameters('MODEL my_doc_model 
-                                          VECTOR_IDXTYPE HNSW');
-                            ```
+    
+        ```
+    CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
+      doc_table(text_column)
+      parameters('MODEL my_doc_model 
+                  VECTOR_IDXTYPE HNSW');
+    ```
 
-              * With vector search preferences specified using VECTORIZER  : 
+  * With vector search preferences specified using VECTORIZER  : 
 
 In this example, the ` vectorizer ` parameter is used in the ` PARAMETERS ` clause to specify the ` my_vectorizer_spec ` preference: 
-                            
-                                                        ```
-                            begin
-                              DBMS_VECTOR_CHAIN.CREATE_PREFERENCE(
-                                'my_vectorizer_spec',
-                                 dbms_vector_chain.vectorizer,
-                                json('{"vector_idxtype" :  "hnsw",
-                                       "model"          :  "my_doc_model",
-                                       "by"             :  "words",
-                                       "max"            :  100,
-                                       "overlap"        :  10,
-                                       "split"          :  "recursively"}'));
-                            end;
-                            /
-                            
-                            CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
-                              doc_table(text_column) 
-                              parameters('VECTORIZER my_vectorizer_spec');
-                            ```
+    
+        ```
+    begin
+      DBMS_VECTOR_CHAIN.CREATE_PREFERENCE(
+        'my_vectorizer_spec',
+         dbms_vector_chain.vectorizer,
+        json('{"vector_idxtype" :  "hnsw",
+               "model"          :  "my_doc_model",
+               "by"             :  "words",
+               "max"            :  100,
+               "overlap"        :  10,
+               "split"          :  "recursively"}'));
+    end;
+    /
+    
+    CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
+      doc_table(text_column) 
+      parameters('VECTORIZER my_vectorizer_spec');
+    ```
 
-              * With text search and vector search preferences directly specified  : 
+  * With text search and vector search preferences directly specified  : 
 
 In this example, only the required Vector Search parameter ` MODEL ` is specified in the ` PARAMETERS ` clause. Text Search parameters are also specified: 
-                            
-                                                        ```
-                            CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
-                              doc_table(text_column)
-                              parameters('MODEL my_doc_model
-                                          DATASTORE my_datastore
-                                          STORAGE my_storage
-                                          STOPLIST my_stoplist
-                                          LEXER my_lexer')
-                              ORDER BY docid asc;
-                            ```
+    
+        ```
+    CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
+      doc_table(text_column)
+      parameters('MODEL my_doc_model
+                  DATASTORE my_datastore
+                  STORAGE my_storage
+                  STOPLIST my_stoplist
+                  LEXER my_lexer')
+      ORDER BY docid asc;
+    ```
 
-              * With text search and index maintenance preferences directly specified and vector search preferences specified using VECTORIZER  : 
+  * With text search and index maintenance preferences directly specified and vector search preferences specified using VECTORIZER  : 
 
 In this example, the ` VECTORIZER ` parameter is used to specify the ` my_vectorizer_spec ` preference that holds vector search parameters. All the Text Search and Index Maintenance preferences are directly specified. 
-                            
-                                                        ```
-                            begin
-                              DBMS_VECTOR_CHAIN.CREATE_PREFERENCE(
-                                'my_vectorizer_spec',
-                                 dbms_vector_chain.vectorizer,
-                                json('{
-                                        "vector_idxtype" :  "hnsw",
-                                        "model"          :  "my_doc_model",
-                                        "by"             :  "words",
-                                        "max"            :  100,
-                                        "overlap"        :  10,
-                                        "split"          :  "recursively"
-                                     }'
-                                    ));
-                            end;
-                            /
-                            
-                            CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
-                              doc_table(text_column) 
-                              parameters('VECTORIZER my_vectorizer_spec
-                                          DATASTORE my_datastore
-                                          STORAGE my_storage
-                                          MEMORY 128M
-                                          MAINTENANCE AUTO
-                                          OPTIMIZE AUTO_DAILY
-                                          STOPLIST my_stoplist
-                                          LEXER my_lexer
-                                          FILTER my_filter
-                                          WORDLIST my_wordlist
-                                          SECTION GROUP my_section_group')
-                              FILTER BY category, author
-                              ORDER BY score(10), score(20) desc  
-                              PARALLEL 3;
-                            ```
+    
+        ```
+    begin
+      DBMS_VECTOR_CHAIN.CREATE_PREFERENCE(
+        'my_vectorizer_spec',
+         dbms_vector_chain.vectorizer,
+        json('{
+                "vector_idxtype" :  "hnsw",
+                "model"          :  "my_doc_model",
+                "by"             :  "words",
+                "max"            :  100,
+                "overlap"        :  10,
+                "split"          :  "recursively"
+             }'
+            ));
+    end;
+    /
+    
+    CREATE HYBRID VECTOR INDEX my_hybrid_idx on 
+      doc_table(text_column) 
+      parameters('VECTORIZER my_vectorizer_spec
+                  DATASTORE my_datastore
+                  STORAGE my_storage
+                  MEMORY 128M
+                  MAINTENANCE AUTO
+                  OPTIMIZE AUTO_DAILY
+                  STOPLIST my_stoplist
+                  LEXER my_lexer
+                  FILTER my_filter
+                  WORDLIST my_wordlist
+                  SECTION GROUP my_section_group')
+      FILTER BY category, author
+      ORDER BY score(10), score(20) desc  
+      PARALLEL 3;
+    ```
+
+
+
 
 **Related Topics**
 
-                * [ Perform Hybrid Search ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-531F9E71-2CEF-46A8-AA53-7C161E801E3A)
-                * [ Query Hybrid Vector Indexes End-to-End Example ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-4E340969-349E-4E46-AD98-AC2A0AEDB773)
+  * [ Perform Hybrid Search ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-531F9E71-2CEF-46A8-AA53-7C161E801E3A)
+  * [ Query Hybrid Vector Indexes End-to-End Example ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-4E340969-349E-4E46-AD98-AC2A0AEDB773)
 
-**Parent topic:** [ Manage Hybrid Vector Indexes ](manage-hybrid-vector-indexes.html)
+
+
+**Parent topic:** [ Manage Hybrid Vector Indexes ](manage-hybrid-vector-indexes.md)

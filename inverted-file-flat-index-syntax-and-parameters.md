@@ -40,38 +40,45 @@ The valid range for IVF vector index parameters are:
   * ` SAMPLES_PER_PARTITION ` : from 1 to (num_vectors/neighbor_partitions) 
   * ` MIN_VECTORS_PER_PARTITION ` : from 0 (no trimming of centroid partitions) to total number of vectors (would result in 1 centroid partition) 
 
+
+
 Examples 
 
-    * To create a global IVF index: 
-        
-                ```
-        CREATE VECTOR INDEX galaxies_ivf_idx ON galaxies (embedding) 
-        ORGANIZATION NEIGHBOR PARTITIONS
-        DISTANCE COSINE
-        WITH TARGET ACCURACY 95;
+  * To create a global IVF index: 
+    
         ```
-        
-                ```
-        CREATE VECTOR INDEX galaxies_ivf_idx ON galaxies (embedding) 
-        ORGANIZATION NEIGHBOR PARTITIONS
-        DISTANCE COSINE
-        WITH TARGET ACCURACY 90 PARAMETERS (type IVF, neighbor partitions 10);
+    CREATE VECTOR INDEX galaxies_ivf_idx ON galaxies (embedding) 
+    ORGANIZATION NEIGHBOR PARTITIONS
+    DISTANCE COSINE
+    WITH TARGET ACCURACY 95;
+    ```
+    
         ```
+    CREATE VECTOR INDEX galaxies_ivf_idx ON galaxies (embedding) 
+    ORGANIZATION NEIGHBOR PARTITIONS
+    DISTANCE COSINE
+    WITH TARGET ACCURACY 90 PARAMETERS (type IVF, neighbor partitions 10);
+    ```
 
-    * To create a local IVF index: 
-        
-                ```
-        CREATE VECTOR INDEX galaxies_ivf_idx ON galaxies (embedding) 
-        ORGANIZATION NEIGHBOR PARTITIONS
-        DISTANCE COSINE
-        WITH TARGET ACCURACY 90 PARAMETERS (type IVF, neighbor partitions 10)
-        LOCAL;
+  * To create a local IVF index: 
+    
         ```
+    CREATE VECTOR INDEX galaxies_ivf_idx ON galaxies (embedding) 
+    ORGANIZATION NEIGHBOR PARTITIONS
+    DISTANCE COSINE
+    WITH TARGET ACCURACY 90 PARAMETERS (type IVF, neighbor partitions 10)
+    LOCAL;
+    ```
+
+
+
 
 For detailed information on the syntax, see [ CREATE VECTOR INDEX ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=SQLRF-GUID-B396C369-54BB-4098-A0DD-7C54B3A0D66F) in  *Oracle Database SQL Language Reference*  . 
 
 **Related Topics**
 
-      * [ Inverted File Flat Vector Indexes Partitioning Schemes ](inverted-file-flat-vector-indexes-partitioning-schemes.html#GUID-98797C70-269E-42E9-B24B-1E3C461D5932)
+  * [ Inverted File Flat Vector Indexes Partitioning Schemes ](inverted-file-flat-vector-indexes-partitioning-schemes.md#GUID-98797C70-269E-42E9-B24B-1E3C461D5932)
 
-**Parent topic:** [ Neighbor Partition Vector Index ](neighbor-partition-vector-index.html)
+
+
+**Parent topic:** [ Neighbor Partition Vector Index ](neighbor-partition-vector-index.md)

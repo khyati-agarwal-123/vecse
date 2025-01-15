@@ -9,10 +9,10 @@ Column Name  |  Data Type  |  Description
 ` PARTITION_NAME ` |  ` VARCHAR2(129) ` |  Object partition name (set to ` NULL ` for non-partitioned objects)   
 ` INDEX_OBJN ` |  ` NUMBER ` |  Index object number   
 ` ANCHOR_ADDRESS ` |  ` RAW(8) ` |  The address of the anchor structure of the in-memory neighbor graph index in the vector pool   
-` INDEX_GRAPH_TYPE ` |  ` VARCHAR2(129) ` |  Type of the constructed graph of this index.  Possible values: 
+` INDEX_GRAPH_TYPE ` |  ` VARCHAR2(129) ` |  Type of the constructed graph of this index.  Possible values: <ul>
 
 <li>
-  * ` HNSW ` : Hierarchical Navigable Small Worlds. Currently only this graph is supported. </li>  
+  * ` HNSW ` : Hierarchical Navigable Small Worlds. Currently only this graph is supported. </li> </ul>  
 ` NUM_LAYERS ` |  ` NUMBER ` |  Number of layers in the constructed graph   
 ` NUM_VECTORS ` |  ` NUMBER ` |  Number of indexed vectors in the vector graph index   
 ` SPARSE_LAYER_VECTORS ` |  ` NUMBER ` |  The total number of vectors in the sparse layers. Note that a sparse layer is defined as any layer above the bottom most layer.   
@@ -27,9 +27,9 @@ Column Name  |  Data Type  |  Description
 ` MAX_SNAPSHOT ` |  ` NUMBER ` |  The total number of snapshots created so far for the inmemory graph index   
 ` ALLOCATED_BYTES ` |  ` NUMBER ` |  Total amount of memory allocated to this vector graph index, in bytes   
 ` USED_BYTES ` |  ` NUMBER ` |  Total amount of memory currently used by the vector graph index, in bytes   
-` CON_ID ` |  ` NUMBER ` |  The ID of the container to which the data pertains. Possible values include the following:  <li>
+` CON_ID ` |  ` NUMBER ` |  The ID of the container to which the data pertains. Possible values include the following:  <ul> <li>
     * ` 0 ` : This value is used for rows containing data that pertain to the entire multitenant container database (CDB). This value is also used for rows in non-CDBs. </li> <li>
     * ` 1 ` : This value is used for rows containing data that pertain to only the root </li> <li>
-    * ` n ` : Where ` n ` is the applicable container ID for the rows containing data </li>  
+    * ` n ` : Where ` n ` is the applicable container ID for the rows containing data </li> </ul>  
   
-**Parent topic:** [ Vector Index and Hybrid Vector Index Views ](vector-index-and-hybrid-vector-index-views.html)
+**Parent topic:** [ Vector Index and Hybrid Vector Index Views ](vector-index-and-hybrid-vector-index-views.md)

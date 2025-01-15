@@ -2,4 +2,4 @@
 
 No additional features were introduced for Oracle Autonomous Database in August 2024. 
 
-**Parent topic:** [ Autonomous Database Updates ](autonomous-database-updates.html)
+**Parent topic:** [ Autonomous Database Updates ](autonomous-database-updates.md)

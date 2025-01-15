@@ -53,48 +53,53 @@ To convert a user's input text string " ` hello ` " to a vector embedding, using
         CONN docuser/password
         ```
 
-    4. Call either ` VECTOR_EMBEDDING ` or ` UTL_TO_EMBEDDING ` . 
+  2. Call either ` VECTOR_EMBEDDING ` or ` UTL_TO_EMBEDDING ` . 
 
-      1. Load your ONNX format embedding model into Oracle Database. 
+    1. Load your ONNX format embedding model into Oracle Database. 
 
-For detailed information on how to perform this step, see [ Import ONNX Models into Oracle Database End-to-End Example ](import-onnx-models-oracle-database-end-end-example.html#GUID-6AEA7A0E-78E0-4083-A126-4516EB98175A) . 
+For detailed information on how to perform this step, see [ Import ONNX Models into Oracle Database End-to-End Example ](import-onnx-models-oracle-database-end-end-example.md#GUID-6AEA7A0E-78E0-4083-A126-4516EB98175A) . 
 
-      2. Call ` VECTOR_EMBEDDING ` or ` UTL_TO_EMBEDDING ` . You can use ` UTL_TO_EMBEDDING ` either from the ` DBMS_VECTOR ` or the ` DBMS_VECTOR_CHAIN ` package, depending on your use case. 
+    2. Call ` VECTOR_EMBEDDING ` or ` UTL_TO_EMBEDDING ` . You can use ` UTL_TO_EMBEDDING ` either from the ` DBMS_VECTOR ` or the ` DBMS_VECTOR_CHAIN ` package, depending on your use case. 
 
-         * ` VECTOR_EMBEDDING ` : 
-                
-                                ```
-                SELECT TO_VECTOR(VECTOR_EMBEDDING(doc_model USING 'hello' as data)) AS embedding;
-                ```
+       * ` VECTOR_EMBEDDING ` : 
+            
+                        ```
+            SELECT TO_VECTOR(VECTOR_EMBEDDING(doc_model USING 'hello' as data)) AS embedding;
+            ```
 
-         * ` DBMS_VECTOR.UTL_TO_EMBEDDING ` : 
-                
-                                ```
-                var params clob; exec :params := '{"provider":"database", "model":"doc_model"}';
-                
-                select dbms_vector.utl_to_embedding('hello', json(:params)) from dual;
-                ```
+       * ` DBMS_VECTOR.UTL_TO_EMBEDDING ` : 
+            
+                        ```
+            var params clob; exec :params := '{"provider":"database", "model":"doc_model"}';
+            
+            select dbms_vector.utl_to_embedding('hello', json(:params)) from dual;
+            ```
 
 Here, ` doc_model ` specifies the name under which your embedding model is stored in the database. 
 
 The generated embedding appears as follows: 
-                
-                                ```
-                EMBEDDING
-                -------------------------------------------------------------------------------------------------------------------------------------
-                [8.78423732E-003,-4.29633334E-002,-5.93001908E-003,-4.65480909E-002,2.14333013E-002,6.53376281E-002,-5.93746938E-002,2.10403297E-002,
-                4.38376889E-002,5.22960871E-002,1.25104953E-002,6.49512559E-002,-9.26998071E-003,-6.97442219E-002,-3.02916039E-002,-4.74979728E-003,
-                -1.08755399E-002,-4.63751052E-003,3.62781435E-002,-9.35919806E-002,-1.13934642E-002,-5.74270077E-002,-1.36667723E-002,2.42995787E-002,
-                -6.96804151E-002,4.93822657E-002,1.01460628E-002,-1.56464987E-002,-2.39410568E-002,-4.27529104E-002,-5.65665103E-002,-1.74160264E-002,
-                5.05326502E-002,4.31500375E-002,-2.6994409E-002,-1.72731467E-002,9.30535868E-002,6.85951149E-004,5.61876409E-003,-9.0233935E-003,
-                -2.55788807E-002,-2.04174276E-002,3.74175981E-002,-1.67872179E-002,1.07479304E-001,-6.64602639E-003,-7.65537247E-002,-9.71965566E-002,
-                -3.99636962E-002,-2.57076006E-002,-5.62455431E-002,-1.3583754E-001,3.45946029E-002,1.85191762E-002,3.01524661E-002,-2.62163244E-002,
-                -4.05582506E-003,1.72979087E-002,-3.66434865E-002,-1.72491539E-002,3.95228416E-002,-1.05518714E-001,-1.27463877E-001,1.42578809E-002
-                ```
+    
+        ```
+    EMBEDDING
+    -------------------------------------------------------------------------------------------------------------------------------------
+    [8.78423732E-003,-4.29633334E-002,-5.93001908E-003,-4.65480909E-002,2.14333013E-002,6.53376281E-002,-5.93746938E-002,2.10403297E-002,
+    4.38376889E-002,5.22960871E-002,1.25104953E-002,6.49512559E-002,-9.26998071E-003,-6.97442219E-002,-3.02916039E-002,-4.74979728E-003,
+    -1.08755399E-002,-4.63751052E-003,3.62781435E-002,-9.35919806E-002,-1.13934642E-002,-5.74270077E-002,-1.36667723E-002,2.42995787E-002,
+    -6.96804151E-002,4.93822657E-002,1.01460628E-002,-1.56464987E-002,-2.39410568E-002,-4.27529104E-002,-5.65665103E-002,-1.74160264E-002,
+    5.05326502E-002,4.31500375E-002,-2.6994409E-002,-1.72731467E-002,9.30535868E-002,6.85951149E-004,5.61876409E-003,-9.0233935E-003,
+    -2.55788807E-002,-2.04174276E-002,3.74175981E-002,-1.67872179E-002,1.07479304E-001,-6.64602639E-003,-7.65537247E-002,-9.71965566E-002,
+    -3.99636962E-002,-2.57076006E-002,-5.62455431E-002,-1.3583754E-001,3.45946029E-002,1.85191762E-002,3.01524661E-002,-2.62163244E-002,
+    -4.05582506E-003,1.72979087E-002,-3.66434865E-002,-1.72491539E-002,3.95228416E-002,-1.05518714E-001,-1.27463877E-001,1.42578809E-002
+    ```
+
+
+
 
 **Related Topics**
 
-           * [ UTL_TO_EMBEDDING and UTL_TO_EMBEDDINGS ](utl_to_embedding-and-utl_to_embeddings-dbms_vector.html#GUID-8E615832-F6C0-4435-8F43-3FAF80692D5B)
-           * [ VECTOR_EMBEDDING ](vector_embedding.html#GUID-5ED78260-6D21-4B6B-86E0-A1E70EFA11CA)
+  * [ UTL_TO_EMBEDDING and UTL_TO_EMBEDDINGS ](utl_to_embedding-and-utl_to_embeddings-dbms_vector.md#GUID-8E615832-F6C0-4435-8F43-3FAF80692D5B)
+  * [ VECTOR_EMBEDDING ](vector_embedding.md#GUID-5ED78260-6D21-4B6B-86E0-A1E70EFA11CA)
 
-**Parent topic:** [ Generate Embeddings ](generate-embeddings.html)
+
+
+**Parent topic:** [ Generate Embeddings ](generate-embeddings.md)

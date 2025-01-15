@@ -10,7 +10,7 @@ The following instructions assume you already have access to a database account 
 
 > **note:** ` BINARY ` vectors are not currently supported in PL/SQL, thus, the ` genbvec_i ` table is used as an intermediary table using a ` VARCHAR2 ` type argument rather than ` VECTOR ` . 
 
-> **note:** If you already have access to a third-party ` BINARY ` vector embedding model, you can perform a real text-to- ` BINARY ` -embedding transformation by calling third-party REST APIs using the Vector Utility PL/SQL package ` DBMS_VECTOR ` . For more information, refer to the example in [ Convert Text String to BINARY Embedding Outside Oracle Database ](convert-text-string-binary-embedding-oracle-database.html#GUID-425922B4-C9DA-48B6-B98F-7846D53AE0AF) . 
+> **note:** If you already have access to a third-party ` BINARY ` vector embedding model, you can perform a real text-to- ` BINARY ` -embedding transformation by calling third-party REST APIs using the Vector Utility PL/SQL package ` DBMS_VECTOR ` . For more information, refer to the example in [ Convert Text String to BINARY Embedding Outside Oracle Database ](convert-text-string-binary-embedding-oracle-database.md#GUID-425922B4-C9DA-48B6-B98F-7846D53AE0AF) . 
 
   1. Create the ` genbvec ` and ` genbvec_i ` tables. 
     
@@ -489,4 +489,7 @@ Example output:
         21 rows selected.
         ```
 
-**Parent topic:** [ Get Started ](get-started-node.html)
+
+
+
+**Parent topic:** [ Get Started ](get-started-node.md)

@@ -130,82 +130,88 @@ To rerank results for the query " ` What are some interesting characteristics of
         /
         ```
 
-     * Rerank the initial retrieval: 
+  8. Rerank the initial retrieval: 
 
-> **note:** For a list of all supported REST endpoints, see [ Supported Third-Party Provider Operations and Endpoints ](supported-third-party-provider-operations-and-endpoints.html#GUID-BE3EE403-CD10-4708-A15F-EFB1FA69DF09) . 
+> **note:** For a list of all supported REST endpoints, see [ Supported Third-Party Provider Operations and Endpoints ](supported-third-party-provider-operations-and-endpoints.md#GUID-BE3EE403-CD10-4708-A15F-EFB1FA69DF09) . 
 
-       * Using the Cohere ` rerank-english-v3.0 ` model: 
-            
-                        ```
-            declare
-              params clob;
-              reranked_output json;
-            begin
-              params := '
-            {
-              "provider": "cohere",
-              "credential_name": "COHERE_CRED",
-              "url": "https://api.cohere.com/v1/rerank",
-              "model": "rerank-english-v3.0",
-              "return_documents": true,
-              "top_n": 3
-            }';
-            
-              reranked_output := dbms_vector_chain.rerank(:query, json(:initial_retrieval_docs), json(params));
-              dbms_output.put_line(json_serialize(reranked_output));
-            end;
-            /
-            ```
+     * Using the Cohere ` rerank-english-v3.0 ` model: 
+        
+                ```
+        declare
+          params clob;
+          reranked_output json;
+        begin
+          params := '
+        {
+          "provider": "cohere",
+          "credential_name": "COHERE_CRED",
+          "url": "https://api.cohere.com/v1/rerank",
+          "model": "rerank-english-v3.0",
+          "return_documents": true,
+          "top_n": 3
+        }';
+        
+          reranked_output := dbms_vector_chain.rerank(:query, json(:initial_retrieval_docs), json(params));
+          dbms_output.put_line(json_serialize(reranked_output));
+        end;
+        /
+        ```
 
-       * Using the Vertex AI ` semantic-ranker-512 ` model: 
-            
-                        ```
-            declare
-              params clob;
-              reranked_output json;
-            begin
-              params := '
-            {
-              "provider": "vertexai",
-              "credential_name": "VERTEXAI_CRED",
-              "url": "https://discoveryengine.googleapis.com/v1/projects/1085581009881/locations/global/rankingConfigs/default_ranking_config:rank",
-              "model": "semantic-ranker-512@latest",
-              "ignoreRecordDetailsInResponse": false,
-              "topN": 3
-            }';
-            
-              reranked_output := dbms_vector_chain.rerank(:query, json(:initial_retrieval_docs), json(params));
-              dbms_output.put_line(json_serialize(reranked_output));
-            end;
-            /
-            ```
+     * Using the Vertex AI ` semantic-ranker-512 ` model: 
+        
+                ```
+        declare
+          params clob;
+          reranked_output json;
+        begin
+          params := '
+        {
+          "provider": "vertexai",
+          "credential_name": "VERTEXAI_CRED",
+          "url": "https://discoveryengine.googleapis.com/v1/projects/1085581009881/locations/global/rankingConfigs/default_ranking_config:rank",
+          "model": "semantic-ranker-512@latest",
+          "ignoreRecordDetailsInResponse": false,
+          "topN": 3
+        }';
+        
+          reranked_output := dbms_vector_chain.rerank(:query, json(:initial_retrieval_docs), json(params));
+          dbms_output.put_line(json_serialize(reranked_output));
+        end;
+        /
+        ```
+
+
+
 
 Using the above Cohere model, the reranked results appear as follows: 
-            
-                        ```
-            [
-               {
-                 "index" : "0",
-                 "score" : "0.059319142",
-                 "content" : "Jupiter boasts an impressive system of 95 known moons, including the four largest Galilean satellites."
-               },
-               {
-                 "index" : "2",
-                 "score" : "0.04352814",
-                 "content" : "Io, one of Jupiter's Galilean moons, is the most volcanically active body in our solar system."
-               },
-               {
-                 "index" : "4",
-                 "score" : "0.04138472",
-                 "content" : "Jupiter's composition is similar to that of the Sun, and it could have become a brown dwarf if its mass had been 80 times greater."
-               }
-            ]
-            ```
+    
+    
+    ```
+    [
+       {
+         "index" : "0",
+         "score" : "0.059319142",
+         "content" : "Jupiter boasts an impressive system of 95 known moons, including the four largest Galilean satellites."
+       },
+       {
+         "index" : "2",
+         "score" : "0.04352814",
+         "content" : "Io, one of Jupiter's Galilean moons, is the most volcanically active body in our solar system."
+       },
+       {
+         "index" : "4",
+         "score" : "0.04138472",
+         "content" : "Jupiter's composition is similar to that of the Sun, and it could have become a brown dwarf if its mass had been 80 times greater."
+       }
+    ]
+    ```
 
 **Related Topics**
 
-         * [ RERANK ](rerank-dbms_vector_chain.html#GUID-08B0E5EE-B097-43CD-828C-05D45B70157D)
-         * [ DBMS_VECTOR ](dbms_vector-vecse.html#GUID-829230F9-BD1E-41F9-BAAB-5D3C3E52FC12)
-         * [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.html#GUID-A09FF69E-FCCB-4EDA-B7E4-B02A11359504)
+  * [ RERANK ](rerank-dbms_vector_chain.md#GUID-08B0E5EE-B097-43CD-828C-05D45B70157D)
+  * [ DBMS_VECTOR ](dbms_vector-vecse.md#GUID-829230F9-BD1E-41F9-BAAB-5D3C3E52FC12)
+  * [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.md#GUID-A09FF69E-FCCB-4EDA-B7E4-B02A11359504)
 
-**Parent topic:** [ Use Retrieval Augmented Generation to Complement LLMs ](use-retrieval-augmented-generation-complement-llms.html)
+
+
+**Parent topic:** [ Use Retrieval Augmented Generation to Complement LLMs ](use-retrieval-augmented-generation-complement-llms.md)

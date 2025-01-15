@@ -26,3 +26,6 @@ Oracle Database 23ai supports binding with native VECTOR types for all Oracle cl
         ```
     SELECT FROM_VECTOR(dataVec) FROM vecTab;
     ```
+
+
+

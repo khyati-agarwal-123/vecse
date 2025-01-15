@@ -65,40 +65,45 @@ For example, if using the WordPiece tokenization, you can download and transfer 
         conn docuser/password
         ```
 
-    6. Create a relational table ( ` doc_vocabtab ` ) to store your vocabulary tokens in it: 
-        
-                ```
-        CREATE TABLE doc_vocabtab(token nvarchar2(64))
-          ORGANIZATION EXTERNAL
-          (default directory VEC_DUMP
-           ACCESS PARAMETERS (RECORDS DELIMITED BY NEWLINE)
-           location ('bert-vocabulary-uncased.txt'));
+  2. Create a relational table ( ` doc_vocabtab ` ) to store your vocabulary tokens in it: 
+    
         ```
+    CREATE TABLE doc_vocabtab(token nvarchar2(64))
+      ORGANIZATION EXTERNAL
+      (default directory VEC_DUMP
+       ACCESS PARAMETERS (RECORDS DELIMITED BY NEWLINE)
+       location ('bert-vocabulary-uncased.txt'));
+    ```
 
-    7. Create a vocabulary ( ` doc_vocab ` ) by calling ` DBMS_VECTOR_CHAIN.CREATE_VOCABULARY ` : 
-        
-                ```
-        DECLARE
-          vocab_params clob := '{
-                                 "table_name"      : "doc_vocabtab",
-                                 "column_name"     : "token",
-                                 "vocabulary_name" : "doc_vocab",
-                                 "format"          : "bert",
-                                 "cased"           : false
-                                }';
-        
-        BEGIN
-          dbms_vector_chain.create_vocabulary(json(vocab_params));
-        END;
-        /
+  3. Create a vocabulary ( ` doc_vocab ` ) by calling ` DBMS_VECTOR_CHAIN.CREATE_VOCABULARY ` : 
+    
         ```
+    DECLARE
+      vocab_params clob := '{
+                             "table_name"      : "doc_vocabtab",
+                             "column_name"     : "token",
+                             "vocabulary_name" : "doc_vocab",
+                             "format"          : "bert",
+                             "cased"           : false
+                            }';
+    
+    BEGIN
+      dbms_vector_chain.create_vocabulary(json(vocab_params));
+    END;
+    /
+    ```
+
+
+
 
 After loading the token vocabulary, you can now use the ` BY VOCABULARY ` chunking mode (with ` VECTOR_CHUNKS ` or ` UTL_TO_CHUNKS ` ) to split data by counting the number of tokens. 
 
 **Related Topics**
 
-       * [ CREATE_VOCABULARY ](create_vocabulary.html#GUID-2D19528E-0F0D-4102-8EC7-E9EA62C66C2D)
-       * [ VECTOR_CHUNKS ](vector_chunks.html#GUID-5927E2FA-6419-4744-A7CB-3E62DBB027AD)
-       * [ UTL_TO_CHUNKS ](utl_to_chunks-dbms_vector_chain.html#GUID-4E145629-7098-4C7C-804F-FC85D1F24240)
+  * [ CREATE_VOCABULARY ](create_vocabulary.md#GUID-2D19528E-0F0D-4102-8EC7-E9EA62C66C2D)
+  * [ VECTOR_CHUNKS ](vector_chunks.md#GUID-5927E2FA-6419-4744-A7CB-3E62DBB027AD)
+  * [ UTL_TO_CHUNKS ](utl_to_chunks-dbms_vector_chain.md#GUID-4E145629-7098-4C7C-804F-FC85D1F24240)
 
-**Parent topic:** [ Configure Chunking Parameters ](configure-chunking-parameters.html)
+
+
+**Parent topic:** [ Configure Chunking Parameters ](configure-chunking-parameters.md)

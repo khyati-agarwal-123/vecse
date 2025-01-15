@@ -114,8 +114,11 @@ Examples
     /
     ```
 
+
+
+
 End-to-end examples  : 
 
 To run end-to-end example scenarios using this procedure, see [ Use LLM-Powered APIs to Generate Summary and Text ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-D6F4B046-2989-4E0E-9245-C56F39866DA1) . 
 
-**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.html)
+**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.md)

@@ -16,6 +16,8 @@ Column Name  |  Data Type  |  Description
   
 **Related Topics**
 
-  * [ Manage Hybrid Vector Indexes ](manage-hybrid-vector-indexes.html#GUID-F2493927-23F8-4231-862B-6EDFA5A12299)
+  * [ Manage Hybrid Vector Indexes ](manage-hybrid-vector-indexes.md#GUID-F2493927-23F8-4231-862B-6EDFA5A12299)
 
-**Parent topic:** [ Vector Index and Hybrid Vector Index Views ](vector-index-and-hybrid-vector-index-views.html)
+
+
+**Parent topic:** [ Vector Index and Hybrid Vector Index Views ](vector-index-and-hybrid-vector-index-views.md)

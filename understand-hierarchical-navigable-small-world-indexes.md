@@ -8,6 +8,8 @@ With Navigable Small World (NSW), the idea is to build a proximity graph where e
   * The maximum number of closest vector candidates considered at each step of the search during insertion ` (EFCONSTRUCTION) `
   * Within the maximum number of connections ( ` NEIGHBORS ` ) permitted per vector 
 
+
+
 If the combination of the above two thresholds is too high, then you may end up with a densely connected graph, which can slow down the search process. On the other hand, if the combination of those thresholds is too low, then the graph may become too sparse and/or disconnected, which makes it challenging to find a path between certain vectors during the search. 
 
 Navigable Small World (NSW) graph traversal for vector search begins with a predefined entry point in the graph, accessing a cluster of closely related vectors. The search algorithm employs two key lists: Candidates, a dynamically updated list of vectors that we encounter while traversing the graph, and Results, which contains the vectors closest to the query vector found thus far. As the search progresses, the algorithm navigates through the graph, continually refining the Candidates by exploring and evaluating vectors that might be closer than those in the Results. The process concludes once there are no vectors in the Candidates closer than the farthest in the Results, indicating a local minimum has been reached and the closest vectors to the query vector have been identified. 
@@ -63,7 +65,10 @@ As explained earlier, when using Oracle AI Vector Search to run an approximate s
 In the case of an HNSW approximate search, you can specify a target accuracy percentage value to influence the number of candidates considered to probe the search. This is automatically calculated by the algorithm. A value of 100 will tend to impose a similar result as an exact search, although the system may still use the index and will not perform an exact search. The optimizer may choose to still use an index as it may be faster to do so given the predicates in the query. Instead of specifying a target accuracy percentage value, you can specify the ` EFSEARCH ` parameter to impose a certain maximum number of candidates to be considered while probing the index. The higher that number, the higher the accuracy. 
 
 > **note:** 
-    * If you do not specify any target accuracy in your approximate search query, then you will inherit the one set when the index was created. You will see that at index creation, you can specify a target accuracy either using a percentage value or parameters values depending on the index type you are creating. 
-    * It is possible to specify a different target accuracy at index search compared to the one set at index creation. For HNSW indexes, you may look at more neighbors using the ` EFSEARCH ` parameter (higher than the ` EFCONSTRUCTION ` value specified at index creation) to get more accurate results. The target accuracy that you give during index creation decides the index creation parameters and also acts as the default accuracy values for vector index searches. 
 
-**Parent topic:** [ About In-Memory Neighbor Graph Vector Index ](memory-neighbor-graph-vector-indexes.html)
+  * If you do not specify any target accuracy in your approximate search query, then you will inherit the one set when the index was created. You will see that at index creation, you can specify a target accuracy either using a percentage value or parameters values depending on the index type you are creating. 
+  * It is possible to specify a different target accuracy at index search compared to the one set at index creation. For HNSW indexes, you may look at more neighbors using the ` EFSEARCH ` parameter (higher than the ` EFCONSTRUCTION ` value specified at index creation) to get more accurate results. The target accuracy that you give during index creation decides the index creation parameters and also acts as the default accuracy values for vector index searches. 
+
+
+
+**Parent topic:** [ About In-Memory Neighbor Graph Vector Index ](memory-neighbor-graph-vector-indexes.md)

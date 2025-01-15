@@ -8,4 +8,4 @@ Column Name  |  Data Type  |  Description
 ` LANG_LANG ` |  ` NUMBER ` |  Language ID for the language (for example, ` 1 ` for American)   
 ` LANG_NAME ` |  ` VARCHAR2(128) ` |  Name of the language (for example, ` AMERICAN ` )   
   
-**Parent topic:** [ Text Processing Views ](text-processing-views.html)
+**Parent topic:** [ Text Processing Views ](text-processing-views.md)

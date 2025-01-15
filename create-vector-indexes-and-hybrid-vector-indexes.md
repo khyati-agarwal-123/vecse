@@ -6,9 +6,11 @@ Depending on whether to use similarity search or hybrid search, you can create e
 
 **Hybrid vector indexes** leverage the existing Oracle Text indexing data structures and vector indexing data structures. Such indexes can provide more relevant search results by integrating the keyword matching capabilities of text search with the semantic precision of vector search. Create hybrid vector indexes directly on your input data or on your vector embeddings to use these indexes for performing a combination of full-text search and similarity search. 
 
-  * [ Size the Vector Pool ](size-vector-pool.html)   
+  * [ Size the Vector Pool ](size-vector-pool.md)   
 To allow vector index creation, you must enable a new memory area stored in the SGA called the **Vector Pool** . 
-  * [ Manage the Different Categories of Vector Indexes ](manage-different-categories-vector-indexes.html)   
+  * [ Manage the Different Categories of Vector Indexes ](manage-different-categories-vector-indexes.md)   
 Learn how to create a vector index, and explore how the different categories of vector indexes (In-Memory Neighbor Graph vector index and Neighbor Partition vector index) can make vector searches faster. 
-  * [ Manage Hybrid Vector Indexes ](manage-hybrid-vector-indexes.html)   
+  * [ Manage Hybrid Vector Indexes ](manage-hybrid-vector-indexes.md)   
 Learn how to manage a hybrid vector index, which is a single index for searching by *similarity* and *keywords* , to enhance the accuracy of your search results. 
+
+

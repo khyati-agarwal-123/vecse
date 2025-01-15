@@ -12,7 +12,7 @@ For example, you can use this function to build a standalone Text Chunking syste
 
 To generate chunks, this function uses the in-house implementation with Oracle Database. 
 
-For detailed information on this function, see [ VECTOR_CHUNKS ](vector_chunks.html#GUID-5927E2FA-6419-4744-A7CB-3E62DBB027AD) . 
+For detailed information on this function, see [ VECTOR_CHUNKS ](vector_chunks.md#GUID-5927E2FA-6419-4744-A7CB-3E62DBB027AD) . 
 
 VECTOR_EMBEDDING 
 
@@ -24,11 +24,13 @@ To generate an embedding, this function uses a vector embedding model (in ONNX f
 
 > **note:** If you want to generate embeddings by using third-party vector embedding models, then use Vector Utility PL/SQL packages. These packages let you work with both embedding models (in ONNX format) stored in the database and third-party embedding models (by calling third-party REST APIs). 
 
-For detailed information on this function, see [ VECTOR_EMBEDDING ](vector_embedding.html#GUID-5ED78260-6D21-4B6B-86E0-A1E70EFA11CA) . 
+For detailed information on this function, see [ VECTOR_EMBEDDING ](vector_embedding.md#GUID-5ED78260-6D21-4B6B-86E0-A1E70EFA11CA) . 
 
 **Related Topics**
 
-  * [ Import Pretrained Models in ONNX Format for Vector Generation Within the Database ](import-pretrained-models-onnx-format-vector-generation-database.html#GUID-D8140BF9-08E9-4B3F-9E28-E40A6FD181A4)
-  * [ Generate Embeddings ](generate-embeddings.html#GUID-813E0E54-9EEF-43FA-A506-1F276D47E7A6)
+  * [ Import Pretrained Models in ONNX Format for Vector Generation Within the Database ](import-pretrained-models-onnx-format-vector-generation-database.md#GUID-D8140BF9-08E9-4B3F-9E28-E40A6FD181A4)
+  * [ Generate Embeddings ](generate-embeddings.md#GUID-813E0E54-9EEF-43FA-A506-1F276D47E7A6)
 
-**Parent topic:** [ About Vector Generation ](vector-generation.html)
+
+
+**Parent topic:** [ About Vector Generation ](vector-generation.md)

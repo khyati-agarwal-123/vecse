@@ -63,4 +63,4 @@ Example
     SQL>
     ```
 
-**Parent topic:** [ Vector Index and Hybrid Vector Index Views ](vector-index-and-hybrid-vector-index-views.html)
+**Parent topic:** [ Vector Index and Hybrid Vector Index Views ](vector-index-and-hybrid-vector-index-views.md)

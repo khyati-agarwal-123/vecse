@@ -10,12 +10,12 @@ Column Name  |  Data Type  |  Description
 ` ALLOC_BYTES ` |  ` NUMBER ` |  Total amount of memory allocated to this pool   
 ` USED_BYTES ` |  ` NUMBER ` |  Amount of memory currently used in this pool   
 ` POPULATE_STATUS ` |  ` VARCHAR2(26) ` |  Status of the vector memory store—whether it is being populated, is done populating etc.   
-` CON_ID ` |  ` NUMBER ` |  The ID of the container to which the data pertains. Possible values are: 
+` CON_ID ` |  ` NUMBER ` |  The ID of the container to which the data pertains. Possible values are:  <ul>
 
 <li>
   * ` 0 ` : This value is used for rows containing data that pertain to the entire multitenant container database (CDB). This value is also used for rows in non-CDBs. </li> <li>
   * ` 1 ` : This value is used for rows containing data that pertain to only the root. </li> <li>
-  * ` n ` : Where ` n ` is the applicable container ID for the rows containing data. </li>  
+  * ` n ` : Where ` n ` is the applicable container ID for the rows containing data. </li> </ul>  
   
 Example 
     
@@ -45,4 +45,4 @@ Example
     SQL>
     ```
 
-**Parent topic:** [ Vector Memory Pool Views ](vector-memory-pool-views.html)
+**Parent topic:** [ Vector Memory Pool Views ](vector-memory-pool-views.md)

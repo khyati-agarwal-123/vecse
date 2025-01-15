@@ -21,6 +21,9 @@ Syntax
 
   * Renaming hybrid vector indexes using the ` ALTER INDEX RENAME ` syntax is not supported. 
 
+
+
+
 [ *`schema`* .] *`index_name`* 
     
 
@@ -41,78 +44,84 @@ For detailed information on the ` PARALLEL ` clause, see [ CREATE HYBRID VECTOR 
 Examples 
 
 Here are some examples on how you can modify existing hybrid vector indexes: 
-    * To rebuild all parts of a hybrid vector index  : 
+
+  * To rebuild all parts of a hybrid vector index  : 
 
 Use the following syntax to rebuild all parts of a hybrid vector index (both Oracle Text index and vector index) with the original preference settings: 
 
 Syntax: 
-        
-                ```
-        ALTER INDEX index_name REBUILD [PARALLEL n];
+    
         ```
+    ALTER INDEX index_name REBUILD [PARALLEL n];
+    ```
 
 Note that you do not need to specify any ` PARAMETERS ` clause when rebuilding both parts of a hybrid vector index. 
 
 Example: 
-        
-                ```
-        ALTER INDEX my_hybrid_idx REBUILD;
-        
-        SELECT (select id from doc_table where rowid = jt.doc_rowid) as doc,
-               jt.chunk
-        FROM JSON_TABLE(
-                 DBMS_HYBRID_VECTOR.SEARCH(
-                   json(
-                     '{ "hybrid_index_name" : "my_hybrid_idx",
-                        "vector" : 
-                         { "search_text"    : "vector based search capabilities",
-                           "search_mode"    : "CHUNK"
-                         },
-                        "return" : 
-                         { "topN"           : 10 }
-                     }')
-                   ),
-                   '$[*]' COLUMNS doc_rowid  PATH '$.rowid',
-                                  chunk      PATH '$.chunk_text') jt;
+    
         ```
+    ALTER INDEX my_hybrid_idx REBUILD;
+    
+    SELECT (select id from doc_table where rowid = jt.doc_rowid) as doc,
+           jt.chunk
+    FROM JSON_TABLE(
+             DBMS_HYBRID_VECTOR.SEARCH(
+               json(
+                 '{ "hybrid_index_name" : "my_hybrid_idx",
+                    "vector" : 
+                     { "search_text"    : "vector based search capabilities",
+                       "search_mode"    : "CHUNK"
+                     },
+                    "return" : 
+                     { "topN"           : 10 }
+                 }')
+               ),
+               '$[*]' COLUMNS doc_rowid  PATH '$.rowid',
+                              chunk      PATH '$.chunk_text') jt;
+    ```
 
-    * To rebuild only the vector index part  : 
+  * To rebuild only the vector index part  : 
 
 Use the following syntax to rebuild only the vector index part of a hybrid vector index with the original preference settings: 
 
 Syntax: 
-        
-                ```
-        ALTER INDEX index_name REBUILD 
-          PARAMETERS('UPDATE VECTOR INDEX') [PARALLEL n];
+    
         ```
+    ALTER INDEX index_name REBUILD 
+      PARAMETERS('UPDATE VECTOR INDEX') [PARALLEL n];
+    ```
 
 Example: 
-        
-                ```
-        ALTER INDEX my_hybrid_idx REBUILD 
-          PARAMETERS('UPDATE VECTOR INDEX') PARALLEL 3;
-        
-        SELECT (select id from doc_table where rowid = jt.doc_rowid) as doc,
-               jt.chunk
-        FROM JSON_TABLE(
-                 DBMS_HYBRID_VECTOR.SEARCH(
-                   json(
-                     '{ "hybrid_index_name" : "my_hybrid_idx",
-                        "vector" : 
-                         { "search_text"    : "vector based search capabilities",
-                           "search_mode"    : "CHUNK"
-                         },
-                        "return" : 
-                         { "topN"           : 10 }
-                     }')
-                   ),
-                   '$[*]' COLUMNS doc_rowid  PATH '$.rowid',
-                                  chunk      PATH '$.chunk_text') jt;
+    
         ```
+    ALTER INDEX my_hybrid_idx REBUILD 
+      PARAMETERS('UPDATE VECTOR INDEX') PARALLEL 3;
+    
+    SELECT (select id from doc_table where rowid = jt.doc_rowid) as doc,
+           jt.chunk
+    FROM JSON_TABLE(
+             DBMS_HYBRID_VECTOR.SEARCH(
+               json(
+                 '{ "hybrid_index_name" : "my_hybrid_idx",
+                    "vector" : 
+                     { "search_text"    : "vector based search capabilities",
+                       "search_mode"    : "CHUNK"
+                     },
+                    "return" : 
+                     { "topN"           : 10 }
+                 }')
+               ),
+               '$[*]' COLUMNS doc_rowid  PATH '$.rowid',
+                              chunk      PATH '$.chunk_text') jt;
+    ```
+
+
+
 
 **Related Topics**
 
-      * [ *Oracle Text Reference*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=CCREF-GUID-47E60252-C731-46A8-B587-AE30C1634F48)
+  * [ *Oracle Text Reference*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=CCREF-GUID-47E60252-C731-46A8-B587-AE30C1634F48)
 
-**Parent topic:** [ Manage Hybrid Vector Indexes ](manage-hybrid-vector-indexes.html)
+
+
+**Parent topic:** [ Manage Hybrid Vector Indexes ](manage-hybrid-vector-indexes.md)

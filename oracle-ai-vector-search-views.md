@@ -2,11 +2,13 @@
 
 These are a set of data dictionary views related to Oracle AI Vector Search. 
 
-  * [ Text Processing Views ](text-processing-views.html)   
+  * [ Text Processing Views ](text-processing-views.md)   
 These views display language-specific data (abbreviation token details) and vocabulary data related to the Oracle AI Vector Search SQL and PL/SQL utilities. 
-  * [ Vector Memory Pool Views ](vector-memory-pool-views.html)   
+  * [ Vector Memory Pool Views ](vector-memory-pool-views.md)   
 Review the various vector memory pool views. 
-  * [ Vector Index and Hybrid Vector Index Views ](vector-index-and-hybrid-vector-index-views.html)   
+  * [ Vector Index and Hybrid Vector Index Views ](vector-index-and-hybrid-vector-index-views.md)   
 These views allow you to query tables related to vector indexes and hybrid vector indexes. 
 
-**Parent topic:** [ Vector Diagnostics ](vector-diagnostics-node.html)
+
+
+**Parent topic:** [ Vector Diagnostics ](vector-diagnostics-node.md)

@@ -23,26 +23,31 @@ Usage Notes
 
     * ` USER_VECTOR_ABBREV_TOKENS ` displays abbreviation tokens from the language data owned by the current user. 
 
+
+
+
 Syntax 
-        
-                ```
-        DBMS_VECTOR_CHAIN.CREATE_LANG_DATA (
-            PARAMS       IN JSON default NULL
-        );
-        ```
+    
+    
+    ```
+    DBMS_VECTOR_CHAIN.CREATE_LANG_DATA (
+        PARAMS       IN JSON default NULL
+    );
+    ```
 
 PARAMS 
 
 Specify the input parameters in JSON format: 
-        
-                ```
-        {
-            table_name, 
-            column_name, 
-            language,
-            preference_name
-        }
-        ```
+    
+    
+    ```
+    {
+        table_name, 
+        column_name, 
+        language,
+        preference_name
+    }
+    ```
 
 **Table: Parameter Details** 
 
@@ -54,19 +59,20 @@ Parameter  |  Description  |  Required  |  Default Value
 ` preference_name ` |  User-specified preference name for this language data  |  Yes  |  No value   
   
 Example 
-        
-                ```
-        declare
-            params CLOB := '{"table_name"      : "eos_data_1",
-                             "column_name"     : "token",
-                             "language"        : "indonesian",
-                             "preference_name" : "my_lang_1"}';
-        begin
-            DBMS_VECTOR_CHAIN.CREATE_LANG_DATA(
-                JSON (params));
-        end;
-        /
-        ```
+    
+    
+    ```
+    declare
+        params CLOB := '{"table_name"      : "eos_data_1",
+                         "column_name"     : "token",
+                         "language"        : "indonesian",
+                         "preference_name" : "my_lang_1"}';
+    begin
+        DBMS_VECTOR_CHAIN.CREATE_LANG_DATA(
+            JSON (params));
+    end;
+    /
+    ```
 
 End-to-end example  : 
 
@@ -74,8 +80,10 @@ To run an end-to-end example scenario using this procedure, see [ Create and Use
 
 **Related Topics**
 
-      * [ VECTOR_CHUNKS ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-5927E2FA-6419-4744-A7CB-3E62DBB027AD)
-      * [ UTL_TO_CHUNKS ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-4E145629-7098-4C7C-804F-FC85D1F24240)
-      * [ Text Processing Views ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-E2B9F02C-E2A6-439B-9A2E-177FF7FA6EE0)
+  * [ VECTOR_CHUNKS ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-5927E2FA-6419-4744-A7CB-3E62DBB027AD)
+  * [ UTL_TO_CHUNKS ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-4E145629-7098-4C7C-804F-FC85D1F24240)
+  * [ Text Processing Views ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-E2B9F02C-E2A6-439B-9A2E-177FF7FA6EE0)
 
-**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.html)
+
+
+**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.md)

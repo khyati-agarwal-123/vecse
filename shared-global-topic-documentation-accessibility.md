@@ -6,4 +6,4 @@ Access to Oracle Support
 
 Oracle customer access to and use of Oracle support services will be pursuant to the terms and conditions specified in their Oracle order for the applicable services. 
 
-**Parent topic:** [ Preface ](preface.html)
+**Parent topic:** [ Preface ](preface.md)

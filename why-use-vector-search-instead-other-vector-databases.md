@@ -36,4 +36,4 @@ In conjunction with Oracle Database 23ai, Oracle Exadata System Software release
 
 AI Smart Scan automatically accelerates Oracle Database 23ai AI Vector Search with optimizations that deliver low-latency parallelized scans across massive volumes of vector data. AI Smart Scan processes vector data at memory speed, leveraging ultra-fast Exadata RDMA Memory (XRMEM) and Exadata Smart Flash Cache in the Exadata storage servers, and performs vector distance computations and top-K filtering at the data source, avoiding unnecessary network data transfer and database server processing. 
 
-**Parent topic:** [ Overview ](overview-node.html)
+**Parent topic:** [ Overview ](overview-node.md)

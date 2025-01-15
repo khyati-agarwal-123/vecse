@@ -7,4 +7,4 @@ Column Name  |  Data Type  |  Description
 ` ABBREV_LANGUAGE ` |  ` NUMBER ` |  Language ID for the language (for example, ` 1 ` for American)   
 ` ABBREV_TOKEN ` |  ` NVARCHAR2(255) ` |  List of all abbreviation tokens corresponding to each language   
   
-**Parent topic:** [ Text Processing Views ](text-processing-views.html)
+**Parent topic:** [ Text Processing Views ](text-processing-views.md)

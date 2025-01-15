@@ -8,4 +8,4 @@ boldface  |  Boldface type indicates graphical user interface elements associate
 *italic*  |  Italic type indicates book titles, emphasis, or placeholder variables for which you supply particular values.   
 ` monospace ` |  Monospace type indicates commands within a paragraph, URLs, code in examples, text that appears on the screen, or text that you enter.   
   
-**Parent topic:** [ Preface ](preface.html)
+**Parent topic:** [ Preface ](preface.md)

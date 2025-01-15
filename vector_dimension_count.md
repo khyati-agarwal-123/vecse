@@ -14,7 +14,7 @@ Syntax
 
 Purpose 
 
-` VECTOR_DIMENSION_COUNT ` is synonymous with [ VECTOR_DIMS ](vector_dims.html#GUID-010349D7-190D-430B-A798-ACC486E1036A) . 
+` VECTOR_DIMENSION_COUNT ` is synonymous with [ VECTOR_DIMS ](vector_dims.md#GUID-010349D7-190D-430B-A798-ACC486E1036A) . 
 
 Parameters 
 
@@ -35,4 +35,4 @@ Example
     
     ```
 
-**Parent topic:** [ Constructors, Converters, and Descriptors ](constructors-converters-descriptors-and-arithmetic-functions.html)
+**Parent topic:** [ Constructors, Converters, and Descriptors ](constructors-converters-descriptors-and-arithmetic-functions.md)

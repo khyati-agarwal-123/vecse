@@ -57,7 +57,7 @@ Here, you use the chunker helper function ` CREATE_LANG_DATA ` from the ` DBMS_V
 
     4. Transfer the data file for your required language to the ` VEC_DUMP ` directory. For example, ` dreoszhs.txt ` for Simplified Chinese. 
 
-To know the data file location for your language, see [ Supported Languages and Data File Locations ](supported-languages-and-data-file-locations.html#GUID-8C8AAE2F-E64A-470F-B109-BE1AC2D6E498) . 
+To know the data file location for your language, see [ Supported Languages and Data File Locations ](supported-languages-and-data-file-locations.md#GUID-8C8AAE2F-E64A-470F-B109-BE1AC2D6E498) . 
 
     5. Connect as the local user ( ` docuser ` ): 
         
@@ -65,38 +65,43 @@ To know the data file location for your language, see [ Supported Languages and 
         conn docuser/password
         ```
 
-    6. Create a relational table ( ` doc_langtab ` ) to store your abbreviation tokens in it: 
-        
-                ```
-        CREATE TABLE doc_langtab(token nvarchar2(64))
-          ORGANIZATION EXTERNAL
-          (default directory VEC_DUMP
-           ACCESS PARAMETERS (RECORDS DELIMITED BY NEWLINE CHARACTERSET AL32UTF8)
-           location ('dreoszhs.txt'));
+  2. Create a relational table ( ` doc_langtab ` ) to store your abbreviation tokens in it: 
+    
         ```
+    CREATE TABLE doc_langtab(token nvarchar2(64))
+      ORGANIZATION EXTERNAL
+      (default directory VEC_DUMP
+       ACCESS PARAMETERS (RECORDS DELIMITED BY NEWLINE CHARACTERSET AL32UTF8)
+       location ('dreoszhs.txt'));
+    ```
 
-    7. Create language data ( ` doc_lang_data ` ) by calling ` DBMS_VECTOR_CHAIN.CREATE_LANG_DATA ` : 
-        
-                ```
-        DECLARE
-          lang_params clob := '{
-                                 "table_name"      : "doc_langtab",
-                                 "column_name"     : "token",
-                                 "language"        : "simplified chinese",
-                                 "preference_name" : "doc_lang_data"
-                               }';
-        BEGIN
-          dbms_vector_chain.create_lang_data(json(lang_params));
-        END;
-        /
+  3. Create language data ( ` doc_lang_data ` ) by calling ` DBMS_VECTOR_CHAIN.CREATE_LANG_DATA ` : 
+    
         ```
+    DECLARE
+      lang_params clob := '{
+                             "table_name"      : "doc_langtab",
+                             "column_name"     : "token",
+                             "language"        : "simplified chinese",
+                             "preference_name" : "doc_lang_data"
+                           }';
+    BEGIN
+      dbms_vector_chain.create_lang_data(json(lang_params));
+    END;
+    /
+    ```
+
+
+
 
 After loading the language data, you can now use language-specific chunking by specifying the ` LANGUAGE ` chunking parameter with ` VECTOR_CHUNKS ` or ` UTL_TO_CHUNKS ` . 
 
 **Related Topics**
 
-       * [ CREATE_LANG_DATA ](create_lang_data.html#GUID-C9756FA9-B0B6-4750-8D9C-ADEF8B67C675)
-       * [ VECTOR_CHUNKS ](vector_chunks.html#GUID-5927E2FA-6419-4744-A7CB-3E62DBB027AD)
-       * [ UTL_TO_CHUNKS ](utl_to_chunks-dbms_vector_chain.html#GUID-4E145629-7098-4C7C-804F-FC85D1F24240)
+  * [ CREATE_LANG_DATA ](create_lang_data.md#GUID-C9756FA9-B0B6-4750-8D9C-ADEF8B67C675)
+  * [ VECTOR_CHUNKS ](vector_chunks.md#GUID-5927E2FA-6419-4744-A7CB-3E62DBB027AD)
+  * [ UTL_TO_CHUNKS ](utl_to_chunks-dbms_vector_chain.md#GUID-4E145629-7098-4C7C-804F-FC85D1F24240)
 
-**Parent topic:** [ Configure Chunking Parameters ](configure-chunking-parameters.html)
+
+
+**Parent topic:** [ Configure Chunking Parameters ](configure-chunking-parameters.md)

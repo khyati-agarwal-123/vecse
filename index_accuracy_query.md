@@ -37,4 +37,4 @@ Parameter  |  Description
   
 For information about determining the accuracy of your vector indexes, see [ Index Accuracy Report ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-A084929C-7A04-4764-9E5B-1204E0844CAF) in  *Oracle Database AI Vector Search User's Guide*  . 
 
-**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.html)
+**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.md)

@@ -27,9 +27,14 @@ Function  |  Description
 ` CREATE_LANG_DATA ` |  Loads your own language data file (abbreviation tokens) into the database.   
 ` DROP_LANG_DATA ` |  Removes abbreviation data for a given language from the database.   
   
+
+
+
 **Related Topics**
 
-    * [ Vector Search PL/SQL Packages ](vector-search-pl-sql-packages-node.html#GUID-04ACF179-957C-4F03-AC1D-4DA44B3E12A2)
-    * [ Text Processing Views ](text-processing-views.html#GUID-E2B9F02C-E2A6-439B-9A2E-177FF7FA6EE0)
+  * [ Vector Search PL/SQL Packages ](vector-search-pl-sql-packages-node.md#GUID-04ACF179-957C-4F03-AC1D-4DA44B3E12A2)
+  * [ Text Processing Views ](text-processing-views.md#GUID-E2B9F02C-E2A6-439B-9A2E-177FF7FA6EE0)
 
-**Parent topic:** [ About PL/SQL Packages to Generate Embeddings ](pl-sql-packages-generate-embeddings.html)
+
+
+**Parent topic:** [ About PL/SQL Packages to Generate Embeddings ](pl-sql-packages-generate-embeddings.md)

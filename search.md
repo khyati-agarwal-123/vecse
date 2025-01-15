@@ -18,9 +18,13 @@ The search results of a hybrid query are fused into a unified result set as ` CL
 
 The minimum input parameters required are the ` hybrid_index_name ` and ` search_text ` . The same text string is used to query against a vectorized chunk index and a text document index. 
 
+
+
+
 Syntax 
     
-        ```
+    
+    ```
     DBMS_HYBRID_VECTOR.SEARCH(
        json(
          '{  "hybrid_index_name":  "",                  
@@ -69,7 +73,8 @@ The same text string is used for a keyword query on document text index (by conv
 
 For example: 
     
-        ```
+    
+    ```
     DBMS_HYBRID_VECTOR.SEARCH(
         json('{ "hybrid_index_name" : "my_hybrid_idx",
                 "search_text"       : "C, Python"
@@ -94,7 +99,8 @@ Parameter  |  Description
   
 For example: 
     
-        ```
+    
+    ```
     DBMS_HYBRID_VECTOR.SEARCH(
         json('{ "hybrid_index_name"     : "my_hybrid_idx",
                 "search_fusion"         : "UNION",
@@ -110,84 +116,89 @@ search_scorer
 
 Specify a method to evaluate the combined "fusion" search scores from both keyword and semantic search results. 
 
-    * ` RSF ` (default) to use the Relative Score Fusion (RSF) algorithm 
+  * ` RSF ` (default) to use the Relative Score Fusion (RSF) algorithm 
 
-    * ` RRF ` to use the Reciprocal Rank Fusion (RRF) algorithm 
+  * ` RRF ` to use the Reciprocal Rank Fusion (RRF) algorithm 
+
+
+
 
 For a deeper understanding of how these algorithms work in hybrid search modes, see [ Understand Hybrid Search ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-310D2298-90F4-4AFE-AF03-F3B81E55F84C) . 
 
 For example: 
 
 With a single search text string for hybrid search: 
-        
-                ```
-        DBMS_HYBRID_VECTOR.SEARCH(
-            json(
-              '{ "hybrid_index_name" : "my_hybrid_idx",
-                 "search_text"       : "C, Python",
-                 "search_scorer"     : "rsf"
-              }'))
-        from dual;
-        ```
+    
+    
+    ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json(
+          '{ "hybrid_index_name" : "my_hybrid_idx",
+             "search_text"       : "C, Python",
+             "search_scorer"     : "rsf"
+          }'))
+    from dual;
+    ```
 
 With separate vector and text search strings: 
-        
-                ```
-        DBMS_HYBRID_VECTOR.SEARCH(
-            json(
-              '{ "hybrid_index_name" : "my_hybrid_idx",
-                 "search_scorer"     : "rsf",
-                 "vector":
-                  { "search_text"    : "leadership experience" },
-                 "text":
-                  { "contains"       : "C and Python" }
-              }'))
-        from dual;
-        ```
+    
+    
+    ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json(
+          '{ "hybrid_index_name" : "my_hybrid_idx",
+             "search_scorer"     : "rsf",
+             "vector":
+              { "search_text"    : "leadership experience" },
+             "text":
+              { "contains"       : "C and Python" }
+          }'))
+    from dual;
+    ```
 
 vector 
 
 Specify query parameters for semantic search against the vector index part of your hybrid vector index: 
 
-      * ` search_text ` : Search text string (query text). 
+  * ` search_text ` : Search text string (query text). 
 
 This string is converted into a query vector (embedding), and is used in a ` VECTOR_DISTANCE ` query to search against the vectorized chunk index. 
 
 For example: 
-            
-                        ```
-            DBMS_HYBRID_VECTOR.SEARCH(
-                json('{ "hybrid_index_name" : "my_hybrid_idx",
-                        "vector":
-                                { "search_text" : "C, Python }
-                      }'))
-            from dual;
-            ```
+    
+        ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json('{ "hybrid_index_name" : "my_hybrid_idx",
+                "vector":
+                        { "search_text" : "C, Python }
+              }'))
+    from dual;
+    ```
 
-      * ` search_vector ` : Vector embedding (query vector). 
+  * ` search_vector ` : Vector embedding (query vector). 
 
 This embedding is directly used in a ` VECTOR_DISTANCE ` query to search against the vectorized chunk index. 
 
 > **note:** The vector embedding that you pass here must be generated using the same embedding model used for semantic search by the specified hybrid vector index. 
 
 For example: 
-            
-                        ```
-            dbms_hybrid_vector.search(
-                json('{ "hybrid_index_name" : "my_hybrid_idx",
-                     "vector":
-                              {
-                               "search_vector" : vector_serialize(
-                                                        vector_embedding(doc_model
-                                                                    using
-                                                                    "C, Python, Database"
-                                                                    as data)
-                                                                RETURNING CLOB)
-                              }}')) 
-            from dual;
-            ```
+    
+        ```
+    dbms_hybrid_vector.search(
+        json('{ "hybrid_index_name" : "my_hybrid_idx",
+             "vector":
+                      {
+                       "search_vector" : vector_serialize(
+                                                vector_embedding(doc_model
+                                                            using
+                                                            "C, Python, Database"
+                                                            as data)
+                                                        RETURNING CLOB)
+                      }}')) 
+    from dual;
+    ```
 
-      * ` search_mode ` : Document or chunk search mode in which you want to query the hybrid vector index: 
+  * ` search_mode ` : Document or chunk search mode in which you want to query the hybrid vector index: 
 
 Parameter  |  Description   
 ---|---  
@@ -195,21 +206,21 @@ Parameter  |  Description
 ` CHUNK ` |  Returns chunk-level results. In chunk mode, the result of your search is a list of chunk identifiers and associated document IDs from the base table corresponding to the list of best chunks identified, regardless of whether the chunks come from the same document or different documents.  The content from these chunk texts can be used as input for LLMs to formulate responses.   
   
 For example, semantic search in chunk mode: 
-            
-                        ```
-            DBMS_HYBRID_VECTOR.SEARCH(
-                json(
-                  '{ "hybrid_index_name" : "my_hybrid_idx",
-                     "vector":
-                      {
-                         "search_text"   : "leadership experience",
-                         "search_mode"   : "CHUNK"
-                      }
-                  }'))
-            from dual;
-            ```
+    
+        ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json(
+          '{ "hybrid_index_name" : "my_hybrid_idx",
+             "vector":
+              {
+                 "search_text"   : "leadership experience",
+                 "search_mode"   : "CHUNK"
+              }
+          }'))
+    from dual;
+    ```
 
-      * ` aggregator ` : Aggregate function to apply for ranking the vector scores for each document in ` DOCUMENT SEARCH_MODE ` . 
+  * ` aggregator ` : Aggregate function to apply for ranking the vector scores for each document in ` DOCUMENT SEARCH_MODE ` . 
 
 Parameter  |  Description   
 ---|---  
@@ -222,74 +233,77 @@ Parameter  |  Description
 ` MAXAVGMED ` |  This function computes a weighted sum of the ` MAX ` , ` AVGN ` , and ` MEDN ` values.   
   
 For example: 
-            
-                        ```
-            DBMS_HYBRID_VECTOR.SEARCH(
-                json(
-                  '{ "hybrid_index_name" : "my_hybrid_idx",
-                     "vector":
-                      {
-                         "search_text"   : "leadership experience",
-                         "search_mode"   : "DOCUMENT",
-                         "aggregator"    : "AVG"
-                      }
-                  }'))
-            from dual;
-            ```
+    
+        ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json(
+          '{ "hybrid_index_name" : "my_hybrid_idx",
+             "vector":
+              {
+                 "search_text"   : "leadership experience",
+                 "search_mode"   : "DOCUMENT",
+                 "aggregator"    : "AVG"
+              }
+          }'))
+    from dual;
+    ```
 
-      * ` score_weight ` : Relative weight (degree of importance or preference) to assign to the semantic ` VECTOR_DISTANCE ` query. This value is used when combining the results of RSF ranking. 
+  * ` score_weight ` : Relative weight (degree of importance or preference) to assign to the semantic ` VECTOR_DISTANCE ` query. This value is used when combining the results of RSF ranking. 
 
 Value: Any positive integer greater than ` 0 ` (zero) 
 
 Default: ` 10 ` (implies 10 times more importance to vector query than text query) 
 
 For example: 
-            
-                        ```
-            DBMS_HYBRID_VECTOR.SEARCH(
-                json(
-                  '{ "hybrid_index_name" : "my_hybrid_idx",
-                     "vector":
-                      {
-                         "search_text"   : "leadership experience",
-                         "search_mode"   : "DOCUMENT",
-                         "aggregator"    : "MAX",
-                         "score_weight"  : 5
-                      }
-                  }'))
-            from dual;
-            ```
+    
+        ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json(
+          '{ "hybrid_index_name" : "my_hybrid_idx",
+             "vector":
+              {
+                 "search_text"   : "leadership experience",
+                 "search_mode"   : "DOCUMENT",
+                 "aggregator"    : "MAX",
+                 "score_weight"  : 5
+              }
+          }'))
+    from dual;
+    ```
 
-      * ` rank_penalty ` : Penalty (denominator in RRF, represented as ` 1/(rank+penality ` ) to assign to vector query. This can help in balancing the relevance score by reducing the importance of unnecessary or repetitive words in a document. This value is used when combining the results of RRF ranking. 
+  * ` rank_penalty ` : Penalty (denominator in RRF, represented as ` 1/(rank+penality ` ) to assign to vector query. This can help in balancing the relevance score by reducing the importance of unnecessary or repetitive words in a document. This value is used when combining the results of RRF ranking. 
 
 Value: ` 0 ` (zero) or any positive integer 
 
 Default: ` 1 `
 
 For example: 
-            
-                        ```
-            DBMS_HYBRID_VECTOR.SEARCH(
-                json(
-                  '{ "hybrid_index_name" : "my_hybrid_idx",
-                     "search_scorer"     : "rrf",
-                     "vector":
-                      {
-                         "search_text"   : "leadership experience",
-                         "search_mode"   : "DOCUMENT",
-                         "aggregator"    : "MAX",
-                         "score_weight"  : 5,
-                         "rank_penalty"  : 2
-                      }
-                  }'))
-            from dual;
-            ```
+    
+        ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json(
+          '{ "hybrid_index_name" : "my_hybrid_idx",
+             "search_scorer"     : "rrf",
+             "vector":
+              {
+                 "search_text"   : "leadership experience",
+                 "search_mode"   : "DOCUMENT",
+                 "aggregator"    : "MAX",
+                 "score_weight"  : 5,
+                 "rank_penalty"  : 2
+              }
+          }'))
+    from dual;
+    ```
+
+
+
 
 text 
 
 Specify query parameters for keyword search against the Oracle Text index part of your hybrid vector index: 
 
-        * ` contains ` : Search text string (query text). 
+  * ` contains ` : Search text string (query text). 
 
 This string is converted into an Oracle Text ` CONTAINS ` query operator syntax for keyword search. 
 
@@ -298,51 +312,51 @@ You can use ` CONTAINS ` query operators to specify query expressions for full-t
 For example: 
 
 With a text contains string for pure keyword search: 
-                
-                                ```
-                DBMS_HYBRID_VECTOR.SEARCH(
-                    json('{ "hybrid_index_name" : "my_hybrid_idx",
-                            "text":
-                                   { "contains" : "C and Python" }
-                          }'))
-                from dual;
-                ```
+    
+        ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json('{ "hybrid_index_name" : "my_hybrid_idx",
+                "text":
+                       { "contains" : "C and Python" }
+              }'))
+    from dual;
+    ```
 
 With separate search texts using ` vector ` and ` text ` sub-elements for hybrid search. One search text or a vector embedding to run a ` VECTOR_DISTANCE ` query for semantic search. A second search text to run a ` CONTAINS ` query for keyword search. This query conducts two separate keyword and semantic queries, where keyword scores and semantic scores are combined: 
-                
-                                ```
-                DBMS_HYBRID_VECTOR.SEARCH(
-                    json('{ "hybrid_index_name" : "my_hybrid_idx",
-                            "vector":
-                                    { "search_text" : "leadership experience" },
-                             "text":
-                                    { "contains" : "C and Python" }
-                          }'))
-                from dual;
-                ```
+    
+        ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json('{ "hybrid_index_name" : "my_hybrid_idx",
+                "vector":
+                        { "search_text" : "leadership experience" },
+                 "text":
+                        { "contains" : "C and Python" }
+              }'))
+    from dual;
+    ```
 
-        * ` score_weight ` : Relative weight (degree of importance or preference) to assign to the text ` CONTAINS ` query. This value is used when combining the results of RSF ranking. 
+  * ` score_weight ` : Relative weight (degree of importance or preference) to assign to the text ` CONTAINS ` query. This value is used when combining the results of RSF ranking. 
 
 Value: Any positive integer greater than ` 0 ` (zero) 
 
 Default: ` 1 ` (implies neutral weight) 
 
 For example: 
-                
-                                ```
-                DBMS_HYBRID_VECTOR.SEARCH(
-                    json(
-                      '{ "hybrid_index_name" : "my_hybrid_idx",
-                         "text":
-                          {
-                             "contains"      : "C and Python",
-                             "score_weight"  : 1
-                          }
-                      }'))
-                from dual;
-                ```
+    
+        ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json(
+          '{ "hybrid_index_name" : "my_hybrid_idx",
+             "text":
+              {
+                 "contains"      : "C and Python",
+                 "score_weight"  : 1
+              }
+          }'))
+    from dual;
+    ```
 
-        * ` rank_penalty ` : Penalty (denominator in RRF, represented as ` 1/(rank+penality ` ) to assign to keyword query. 
+  * ` rank_penalty ` : Penalty (denominator in RRF, represented as ` 1/(rank+penality ` ) to assign to keyword query. 
 
 This can help in balancing the relevance score by reducing the importance of unnecessary or repetitive words in a document. This value is used when combining the results of RRF ranking. 
 
@@ -351,19 +365,22 @@ Value: ` 0 ` (zero) or any positive integer
 Default: ` 5 `
 
 For example: 
-                
-                                ```
-                DBMS_HYBRID_VECTOR.SEARCH(
-                    json(
-                      '{ "hybrid_index_name" : "my_hybrid_idx",
-                         "text":
-                          {
-                             "contains"      : "C and Python",
-                             "rank_penalty"  : 5
-                          }
-                      }'))
-                from dual;
-                ```
+    
+        ```
+    DBMS_HYBRID_VECTOR.SEARCH(
+        json(
+          '{ "hybrid_index_name" : "my_hybrid_idx",
+             "text":
+              {
+                 "contains"      : "C and Python",
+                 "rank_penalty"  : 5
+              }
+          }'))
+    from dual;
+    ```
+
+
+
 
 return 
 
@@ -372,117 +389,119 @@ Specify which fields to appear in the result set:
 Parameter  |  Description   
 ---|---  
 ` topN ` |  Maximum number of best-matched results to be returned  Value: Any integer greater than ` 0 ` (zero)  Default: ` 20 `  
-` values ` |  Return attributes for the search results. Values for scores range between 100 (best) to 0 (worse).  <li>
-          * ` rowid ` : Row ID associated with the source document.  </li> <li>
-          * ` score ` : Final score computed from keyword-and-semantic search scores.  </li> <li>
-          * ` vector_score ` : Semantic score from vector search results.  </li> <li>
-          * ` text_score ` : Keyword score from text search results.  </li> <li>
-          * ` vector_rank ` : Ranking of chunks retrieved from semantic or ` VECTOR_DISTANCE ` search.  </li> <li>
-          * ` text_rank ` : Ranking of documents retrieved from keyword or ` CONTAINS ` search.  </li> <li>
-          * ` chunk_text ` : Human-readable content from each chunk.  </li> <li>
-          * ` chunk_id ` : ID of each chunk text.  </li> Default: All the above return attributes are shown by default.   
-` format ` |  Format of the results as:  <li>
-            * ` JSON ` (default)  </li> <li>
-            * ` XML ` </li>  
+` values ` |  Return attributes for the search results. Values for scores range between 100 (best) to 0 (worse).  <ul>
+
+<li>
+  * ` rowid ` : Row ID associated with the source document.  </li> <li>
+  * ` score ` : Final score computed from keyword-and-semantic search scores.  </li> <li>
+  * ` vector_score ` : Semantic score from vector search results.  </li> <li>
+  * ` text_score ` : Keyword score from text search results.  </li> <li>
+  * ` vector_rank ` : Ranking of chunks retrieved from semantic or ` VECTOR_DISTANCE ` search.  </li> <li>
+  * ` text_rank ` : Ranking of documents retrieved from keyword or ` CONTAINS ` search.  </li> <li>
+  * ` chunk_text ` : Human-readable content from each chunk.  </li> <li>
+  * ` chunk_id ` : ID of each chunk text.  </li> </ul> Default: All the above return attributes are shown by default.   
+` format ` |  Format of the results as:  <ul> <li>
+    * ` JSON ` (default)  </li> <li>
+    * ` XML ` </li> </ul>  
   
 For example: 
-                        
-                                                ```
-                        DBMS_HYBRID_VECTOR.SEARCH(
-                            json(
-                              '{ "hybrid_index_name" : "my_hybrid_idx",
-                                 "search_text"       : "C, Python",
-                                 "return":
-                                  {
-                                     "values"        : [ "rowid", "score" ],
-                                     "topN"          : 3,
-                                     "format"        : "JSON"
-                                  }
-                              }'))
-                        from dual;
-                        ```
+        
+                ```
+        DBMS_HYBRID_VECTOR.SEARCH(
+            json(
+              '{ "hybrid_index_name" : "my_hybrid_idx",
+                 "search_text"       : "C, Python",
+                 "return":
+                  {
+                     "values"        : [ "rowid", "score" ],
+                     "topN"          : 3,
+                     "format"        : "JSON"
+                  }
+              }'))
+        from dual;
+        ```
 
 Complete Example With All Query Parameters 
 
 The following example shows a hybrid search query that performs separate text and vector searches against ` my_hybrid_idx ` . This query specifies the ` search_text ` for vector search using the ` vector_distance ` function as ` prioritize teamwork and leadership experience ` and the keyword for text search using the ` contains ` operator as ` C and Python ` . The search mode is ` DOCUMENT ` to return the search results as topN documents. 
-                        
-                                                ```
-                        select json_Serialize(
-                          DBMS_HYBRID_VECTOR.SEARCH(
-                            json(
-                              '{ "hybrid_index_name" : "my_hybrid_idx",
-                                 "search_fusion"     : "INTERSECT",
-                                 "search_scorer"     : "rsf",
-                                 "vector":
-                                  {
-                                     "search_text"   : "prioritize teamwork and leadership experience",
-                                     "search_mode"   : "DOCUMENT",
-                                     "score_weight"  : 10,
-                                     "rank_penalty"  : 1,
-                                     "aggregator"    : "MAX"
-                                  },
-                                 "text":
-                                  {
-                                     "contains"      : "C and Python",
-                                     "score_weight"  : 1,
-                                     "rank_penalty"  : 5
-                                  },
-                                 "return":
-                                  {
-                                     "format"        : "JSON",
-                                     "topN"          : 3,
-                                     "values"        : [ "rowid", "score", "vector_score",
-                                                         "text_score", "vector_rank",
-                                                         "text_rank", "chunk_text", "chunk_id" ]
-                                  }
-                              }'
-                            )
-                          ) pretty)
-                        from dual;
-                        ```
+        
+                ```
+        select json_Serialize(
+          DBMS_HYBRID_VECTOR.SEARCH(
+            json(
+              '{ "hybrid_index_name" : "my_hybrid_idx",
+                 "search_fusion"     : "INTERSECT",
+                 "search_scorer"     : "rsf",
+                 "vector":
+                  {
+                     "search_text"   : "prioritize teamwork and leadership experience",
+                     "search_mode"   : "DOCUMENT",
+                     "score_weight"  : 10,
+                     "rank_penalty"  : 1,
+                     "aggregator"    : "MAX"
+                  },
+                 "text":
+                  {
+                     "contains"      : "C and Python",
+                     "score_weight"  : 1,
+                     "rank_penalty"  : 5
+                  },
+                 "return":
+                  {
+                     "format"        : "JSON",
+                     "topN"          : 3,
+                     "values"        : [ "rowid", "score", "vector_score",
+                                         "text_score", "vector_rank",
+                                         "text_rank", "chunk_text", "chunk_id" ]
+                  }
+              }'
+            )
+          ) pretty)
+        from dual;
+        ```
 
 The top 3 rows are ordered by relevance, with higher scores indicating a better match. All the return attributes are shown by default: 
-                        
-                                                ```
-                        [
-                          {
-                            "rowid"         : "AAAR9jAABAAAQeaAAA",
-                            "score"         : 58.64,
-                            "vector_score"  : 61,
-                            "text_score"    : 35,
-                            "vector_rank"   : 1,
-                            "text_rank"     : 2,
-                            "chunk_text"    : "Candidate 1: C Master. Optimizes low-level system (i.e. Database)
-                                               performance with C. Strong leadership skills in guiding teams to 
-                                               deliver complex projects.",
-                            "chunk_id"      : "1"
-                          },
-                          {
-                            "rowid"         : "AAAR9jAABAAAQeaAAB",
-                            "score"         : 56.86,
-                            "vector_score"  : 55.75,
-                            "text_score"    : 68,
-                            "vector_rank"   : 3,
-                            "text_rank"     : 1,
-                            "chunk_text"    : "Candidate 3: Full-Stack Developer. Skilled in Database, C, HTML,
-                                               JavaScript, and Python with experience in building responsive web 
-                                               applications. Thrives in collaborative team environments.",
-                            "chunk_id"      : "1"
-                          },
-                          {
-                            "rowid"         : "AAAR9jAABAAAQeaAAD",
-                            "score"         : 51.67,
-                            "vector_score"  : 56.64,
-                            "text_score"    : 2,
-                            "vector_rank"   : 2,
-                            "text_rank"     : 3,
-                            "chunk_text"    : "Candidate 2: Database Administrator (DBA). Maintains and secures
-                                               enterprise database (Oracle, MySql, SQL Server). Passionate about 
-                                               data integrity and optimization. Strong mentor for junior DBA(s).",
-                            "chunk_id"      : "1"
-                          }
-                        ]
-                        ```
+        
+                ```
+        [
+          {
+            "rowid"         : "AAAR9jAABAAAQeaAAA",
+            "score"         : 58.64,
+            "vector_score"  : 61,
+            "text_score"    : 35,
+            "vector_rank"   : 1,
+            "text_rank"     : 2,
+            "chunk_text"    : "Candidate 1: C Master. Optimizes low-level system (i.e. Database)
+                               performance with C. Strong leadership skills in guiding teams to 
+                               deliver complex projects.",
+            "chunk_id"      : "1"
+          },
+          {
+            "rowid"         : "AAAR9jAABAAAQeaAAB",
+            "score"         : 56.86,
+            "vector_score"  : 55.75,
+            "text_score"    : 68,
+            "vector_rank"   : 3,
+            "text_rank"     : 1,
+            "chunk_text"    : "Candidate 3: Full-Stack Developer. Skilled in Database, C, HTML,
+                               JavaScript, and Python with experience in building responsive web 
+                               applications. Thrives in collaborative team environments.",
+            "chunk_id"      : "1"
+          },
+          {
+            "rowid"         : "AAAR9jAABAAAQeaAAD",
+            "score"         : 51.67,
+            "vector_score"  : 56.64,
+            "text_score"    : 2,
+            "vector_rank"   : 2,
+            "text_rank"     : 3,
+            "chunk_text"    : "Candidate 2: Database Administrator (DBA). Maintains and secures
+                               enterprise database (Oracle, MySql, SQL Server). Passionate about 
+                               data integrity and optimization. Strong mentor for junior DBA(s).",
+            "chunk_id"      : "1"
+          }
+        ]
+        ```
 
 End-to-end example  : 
 
@@ -490,6 +509,6 @@ To see how to create a hybrid vector index and explore all types of queries agai
 
 **Related Topics**
 
-              * [ Perform Hybrid Search ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-531F9E71-2CEF-46A8-AA53-7C161E801E3A)
+      * [ Perform Hybrid Search ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-531F9E71-2CEF-46A8-AA53-7C161E801E3A)
 
-**Parent topic:** [ DBMS_HYBRID_VECTOR ](dbms_hybrid_vector-vecse.html)
+**Parent topic:** [ DBMS_HYBRID_VECTOR ](dbms_hybrid_vector-vecse.md)

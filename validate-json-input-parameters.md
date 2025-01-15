@@ -108,55 +108,63 @@ Validate JSON input parameters for the ` DBMS_VECTOR.UTL ` and ` DBMS_VECTOR_CHA
         }
         ```
 
-    * For REST Providers  : 
+  * For REST Providers  : 
 
 ` SCHEMA_REST `
-        
-                ```
-        
-        {  "title" : "REST parameters",
-           "description" : "REST versions of utl_to_embedding, utl_to_summary, utl_to_generate_text",
-           "type" : "object",
-           "properties" : {
-             "provider"         : {"type" : "string" },
-             "credential_name"  : {"type" : "string" },
-             "url"              : {"type" : "string" },
-             "model"            : {"type" : "string" }
-            },
-           "additionalProperties" : true,
-           "required" : [ "provider", "credential_name", "url", "model" ] }
+    
         ```
+    
+    {  "title" : "REST parameters",
+       "description" : "REST versions of utl_to_embedding, utl_to_summary, utl_to_generate_text",
+       "type" : "object",
+       "properties" : {
+         "provider"         : {"type" : "string" },
+         "credential_name"  : {"type" : "string" },
+         "url"              : {"type" : "string" },
+         "model"            : {"type" : "string" }
+        },
+       "additionalProperties" : true,
+       "required" : [ "provider", "credential_name", "url", "model" ] }
+    ```
 
 Note that all the REST calls to third-party service providers share the same schema for their respective embedding, summarization, and text generation operations. 
 
+
+
+
 Examples  : 
 
-      * To validate your JSON data against JSON schema, use the PL/SQL function or procedure ` DBMS_JSON_SCHEMA.is_valid() ` . 
+  * To validate your JSON data against JSON schema, use the PL/SQL function or procedure ` DBMS_JSON_SCHEMA.is_valid() ` . 
 
 The function returns ` 1 ` for valid and ` 0 ` for invalid (invalid data can optionally raise an error). The procedure returns ` TRUE ` for valid and ` FALSE ` for invalid as the value of an ` OUT ` parameter. 
-            
-                        ```
-            l_valid := sys.DBMS_JSON_SCHEMA.is_valid(params, json(SCHEMA), dbms_json_schema.RAISE_ERROR);
-            ```
+    
+        ```
+    l_valid := sys.DBMS_JSON_SCHEMA.is_valid(params, json(SCHEMA), dbms_json_schema.RAISE_ERROR);
+    ```
 
-      * To read a detailed validation report of errors, use the PL/SQL procedure ` DBMS_JSON_SCHEMA.validate_report ` . 
+  * To read a detailed validation report of errors, use the PL/SQL procedure ` DBMS_JSON_SCHEMA.validate_report ` . 
 
 This use of the procedure checks data against schema, providing output in parameters validity ( ` BOOLEAN ` ) and errors ( ` JSON ` ). 
-            
-                        ```
-            sys.DBMS_JSON_SCHEMA.is_valid(params, json(SCHEMA), l_valid, l_errors);
-            ```
+    
+        ```
+    sys.DBMS_JSON_SCHEMA.is_valid(params, json(SCHEMA), l_valid, l_errors);
+    ```
 
-      * If you use the procedure (not function) ` is_valid ` , then you have access to the validation errors report as an ` OUT ` parameter. If you use the function ` is_valid ` , then you do not have access to such a report. Instead of using the function ` is_valid ` , you can use the PL/SQL function ` DBMS_JSON_SCHEMA.validate_report ` in a SQL query to validate and return the same full validation information that the reporting ` OUT ` parameter of the procedure ` is_valid ` provides, as a JSON type instance. 
-            
-                        ```
-            SELECT JSON_SERIALIZE(DBMS_JSON_SCHEMA.validate_report('json',SCHEMA) returning varchar2 PRETTY);
-            ```
+  * If you use the procedure (not function) ` is_valid ` , then you have access to the validation errors report as an ` OUT ` parameter. If you use the function ` is_valid ` , then you do not have access to such a report. Instead of using the function ` is_valid ` , you can use the PL/SQL function ` DBMS_JSON_SCHEMA.validate_report ` in a SQL query to validate and return the same full validation information that the reporting ` OUT ` parameter of the procedure ` is_valid ` provides, as a JSON type instance. 
+    
+        ```
+    SELECT JSON_SERIALIZE(DBMS_JSON_SCHEMA.validate_report('json',SCHEMA) returning varchar2 PRETTY);
+    ```
+
+
+
 
 **Related Topics**
 
-        * [ DBMS_VECTOR ](dbms_vector-vecse.html#GUID-829230F9-BD1E-41F9-BAAB-5D3C3E52FC12)
-        * [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.html#GUID-A09FF69E-FCCB-4EDA-B7E4-B02A11359504)
-        * [ DBMS_JSON_SCHEMA ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ARPLS-GUID-63089EEE-6DF8-41C9-9871-11B94D7551B4)
+  * [ DBMS_VECTOR ](dbms_vector-vecse.md#GUID-829230F9-BD1E-41F9-BAAB-5D3C3E52FC12)
+  * [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.md#GUID-A09FF69E-FCCB-4EDA-B7E4-B02A11359504)
+  * [ DBMS_JSON_SCHEMA ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ARPLS-GUID-63089EEE-6DF8-41C9-9871-11B94D7551B4)
 
-**Parent topic:** [ About PL/SQL Packages to Generate Embeddings ](pl-sql-packages-generate-embeddings.html)
+
+
+**Parent topic:** [ About PL/SQL Packages to Generate Embeddings ](pl-sql-packages-generate-embeddings.md)

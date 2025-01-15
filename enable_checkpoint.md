@@ -8,9 +8,13 @@ Use the ` ENABLE_CHECKPOINT ` procedure to enable the Checkpoint feature for a g
 
   * By default, HNSW checkpointing is enabled. If required, you can disable it using the ` DBMS_VECTOR.DISABLE_CHECKPOINT ` procedure. 
 
+
+
+
 Syntax 
     
-        ```
+    
+    ```
     DBMS_VECTOR.ENABLE_CHECKPOINT('INDEX_USER',['INDEX_NAME']);
     ```
 
@@ -26,21 +30,26 @@ The ` INDEX_NAME ` clause is optional. If you do not specify the index name, the
 
 Examples 
 
-    * Using both the index name and index user: 
-        
-                ```
-        DBMS_VECTOR.ENABLE_CHECKPOINT('VECTOR_USER','VIDX1');
+  * Using both the index name and index user: 
+    
         ```
+    DBMS_VECTOR.ENABLE_CHECKPOINT('VECTOR_USER','VIDX1');
+    ```
 
-    * Using only the index user: 
-        
-                ```
-        DBMS_VECTOR.ENABLE_CHECKPOINT('VECTOR_USER');
+  * Using only the index user: 
+    
         ```
+    DBMS_VECTOR.ENABLE_CHECKPOINT('VECTOR_USER');
+    ```
+
+
+
 
 **Related Topics**
 
-      * [ *Oracle Database AI Vector Search User's Guide*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-8604A7A5-3C96-4B55-85BC-BCF44562BDBB)
-      * [ DISABLE_CHECKPOINT ](disable_checkpoint.html#GUID-BD7B95F2-5D35-4D94-9A34-ECE37D067C73)
+  * [ *Oracle Database AI Vector Search User's Guide*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-8604A7A5-3C96-4B55-85BC-BCF44562BDBB)
+  * [ DISABLE_CHECKPOINT ](disable_checkpoint.md#GUID-BD7B95F2-5D35-4D94-9A34-ECE37D067C73)
 
-**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.html)
+
+
+**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.md)

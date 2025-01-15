@@ -81,16 +81,20 @@ Depending on the type of your data, you can use different pretrained, open-sourc
   * For visual data, you can use Residual Network (ResNet) to generate vector embeddings. 
   * For audio data, you can use the visual spectrogram representation of the audio data to fall back into the visual data case. 
 
+
+
 Each model also determines the number of dimensions for your vectors. For example: 
 
-    * Cohere's embedding model embed-english-v3.0 has 1024 dimensions. 
-    * OpenAI's embedding model text-embedding-3-large has 3072 dimensions. 
-    * Hugging Face's embedding model all-MiniLM-L6-v2 has 384 dimensions 
+  * Cohere's embedding model embed-english-v3.0 has 1024 dimensions. 
+  * OpenAI's embedding model text-embedding-3-large has 3072 dimensions. 
+  * Hugging Face's embedding model all-MiniLM-L6-v2 has 384 dimensions 
+
+
 
 Of course, you can always create your own model that is trained with your own data set. 
 
 Import Embedding Models into Oracle Database 
 
-Although you can generate vector embeddings outside the Oracle Database using pretrained open-source embeddings models or your own embeddings models, you also have the option to import those models directly into the Oracle Database if they are compatible with the Open Neural Network Exchange (ONNX) standard. Oracle Database implements an ONNX runtime directly within the database. This allows you to generate vector embeddings directly within the Oracle Database using SQL. See [ Generate Vector Embeddings ](generate-vector-embeddings-node.html#GUID-A788574C-F88D-4E5E-B220-A40FA8CBB174) for more information. 
+Although you can generate vector embeddings outside the Oracle Database using pretrained open-source embeddings models or your own embeddings models, you also have the option to import those models directly into the Oracle Database if they are compatible with the Open Neural Network Exchange (ONNX) standard. Oracle Database implements an ONNX runtime directly within the database. This allows you to generate vector embeddings directly within the Oracle Database using SQL. See [ Generate Vector Embeddings ](generate-vector-embeddings-node.md#GUID-A788574C-F88D-4E5E-B220-A40FA8CBB174) for more information. 
 
-**Parent topic:** [ Overview ](overview-node.html)
+**Parent topic:** [ Overview ](overview-node.md)

@@ -18,6 +18,9 @@ You can also prompt with a media file, such as an image, to extract text from pi
 
 For this operation, this API makes a REST call to your chosen remote third-party provider (Google AI, Hugging Face, OpenAI, or Vertex AI) or local third-party provider (Ollama). 
 
+
+
+
 > **note:** WARNING: 
 
 Certain features of the database may allow you to access services offered separately by third-parties, for example, through the use of JSON specifications that facilitate your access to REST APIs. 
@@ -28,25 +31,28 @@ Syntax
 
 This function accepts the input as ` CLOB ` containing text data (for textual prompts) or as ` BLOB ` containing media data (for media files such as images). It then processes this information to generate a new ` CLOB ` containing the generated text. 
 
-    * Prompt to Text: 
-        
-                ```
-        DBMS_VECTOR_CHAIN.UTL_TO_GENERATE_TEXT (
-            	DATA          IN CLOB,
-            	PARAMS        IN JSON default NULL
-        ) return CLOB;
+  * Prompt to Text: 
+    
         ```
+    DBMS_VECTOR_CHAIN.UTL_TO_GENERATE_TEXT (
+        	DATA          IN CLOB,
+        	PARAMS        IN JSON default NULL
+    ) return CLOB;
+    ```
 
-    * Image to Text: 
-        
-                ```
-        DBMS_VECTOR_CHAIN.UTL_TO_GENERATE_TEXT(
-                  TEXT_DATA      IN CLOB,
-                  MEDIA_DATA     IN BLOB,
-                  MEDIA_TYPE     IN VARCHAR2 default 'image/jpeg',
-                  PARAMS         IN JSON default NULL
-        ) return CLOB;
+  * Image to Text: 
+    
         ```
+    DBMS_VECTOR_CHAIN.UTL_TO_GENERATE_TEXT(
+              TEXT_DATA      IN CLOB,
+              MEDIA_DATA     IN BLOB,
+              MEDIA_TYPE     IN VARCHAR2 default 'image/jpeg',
+              PARAMS         IN JSON default NULL
+    ) return CLOB;
+    ```
+
+
+
 
 DATA and TEXT_DATA 
 
@@ -62,44 +68,50 @@ MEDIA_TYPE
 
 Specify the image format for the given image or visual PDF file ( ` BLOB ` file) in one of the supported image data MIME types. For example: 
 
-      * For PNG: ` image/png `
+  * For PNG: ` image/png `
 
-      * For JPEG: ` image/jpeg `
+  * For JPEG: ` image/jpeg `
 
-      * For PDF: ` application/pdf `
+  * For PDF: ` application/pdf `
+
+
+
 
 > **note:** For a complete list of the supported image formats, refer to your third-party provider's documentation. 
 
 PARAMS 
 
 Specify the following input parameters in JSON format, depending on the service provider that you want to access for text generation: 
-            
-                        ```
-            {
-              "provider"        : "",
-              "credential_name" : "",  
-              "url"             : "",
-              "model"           : "",
-              "transfer_timeout": ,
-              "": ""
-            }
-            ```
+    
+    
+    ```
+    {
+      "provider"        : "",
+      "credential_name" : "",  
+      "url"             : "",
+      "model"           : "",
+      "transfer_timeout": ,
+      "": ""
+    }
+    ```
 
 **Table: UTL_TO_GENERATE_TEXT Parameter Details** 
 
 Parameter  |  Description   
 ---|---  
-` provider ` |  Supported REST provider that you want to access to generate text.  Specify one of the following values:  For ` CLOB ` input:  <li>
-        * ` cohere ` </li> <li>
-        * ` googleai ` </li> <li>
-        * ` huggingface ` </li> <li>
-        * ` ocigenai ` </li> <li>
-        * ` openai ` </li> <li>
-        * ` vertexai ` </li> For ` BLOB ` input:  <li>
-          * ` googleai ` </li> <li>
-          * ` huggingface ` </li> <li>
-          * ` openai ` </li> <li>
-          * ` vertexai ` </li>  
+` provider ` |  Supported REST provider that you want to access to generate text.  Specify one of the following values:  For ` CLOB ` input:  <ul>
+
+<li>
+  * ` cohere ` </li> <li>
+  * ` googleai ` </li> <li>
+  * ` huggingface ` </li> <li>
+  * ` ocigenai ` </li> <li>
+  * ` openai ` </li> <li>
+  * ` vertexai ` </li> </ul> For ` BLOB ` input:  <ul> <li>
+    * ` googleai ` </li> <li>
+    * ` huggingface ` </li> <li>
+    * ` openai ` </li> <li>
+    * ` vertexai ` </li> </ul>  
 ` credential_name ` |  Name of the credential in the form: *`schema`* . *`credential_name`*  A credential name holds authentication credentials to enable access to your provider for making REST API calls.  You need to first set up your credential by calling the ` DBMS_VECTOR_CHAIN.CREATE_CREDENTIAL ` helper function to create and store a credential, and then refer to the credential name here. See [ CREATE_CREDENTIAL ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-A6E28402-DC43-44C6-A1B2-75C3F270DD76) .   
 ` url ` |  URL of the third-party provider endpoint for each REST call, as listed in [ Supported Third-Party Provider Operations and Endpoints ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-BE3EE403-CD10-4708-A15F-EFB1FA69DF09) .   
 ` model ` |  Name of the third-party text generation model in the form: *`schema`* . *`model_name`*  If the model name is not schema-qualified, then the schema of the procedure invoker is used.  Note  : For Generative AI, all the supported third-party models are listed in [ Supported Third-Party Provider Operations and Endpoints ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-BE3EE403-CD10-4708-A15F-EFB1FA69DF09) .   
@@ -122,291 +134,291 @@ Parameter  |  Description
 Let us look at some example configurations for all third-party providers: 
 
 > **note:** Important: 
-            * The following examples are for illustration purposes. For accurate and up-to-date information on additional parameters to use, refer to your third-party provider's documentation. 
+      * The following examples are for illustration purposes. For accurate and up-to-date information on additional parameters to use, refer to your third-party provider's documentation. 
 
-            * For a list of all supported REST endpoint URLs, see [ Supported Third-Party Provider Operations and Endpoints ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-BE3EE403-CD10-4708-A15F-EFB1FA69DF09) . 
+      * For a list of all supported REST endpoint URLs, see [ Supported Third-Party Provider Operations and Endpoints ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-BE3EE403-CD10-4708-A15F-EFB1FA69DF09) . 
 
 Cohere example: 
-                        
-                                                ```
-                        {
-                          "provider"       : "cohere", 
-                          "credential_name": "COHERE_CRED",
-                          "url"            : "https://api.cohere.example.com/chat",
-                          "model"          : "command"
-                        }
-                        ```
+        
+                ```
+        {
+          "provider"       : "cohere", 
+          "credential_name": "COHERE_CRED",
+          "url"            : "https://api.cohere.example.com/chat",
+          "model"          : "command"
+        }
+        ```
 
 Generative AI example: 
 
 > **note:** For Generative AI, if you want to pass any additional REST provider-specific parameters, then you must enclose those in ` chatRequest ` . 
-                        
-                                                ```
-                        {
-                          "provider"       : "ocigenai",
-                          "credential_name": "OCI_CRED",
-                          "url"            : "https://inference.generativeai.us-example.com/chat",
-                          "model"          : "cohere.command-r-16k",
-                          "chatRequest"    : {
-                                              "maxTokens"    : 256
-                                             }
-                        }
-                        ```
+        
+                ```
+        {
+          "provider"       : "ocigenai",
+          "credential_name": "OCI_CRED",
+          "url"            : "https://inference.generativeai.us-example.com/chat",
+          "model"          : "cohere.command-r-16k",
+          "chatRequest"    : {
+                              "maxTokens"    : 256
+                             }
+        }
+        ```
 
 Google AI example: 
-                        
-                                                ```
-                        {
-                          "provider"        : "googleai",
-                          "credential_name" : "GOOGLEAI_CRED",
-                          "url"             : "https://googleapis.example.com/models/",
-                          "model"           : "gemini-pro:generateContent"
-                        }
-                        ```
+        
+                ```
+        {
+          "provider"        : "googleai",
+          "credential_name" : "GOOGLEAI_CRED",
+          "url"             : "https://googleapis.example.com/models/",
+          "model"           : "gemini-pro:generateContent"
+        }
+        ```
 
 Hugging Face example: 
-                        
-                                                ```
-                        {
-                          "provider"        : "huggingface",
-                          "credential_name" : "HF_CRED",
-                          "url"             : "https://api.huggingface.example.com/models/",
-                          "model"           : "gpt2"
-                        }
-                        ```
+        
+                ```
+        {
+          "provider"        : "huggingface",
+          "credential_name" : "HF_CRED",
+          "url"             : "https://api.huggingface.example.com/models/",
+          "model"           : "gpt2"
+        }
+        ```
 
 Ollama example: 
-                        
-                                                ```
-                        {
-                          "provider"       : "ollama", 
-                          "host"           : "local", 
-                          "url"            : "http://localhost:11434/api/generate", 
-                          "model"          : "phi3:mini"
-                        }
-                        ```
+        
+                ```
+        {
+          "provider"       : "ollama", 
+          "host"           : "local", 
+          "url"            : "http://localhost:11434/api/generate", 
+          "model"          : "phi3:mini"
+        }
+        ```
 
 OpenAI example: 
-                        
-                                                ```
-                        {
-                          "provider"        : "openai",
-                          "credential_name" : "OPENAI_CRED",
-                          "url"             : "https://api.openai.example.com",
-                          "model"           : "gpt-4o-mini",
-                          "max_tokens"      : 60,
-                          "temperature"     : 1.0
-                        }
-                        ```
+        
+                ```
+        {
+          "provider"        : "openai",
+          "credential_name" : "OPENAI_CRED",
+          "url"             : "https://api.openai.example.com",
+          "model"           : "gpt-4o-mini",
+          "max_tokens"      : 60,
+          "temperature"     : 1.0
+        }
+        ```
 
 Vertex AI example: 
-                        
-                                                ```
-                        {
-                          "provider"         : "vertexai",
-                          "credential_name"  : "VERTEXAI_CRED",
-                          "url"              : "https://googleapis.example.com/models/",
-                          "model"            : "gemini-1.0-pro:generateContent",
-                          "generation_config": {
-                                                "temperature"    : 0.9,
-                                                "topP"           : 1,
-                                                "candidateCount" : 1,
-                                                "maxOutputTokens": 256
-                                               }
-                        }
-                        ```
+        
+                ```
+        {
+          "provider"         : "vertexai",
+          "credential_name"  : "VERTEXAI_CRED",
+          "url"              : "https://googleapis.example.com/models/",
+          "model"            : "gemini-1.0-pro:generateContent",
+          "generation_config": {
+                                "temperature"    : 0.9,
+                                "topP"           : 1,
+                                "candidateCount" : 1,
+                                "maxOutputTokens": 256
+                               }
+        }
+        ```
 
 Examples 
 
-              * Prompt to Text: 
+      * Prompt to Text: 
 
 The following statements generate a text response by making a REST call to Generative AI. The prompt given here is " ` What is Oracle Text? ` ". 
 
 Here, the cohere.command-r-16k and meta.llama-3.1-70b-instruct models are used. You can replace the ` model ` value with any other supported model that you want to use with Generative AI, as listed in [ Supported Third-Party Provider Operations and Endpoints ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-BE3EE403-CD10-4708-A15F-EFB1FA69DF09) . 
 
 Using the cohere.command-r-16k model  : 
-                            
-                                                        ```
-                            -- select example
-                            
-                            var params clob;
-                            exec :params := '
-                            {
-                              "provider"       : "ocigenai",
-                              "credential_name": "OCI_CRED",
-                              "url"            : "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/chat",
-                              "model"          : "cohere.command-r-16k",
-                              "chatRequest"    : {
-                                                  "maxTokens": 256
-                                                 }
-                            }';
-                            
-                            select dbms_vector_chain.utl_to_generate_text(
-                             'What is Oracle Text?',
-                             json(:params)) from dual;
-                            
-                            -- PL/SQL example
-                            
-                            declare
-                              input clob;
-                              params clob;
-                              output clob;
-                            begin
-                              input := 'What is Oracle Text?';
-                            
-                              params := '
-                            {
-                              "provider"       : "ocigenai",
-                              "credential_name": "OCI_CRED",
-                              "url"            : "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/chat",
-                              "model"          : "cohere.command-r-16k",
-                              "chatRequest"    : {
-                                                  "maxTokens": 256
-                                                 }
-                            }';
-                            
-                              output := dbms_vector_chain.utl_to_generate_text(input, json(params));
-                              dbms_output.put_line(output);
-                              if output is not null then
-                                dbms_lob.freetemporary(output);
-                              end if;
-                            exception
-                              when OTHERS THEN
-                                DBMS_OUTPUT.PUT_LINE (SQLERRM);
-                                DBMS_OUTPUT.PUT_LINE (SQLCODE);
-                            end;
-                            /
-                            ```
+            
+                        ```
+            -- select example
+            
+            var params clob;
+            exec :params := '
+            {
+              "provider"       : "ocigenai",
+              "credential_name": "OCI_CRED",
+              "url"            : "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/chat",
+              "model"          : "cohere.command-r-16k",
+              "chatRequest"    : {
+                                  "maxTokens": 256
+                                 }
+            }';
+            
+            select dbms_vector_chain.utl_to_generate_text(
+             'What is Oracle Text?',
+             json(:params)) from dual;
+            
+            -- PL/SQL example
+            
+            declare
+              input clob;
+              params clob;
+              output clob;
+            begin
+              input := 'What is Oracle Text?';
+            
+              params := '
+            {
+              "provider"       : "ocigenai",
+              "credential_name": "OCI_CRED",
+              "url"            : "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/chat",
+              "model"          : "cohere.command-r-16k",
+              "chatRequest"    : {
+                                  "maxTokens": 256
+                                 }
+            }';
+            
+              output := dbms_vector_chain.utl_to_generate_text(input, json(params));
+              dbms_output.put_line(output);
+              if output is not null then
+                dbms_lob.freetemporary(output);
+              end if;
+            exception
+              when OTHERS THEN
+                DBMS_OUTPUT.PUT_LINE (SQLERRM);
+                DBMS_OUTPUT.PUT_LINE (SQLCODE);
+            end;
+            /
+            ```
 
 Using the meta.llama-3.1-70b-instruct model  : 
-                            
-                                                        ```
-                            -- select example
-                            
-                            var params clob;
-                            exec :params := '
-                            {
-                               "provider"       : "ocigenai",
-                               "credential_name": "OCI_CRED",
-                               "url"            : "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/chat",
-                               "model"          : "meta.llama-3.1-70b-instruct",
-                               "chatRequest"    : {
-                                                   "topK" : 1
-                                                  }
-                            }';
-                            
-                            select dbms_vector_chain.utl_to_generate_text(
-                             'What is Oracle Text?',
-                             json(:params)) from dual;
-                            
-                            -- PL/SQL example
-                            
-                            declare
-                              input clob;
-                              params clob;
-                              output clob;
-                            begin
-                              input := 'What is Oracle Text?';
-                            
-                              params := '
-                            {
-                               "provider"       : "ocigenai",
-                               "credential_name": "OCI_CRED",
-                               "url"            : "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/chat",
-                               "model"          : "meta.llama-3.1-70b-instruct",
-                               "chatRequest"    : {
-                                                   "topK" : 1
-                                                  }
-                            }';
-                            
-                              output := dbms_vector_chain.utl_to_generate_text(input, json(params));
-                              dbms_output.put_line(output);
-                              if output is not null then
-                                dbms_lob.freetemporary(output);
-                              end if;
-                            exception
-                              when OTHERS THEN
-                                DBMS_OUTPUT.PUT_LINE (SQLERRM);
-                                DBMS_OUTPUT.PUT_LINE (SQLCODE);
-                            end;
-                            /
-                            ```
+            
+                        ```
+            -- select example
+            
+            var params clob;
+            exec :params := '
+            {
+               "provider"       : "ocigenai",
+               "credential_name": "OCI_CRED",
+               "url"            : "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/chat",
+               "model"          : "meta.llama-3.1-70b-instruct",
+               "chatRequest"    : {
+                                   "topK" : 1
+                                  }
+            }';
+            
+            select dbms_vector_chain.utl_to_generate_text(
+             'What is Oracle Text?',
+             json(:params)) from dual;
+            
+            -- PL/SQL example
+            
+            declare
+              input clob;
+              params clob;
+              output clob;
+            begin
+              input := 'What is Oracle Text?';
+            
+              params := '
+            {
+               "provider"       : "ocigenai",
+               "credential_name": "OCI_CRED",
+               "url"            : "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/chat",
+               "model"          : "meta.llama-3.1-70b-instruct",
+               "chatRequest"    : {
+                                   "topK" : 1
+                                  }
+            }';
+            
+              output := dbms_vector_chain.utl_to_generate_text(input, json(params));
+              dbms_output.put_line(output);
+              if output is not null then
+                dbms_lob.freetemporary(output);
+              end if;
+            exception
+              when OTHERS THEN
+                DBMS_OUTPUT.PUT_LINE (SQLERRM);
+                DBMS_OUTPUT.PUT_LINE (SQLCODE);
+            end;
+            /
+            ```
 
 End-to-end examples  : 
 
 To run end-to-end example scenarios, see [ Generate Text Response ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-CEE6C9D1-132B-4F0B-ACE0-C2934C326FAE) . 
 
-              * Image to Text: 
+      * Image to Text: 
 
 The following statements generate a text response by making a REST call to OpenAI. Here, the input is an image ( ` sample_image.jpeg ` ) along with the prompt " ` Describe this image? ` ". 
-                            
-                                                        ```
-                            -- select example
-                            
-                            var input clob;
-                            var media_data blob;
-                            var media_type clob;
-                            var params clob;
-                            
-                            begin
-                              :input := 'Describe this image';
-                              :media_data := load_blob_from_file('DEMO_DIR', 'sample_image.jpeg');
-                              :media_type := 'image/jpeg';
-                              :params := '
-                            {
-                              "provider"       : "openai",
-                              "credential_name": "OPENAI_CRED",
-                              "url"            : "https://api.openai.com/v1/chat/completions",
-                              "model"          : "gpt-4o-mini",
-                              "max_tokens"     : 60
-                            }';
-                            end;
-                            /
-                            
-                            select dbms_vector_chain.utl_to_generate_text(:input, :media_data, :media_type, json(:params));
-                            
-                            -- PL/SQL example
-                            
-                            declare
-                              input clob;
-                              media_data blob;
-                              media_type varchar2(32);
-                              params clob;
-                              output clob;
-                            
-                            begin
-                              input := 'Describe this image';
-                              media_data := load_blob_from_file('DEMO_DIR', 'image_file');
-                              media_type := 'image/jpeg';
-                              params := '
-                            {
-                              "provider"       : "openai",
-                              "credential_name": "OPENAI_CRED",
-                              "url"            : "https://api.openai.com/v1/chat/completions",
-                              "model"          : "gpt-4o-mini",
-                              "max_tokens"     : 60
-                            }';
-                            
-                              output := dbms_vector_chain.utl_to_generate_text(
-                                input, media_data, media_type, json(params));
-                              dbms_output.put_line(output);
-                            
-                              if output is not null then
-                                dbms_lob.freetemporary(output);
-                              end if;
-                              if media_data is not null then
-                                dbms_lob.freetemporary(media_data);
-                              end if;
-                            exception
-                              when OTHERS THEN
-                                DBMS_OUTPUT.PUT_LINE (SQLERRM);
-                                DBMS_OUTPUT.PUT_LINE (SQLCODE);
-                            end;
-                            /
-                            ```
+            
+                        ```
+            -- select example
+            
+            var input clob;
+            var media_data blob;
+            var media_type clob;
+            var params clob;
+            
+            begin
+              :input := 'Describe this image';
+              :media_data := load_blob_from_file('DEMO_DIR', 'sample_image.jpeg');
+              :media_type := 'image/jpeg';
+              :params := '
+            {
+              "provider"       : "openai",
+              "credential_name": "OPENAI_CRED",
+              "url"            : "https://api.openai.com/v1/chat/completions",
+              "model"          : "gpt-4o-mini",
+              "max_tokens"     : 60
+            }';
+            end;
+            /
+            
+            select dbms_vector_chain.utl_to_generate_text(:input, :media_data, :media_type, json(:params));
+            
+            -- PL/SQL example
+            
+            declare
+              input clob;
+              media_data blob;
+              media_type varchar2(32);
+              params clob;
+              output clob;
+            
+            begin
+              input := 'Describe this image';
+              media_data := load_blob_from_file('DEMO_DIR', 'image_file');
+              media_type := 'image/jpeg';
+              params := '
+            {
+              "provider"       : "openai",
+              "credential_name": "OPENAI_CRED",
+              "url"            : "https://api.openai.com/v1/chat/completions",
+              "model"          : "gpt-4o-mini",
+              "max_tokens"     : 60
+            }';
+            
+              output := dbms_vector_chain.utl_to_generate_text(
+                input, media_data, media_type, json(params));
+              dbms_output.put_line(output);
+            
+              if output is not null then
+                dbms_lob.freetemporary(output);
+              end if;
+              if media_data is not null then
+                dbms_lob.freetemporary(media_data);
+              end if;
+            exception
+              when OTHERS THEN
+                DBMS_OUTPUT.PUT_LINE (SQLERRM);
+                DBMS_OUTPUT.PUT_LINE (SQLCODE);
+            end;
+            /
+            ```
 
 End-to-end examples  : 
 
 To run end-to-end example scenarios, see [ Describe Image Content ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-05084961-E744-43DE-A4BC-8375EE3444E6) . 
 
-**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.html)
+**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.md)

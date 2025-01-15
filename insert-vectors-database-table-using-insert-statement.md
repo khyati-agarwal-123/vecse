@@ -153,7 +153,9 @@ If you have already loaded an embedding model into the database, called, let's s
 
 > **note:** See Also: 
 
-  * [ Import Pretrained Models in ONNX Format for Vector Generation Within the Database ](import-pretrained-models-onnx-format-vector-generation-database.html#GUID-D8140BF9-08E9-4B3F-9E28-E40A6FD181A4)
-  * [ Convert Text String to Embedding Within Oracle Database ](convert-text-string-embedding-oracle-database.html#GUID-1F9E9C73-6118-427E-8FB7-D4EBCCECC6D0)
+  * [ Import Pretrained Models in ONNX Format for Vector Generation Within the Database ](import-pretrained-models-onnx-format-vector-generation-database.md#GUID-D8140BF9-08E9-4B3F-9E28-E40A6FD181A4)
+  * [ Convert Text String to Embedding Within Oracle Database ](convert-text-string-embedding-oracle-database.md#GUID-1F9E9C73-6118-427E-8FB7-D4EBCCECC6D0)
 
-**Parent topic:** [ Store Vector Embeddings ](store-vector-embeddings.html)
+
+
+**Parent topic:** [ Store Vector Embeddings ](store-vector-embeddings.md)

@@ -31,7 +31,7 @@ Parameter  |  Description
 ` file_name ` |  A ` VARCHAR2 ` type parameter that specifies the name of the ONNX model.   
 ` model_name ` |  Name of the model in the form ` [schema_name.]model_name ` . If you do not specify a schema, then your own schema is used.   
 ` model_data ` |  It is a ` BLOB ` holding the ONNX representation of the model. The ` BLOB ` contains the identical byte sequence as the one stored in an ONNX file.   
-` metadata ` |  A JSON description of the metadata describing the model. The metadata at minimum must describe the machine learning function supported by the model. The model's metadata parameters are described in [ JSON Metadata Parameters for ONNX Models ](json-metadata-parameters-onnx-models.html#GUID-B6D784CE-0A52-43B5-A92C-231358416A4B) .   
+` metadata ` |  A JSON description of the metadata describing the model. The metadata at minimum must describe the machine learning function supported by the model. The model's metadata parameters are described in [ JSON Metadata Parameters for ONNX Models ](json-metadata-parameters-onnx-models.md#GUID-B6D784CE-0A52-43B5-A92C-231358416A4B) .   
   
 Examples 
 
@@ -84,9 +84,14 @@ The name of the model follows the same restrictions as those used for other mach
     EXECUTE DBMS_VECTOR.LOAD_ONNX_MODEL('DM_DUMP', 'my_embedding_model.onnx', 'doc_model'));
     ```
 
+
+
+
 > **note:** See Also: [ *Oracle Machine Learning for SQL User’s Guide*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=DMPRG-GUID-A39EB438-4FAE-45C4-9E6B-FBEC7FA84BE8) for examples of using ONNX models for machine learning tasks 
 
-    * [ JSON Metadata Parameters for ONNX Models ](json-metadata-parameters-onnx-models.html)   
+  * [ JSON Metadata Parameters for ONNX Models ](json-metadata-parameters-onnx-models.md)   
 When importing models using the ` IMPORT_ONNX_MODEL ` ( ` DBMS_DATA_MINING ` ), ` LOAD_ONNX_MODEL ` ( ` DBMS_VECTOR ` ), or ` LOAD_ONNX_MODEL_CLOUD ` ( ` DBMS_VECTOR ` ) procedures, you supply metadata as JSON parameters. 
 
-**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.html)
+
+
+**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.md)

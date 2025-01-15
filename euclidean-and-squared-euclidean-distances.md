@@ -9,4 +9,4 @@ With Euclidean distances, comparing squared distances is equivalent to comparing
   
 
 
-![Description of euclidian_similarity.png follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/euclidian_similarity.png)[ Description of the illustration euclidian_similarity.png ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/euclidian_similarity.md)**Parent topic:** [ Vector Distance Metrics ](vector-distance-metrics.html)
+![Description of euclidian_similarity.png follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/euclidian_similarity.png)[ Description of the illustration euclidian_similarity.png ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/euclidian_similarity.md)**Parent topic:** [ Vector Distance Metrics ](vector-distance-metrics.md)

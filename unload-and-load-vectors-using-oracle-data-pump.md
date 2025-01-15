@@ -27,10 +27,14 @@ Examples Vector Export and Import Syntax
   * ` TABLE_EXISTS_ACTION=REPLACE ` supports any access method. 
   * It is not possible to use a the transportable tablespace mode with vector indexes. However, this mode supports tables with the ` VECTOR ` datatype. 
 
+
+
 **Related Topics**
 
-    * [ Overview of Oracle Data Pump ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=SUTIL-GUID-17FAE261-0972-4220-A2E4-44D479F519D4)
-    * [ DBMS_DATAPUMP ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ARPLS-GUID-AEA7ED80-DB4A-4A70-B199-592287206348)
-    * [ DBMS_METADATA ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ARPLS-GUID-F72B5833-C14E-4713-A588-6BDF4D4CBA2A)
+  * [ Overview of Oracle Data Pump ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=SUTIL-GUID-17FAE261-0972-4220-A2E4-44D479F519D4)
+  * [ DBMS_DATAPUMP ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ARPLS-GUID-AEA7ED80-DB4A-4A70-B199-592287206348)
+  * [ DBMS_METADATA ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ARPLS-GUID-F72B5833-C14E-4713-A588-6BDF4D4CBA2A)
 
-**Parent topic:** [ Store Vector Embeddings ](store-vector-embeddings.html)
+
+
+**Parent topic:** [ Store Vector Embeddings ](store-vector-embeddings.md)

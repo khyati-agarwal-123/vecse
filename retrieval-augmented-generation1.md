@@ -26,11 +26,16 @@ Here is how RAG improves upon the issues with traditional LLMs:
   * Factually More Accurate and Detailed Responses:  While traditional LLMs are trained on older data, RAG incorporates real-time retrieved information, meaning that generated responses are not only contextually rich but also factually more up-to-date and accurate as time goes on. This is particularly beneficial for queries that require precision and detail, such as scientific facts, historical data, or specific statistics. 
   * Reduced Hallucination:  LLMs can sometimes "hallucinate" information, as in generate plausible but false or unverified content. RAG mitigates this by grounding responses in retrieved documents, thereby enhancing the reliability of the information provided. 
 
+
+
 Oracle AI Vector Search enables RAG within Oracle Database using the ` DBMS_VECTOR_CHAIN ` PL/SQL package. Alternatively, you can implement RAG externally by using popular frameworks such as LangChain. 
 
 LangChain is a popular open source framework that encapsulates popular LLMs, vector databases, document stores, and embedding models. ` DBMS_VECTOR_CHAIN ` is a PL/SQL package that provides the ability to create RAG solutions, all within the database. With ` DBMS_VECTOR_CHAIN ` , your data never needs to leave the security of Oracle Database. 
 
 > **note:** See Also: 
-    * [ *Oracle Database PL/SQL Packages and Types Reference*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ARPLS-GUID-A5B4C9B9-4F94-44E5-817E-FF1A08180C4B) for details about the ` DBMS_VECTOR_CHAIN ` package 
 
-**Parent topic:** [ Use Retrieval Augmented Generation to Complement LLMs ](use-retrieval-augmented-generation-complement-llms.html)
+  * [ *Oracle Database PL/SQL Packages and Types Reference*  ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=ARPLS-GUID-A5B4C9B9-4F94-44E5-817E-FF1A08180C4B) for details about the ` DBMS_VECTOR_CHAIN ` package 
+
+
+
+**Parent topic:** [ Use Retrieval Augmented Generation to Complement LLMs ](use-retrieval-augmented-generation-complement-llms.md)

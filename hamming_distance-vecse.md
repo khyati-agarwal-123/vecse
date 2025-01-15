@@ -18,4 +18,7 @@ Parameters
 
   * ` HAMMING_DISTANCE ` returns NULL if either *expr1* or *expr2* is NULL. 
 
-**Parent topic:** [ Vector Distance Functions and Operators ](vector-distance-functions-and-operators.html)
+
+
+
+**Parent topic:** [ Vector Distance Functions and Operators ](vector-distance-functions-and-operators.md)

@@ -9,4 +9,4 @@ This metric is most useful for vectors describing objects on a uniform grid, suc
   
 
 
-![Description of manhattan_similarity2.png follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/manhattan_similarity2.png)[ Description of the illustration manhattan_similarity2.png ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/manhattan_similarity2.md)**Parent topic:** [ Vector Distance Metrics ](vector-distance-metrics.html)
+![Description of manhattan_similarity2.png follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/manhattan_similarity2.png)[ Description of the illustration manhattan_similarity2.png ](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/manhattan_similarity2.md)**Parent topic:** [ Vector Distance Metrics ](vector-distance-metrics.md)

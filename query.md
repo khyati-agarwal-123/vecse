@@ -58,4 +58,4 @@ DATA
 
 This function accepts the input data type as ` VARCHAR2 ` , ` NUMBER ` , ` JSON ` , ` BOOLEAN ` or ` CLOB ` . 
 
-**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.html)
+**Parent topic:** [ DBMS_VECTOR ](dbms_vector-vecse.md)

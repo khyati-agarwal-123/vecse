@@ -133,98 +133,101 @@ These instructions assume you have configured your Oracle Linux 8 repo in ` /etc
      * To upload the model directly into the database, skip this step and proceed to step 12. 
 
 Export a preconfigured embedding model to a local file. Import EmbeddingModel from ` oml.utils ` . This exports the ONNX-format model to your local file system. 
-        
-                ```
-        from oml.utils import EmbeddingModel
-        
-        # Export to file
-        em = EmbeddingModel(model_name="sentence-transformers/all-MiniLM-L6-v2")
-        em.export2file("all-MiniLM-L6-v2", output_dir=".")
+    
         ```
+    from oml.utils import EmbeddingModel
+    
+    # Export to file
+    em = EmbeddingModel(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    em.export2file("all-MiniLM-L6-v2", output_dir=".")
+    ```
 
 Move the ONNX file to a directory on the database server, and create a directory on the file system and in the database for the import. 
-        
-                ```
-        mkir -p /tmp/models
-        sqlplus / as sysdba
-        alter session set container=;
+    
         ```
+    mkir -p /tmp/models
+    sqlplus / as sysdba
+    alter session set container=;
+    ```
 
 Apply the necessary permissions and grants. 
-        
-                ```
-        -- directory to store ONNX files for import
-        CREATE DIRECTORY ONNX_IMPORT AS '/tmp/models';
-        -- grant your OML user read and write permissions on the directory
-        GRANT READ, WRITE ON DIRECTORY ONNX_IMPORT to OMLUSER;
-        -- grant to allow user to import the model
-        GRANT CREATE MINING MODEL TO OMLUSER;
+    
         ```
+    -- directory to store ONNX files for import
+    CREATE DIRECTORY ONNX_IMPORT AS '/tmp/models';
+    -- grant your OML user read and write permissions on the directory
+    GRANT READ, WRITE ON DIRECTORY ONNX_IMPORT to OMLUSER;
+    -- grant to allow user to import the model
+    GRANT CREATE MINING MODEL TO OMLUSER;
+    ```
 
 Use the ` DBMS_VECTOR.LOAD_ONNX_MODEL ` procedure to load the model in your OML user schema. In this example, the procedure loads the ONNX model file named ` all-MiniLM-L6.onnx ` from the ONNX_IMPORT directory into the database as a model named ALL_MINILM_L6. 
-        
-                ```
-        BEGIN
-           DBMS_VECTOR.LOAD_ONNX_MODEL(
-             directory => 'ONNX_IMPORT',
-             file_name => 'all-MiniLM-L6-v2.onnx',
-             model_name => 'ALL_MINILM_L6');
-        END;
+    
         ```
+    BEGIN
+       DBMS_VECTOR.LOAD_ONNX_MODEL(
+         directory => 'ONNX_IMPORT',
+         file_name => 'all-MiniLM-L6-v2.onnx',
+         model_name => 'ALL_MINILM_L6');
+    END;
+    ```
 
-     * Export a preconfigured embedding model to the database. If using a database connection to update to match your credentials and database environment. 
+  12. Export a preconfigured embedding model to the database. If using a database connection to update to match your credentials and database environment. 
 
 > **note:** To ensure step 12 works properly, complete steps 4 and 5 first. 
-        
-                ```
-        # Import oml library and EmbeddingModel from oml.utils
-        import oml
-        from oml.utils import EmbeddingModel
-        
-        # Set embedded mode to false for Oracle Database on premises. This is not supported or required for Oracle Autonomous Database.
-        oml.core.methods.__embed__ = False
-        
-        # Create a database connection. 
-        
-        # Oracle Database on-premises
-        oml.connect("", "", port= host="", service_name="")
-        
-        # Oracle Autonomous Database
-        oml.connect(user="", password="", dsn="myadb_low")
-        
-        em = EmbeddingModel(model_name="sentence-transformers/all-MiniLM-L6-v2")
-        em.export2db("ALL_MINILM_L6")
+    
         ```
+    # Import oml library and EmbeddingModel from oml.utils
+    import oml
+    from oml.utils import EmbeddingModel
+    
+    # Set embedded mode to false for Oracle Database on premises. This is not supported or required for Oracle Autonomous Database.
+    oml.core.methods.__embed__ = False
+    
+    # Create a database connection. 
+    
+    # Oracle Database on-premises
+    oml.connect("", "", port= host="", service_name="")
+    
+    # Oracle Autonomous Database
+    oml.connect(user="", password="", dsn="myadb_low")
+    
+    em = EmbeddingModel(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    em.export2db("ALL_MINILM_L6")
+    ```
 
 Query the model and its views, and you can generate embeddings from Python or SQL. 
-        
-                ```
-        import oracledb
-        cr = oml.cursor()
-        data = cr.execute("select vector_embedding(ALL_MINILM_L6 using 'RES' as DATA)AS embedding from dual")
-        data.fetchall()
+    
         ```
-        
-                ```
-        SELECT VECTOR_EMBEDDING(ALL_MINILM_L6 USING 'RES' as DATA) AS embedding;
+    import oracledb
+    cr = oml.cursor()
+    data = cr.execute("select vector_embedding(ALL_MINILM_L6 using 'RES' as DATA)AS embedding from dual")
+    data.fetchall()
+    ```
+    
         ```
+    SELECT VECTOR_EMBEDDING(ALL_MINILM_L6 USING 'RES' as DATA) AS embedding;
+    ```
 
-     * Verify the model exists using SQL: 
-        
-                ```
-        sqlplus $USER/pass@PDBNAME;
+  13. Verify the model exists using SQL: 
+    
         ```
-        
-                ```
-        select model_name, algorithm, mining_function from user_mining_models where  model_name='ALL_MINILM_L6';
-        
+    sqlplus $USER/pass@PDBNAME;
+    ```
+    
         ```
-        
-                ```
-        ---------------------------------------------------------------------------
-        MODEL_NAME                 ALGORITHM                      MINING_FUNCTION
-        ------------------------------ -------------------------------------------
-        ALL_MINILM_L6              ONNX                           EMBEDDING
+    select model_name, algorithm, mining_function from user_mining_models where  model_name='ALL_MINILM_L6';
+    
+    ```
+    
         ```
+    ---------------------------------------------------------------------------
+    MODEL_NAME                 ALGORITHM                      MINING_FUNCTION
+    ------------------------------ -------------------------------------------
+    ALL_MINILM_L6              ONNX                           EMBEDDING
+    ```
 
-**Parent topic:** [ Convert Pretrained Models to ONNX Format ](convert-trained-models-onnx-format.html)
+
+
+
+**Parent topic:** [ Convert Pretrained Models to ONNX Format ](convert-trained-models-onnx-format.md)

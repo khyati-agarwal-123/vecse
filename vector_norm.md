@@ -30,4 +30,4 @@ Example
     5.0E+000
     ```
 
-**Parent topic:** [ Constructors, Converters, and Descriptors ](constructors-converters-descriptors-and-arithmetic-functions.html)
+**Parent topic:** [ Constructors, Converters, and Descriptors ](constructors-converters-descriptors-and-arithmetic-functions.md)

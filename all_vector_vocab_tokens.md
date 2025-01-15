@@ -8,4 +8,4 @@ Column Name  |  Data Type  |  Description
 ` VOCAB_NAME ` |  ` VARCHAR2(128) ` |  User-specified name of the vocabulary (for example, ` DOC_VOCAB ` )   
 ` VOCAB_TOKEN ` |  ` VARCHAR2(255) ` |  Tokens contained in the vocabulary   
   
-**Parent topic:** [ Text Processing Views ](text-processing-views.html)
+**Parent topic:** [ Text Processing Views ](text-processing-views.md)

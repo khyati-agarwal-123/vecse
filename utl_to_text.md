@@ -60,4 +60,4 @@ End-to-end example  :
 
 To run an end-to-end example scenario using this function, see [ Convert File to Text to Chunks to Embeddings Within Oracle Database ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-10D0A76C-2DAE-42BE-A332-3EEF6D91D701) . 
 
-**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.html)
+**Parent topic:** [ DBMS_VECTOR_CHAIN ](dbms_vector_chain-vecse.md)
