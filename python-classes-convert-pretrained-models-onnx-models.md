@@ -1,132 +1,140 @@
-##  Python Classes to Convert Pretrained Models to ONNX Models {#GUID-53F409DB-CC9A-406E-8697-0A824A415914} 
+## Python Classes to Convert Pretrained Models to ONNX Models {#GUID-53F409DB-CC9A-406E-8697-0A824A415914}
 
-Explore the functions and attributes of the ` EmbeddingModelConfig ` class and ` EmbeddingModel ` class within Python. These classes are designed to configure pretrained embedding models. 
+Explore the functions and attributes of the `EmbeddingModelConfig` class and `EmbeddingModel` class within Python. These classes are designed to configure pretrained embedding models. 
 
-EmbeddingModelConfig 
+EmbeddingModelConfig<br>The `EmbeddingModelConfig` class contains the properties required for the package to perform downloading, exporting, augmenting, validation, and storing of an ONNX model. The class provides access to configuration properties using the dot operator. As a convenience, well-known configurations are provided as templates. 
 
-The ` EmbeddingModelConfig ` class contains the properties required for the package to perform downloading, exporting, augmenting, validation, and storing of an ONNX model. The class provides access to configuration properties using the dot operator. As a convenience, well-known configurations are provided as templates. 
+Parameters<br>This table describes the functions and properties of the `EmbeddingModelConfig` class. 
 
-Parameters 
-
-This table describes the functions and properties of the ` EmbeddingModelConfig ` class. 
-
-Functions  |  Parameter Type  |  Returns  |  Description   
+Functions | Parameter Type | Returns | Description  
 ---|---|---|---  
-` from_template(name,**kwargs) ` |  <ul>
+`from_template(name,**kwargs)` | 
 
-<li>
-  * ` name ` ( ` String ` ): The name of the template </li> <li>
-  * ` **kwargs ` : template properties to override or add </li> </ul> |  Instance of ` EmbeddingModelConfig ` |  A static function that creates an ` EmbeddingModelConfig ` object based on a predefined template given by the name parameter. You can use named arguments to override the template properties.   
-` show_templates() ` |  NA  |  List of existing templates  |  A static function that returns a list of existing templates by name.   
-` show_preconfigured() ` |  <ul> <li>
-    * ` include_properties ` ( ` bool,optional ` ): A flag indicating whether properties should be included in the results. Defaults to ` False ` so only names will be included by default.  </li> <li>
-    * ` model_name ` ( ` str,optional ` ): A model name to filter by when including properties. This argument will be ignored if ` include_properties ` is ` False ` . Otherwise only the properties of this model will be included in the results. </li> </ul> |  A list of preconfigured model names or properties.  |  Shows a list of preconfigured model names, or properties. By default, this function returns a list of names only. If the properties are required, pass the ` include_properties ` parameter as ` True ` . The returned list will contain a single dict where each key of the dict is the name of a preconfigured model and the value is the property set for that model. Finally, if only a single set of properties for a specific model is required, pass the name of the model in the ` model_name ` parameter (the ` include_properties ` parameter should also be ` True ` ). This will return a list of a single dict with the properties for the specified model.   
-  
-Template Properties 
+* `name` (`String`): The name of the template <br>`**kwargs`: template properties to override or add 
 
-The text template has configuration properties shown below: 
-        
-                ```
-        "do_lower_case": true,
-        "post_processors":[{"name":"Pooling","type":"mean"},{"name":"Normalize"}]
-        ```
+| Instance of `EmbeddingModelConfig` | A static function that creates an `EmbeddingModelConfig` object based on a predefined template given by the name parameter. You can use named arguments to override the template properties.   
+`show_templates()` | NA | List of existing templates | A static function that returns a list of existing templates by name.  
+`show_preconfigured()` | 
+
+* `include_properties` (`bool,optional`): A flag indicating whether properties should be included in the results. Defaults to `False` so only names will be included by default.  <br>`model_name` (`str,optional`): A model name to filter by when including properties. This argument will be ignored if `include_properties` is `False`. Otherwise only the properties of this model will be included in the results. 
+
+| A list of preconfigured model names or properties. | Shows a list of preconfigured model names, or properties. By default, this function returns a list of names only. If the properties are required, pass the `include_properties` parameter as `True`. The returned list will contain a single dict where each key of the dict is the name of a preconfigured model and the value is the property set for that model. Finally, if only a single set of properties for a specific model is required, pass the name of the model in the `model_name` parameter (the `include_properties` parameter should also be `True`). This will return a list of a single dict with the properties for the specified model.   
+
+Template Properties
+
+The text template has configuration properties shown below:
+```
+"do_lower_case": true,
+"post_processors":[{"name":"Pooling","type":"mean"},{"name":"Normalize"}]
+```
+
 
 > **note:** 
 
-All other properties in the Properties table will take the default values. Any property without a default value must be provided when creating the ` EmbeddingModelConfig ` instance. 
+All other properties in the Properties table will take the default values. Any property without a default value must be provided when creating the `EmbeddingModelConfig` instance. 
 
-Properties 
+Properties
 
-This table shows all properties that can be configured. preconfigured models already have these properties set to specific values. Templates will use the default values unless a user overrides it when using the ` from_template ` function on ` EmbeddingModelConfig ` . 
+This table shows all properties that can be configured. preconfigured models already have these properties set to specific values. Templates will use the default values unless a user overrides it when using the `from_template` function on `EmbeddingModelConfig`. 
 
-Property  |  Description   
+Property | Description  
 ---|---  
-` post_processors ` |  An array of post_processors that will be loaded after the model is loaded or initialized. The list of known and supported post_processors is provided later in this section. Templates may define a list of post_processors for the types of models they support. Otherwise, an empty array is the default.   
-` max_seq_length ` |  This property is applicable for text-based models only. The maximum length of input to the model as number of tokens. There is no default value. Specify this value for models that are not preconfigured.   
-` do_lower_case ` |  Specifies whether or not to lowercase the input when tokenizing. The default value is ` True ` .   
-` quantize_model ` |  Perform quantization on the model. This could greatly reduce the size of the model as well as speed up the process. It may however result in different results for the embedding vector (against the original model) and possibly small reduction in accuracy. The default value is ` False ` .   
-` distance_metrics ` |  An array of names of suitable distance metrics for the model. The names must be name of distance metrics used for Oracle vector distance operator. Only used when exporting the model to the database. Supported list is [" ` EUCLIDEAN ` "," ` COSINE ` "," ` MANHATTAN ` "," ` HAMMING ` "," ` DOT ` "," ` EUCLIDEAN_SQUARED ` ", " ` JACCARD ` "]. The default value is an empty array.   
-` languages ` |  A array of language (Abbreviation) supported in the Database. Only used when exporting the model to the database. For a supported list of languages, see [ Languages ](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=NLSGP-GUID-D2FCFD55-EDC3-473F-9832-AAB564457830) . The default value is an empty array.   
-` use_float16 ` |  Specifies whether or not to convert the exported onnx model to float16. The default value is ` False ` .   
-  
-Properties of post_processors 
+`post_processors` | An array of post_processors that will be loaded after the model is loaded or initialized. The list of known and supported post_processors is provided later in this section. Templates may define a list of post_processors for the types of models they support. Otherwise, an empty array is the default.  
+`max_seq_length` | This property is applicable for text-based models only. The maximum length of input to the model as number of tokens. There is no default value. Specify this value for models that are not preconfigured.  
+`do_lower_case` | Specifies whether or not to lowercase the input when tokenizing. The default value is `True`.   
+`quantize_model` | Perform quantization on the model. This could greatly reduce the size of the model as well as speed up the process. It may however result in different results for the embedding vector (against the original model) and possibly small reduction in accuracy. The default value is `False`.   
+`distance_metrics` | An array of names of suitable distance metrics for the model. The names must be name of distance metrics used for Oracle vector distance operator. Only used when exporting the model to the database. Supported list is ["`EUCLIDEAN`","`COSINE`","`MANHATTAN`","`HAMMING`","`DOT`","`EUCLIDEAN_SQUARED`", "`JACCARD`"]. The default value is an empty array.   
+`languages` | A array of language (Abbreviation) supported in the Database. Only used when exporting the model to the database. For a supported list of languages, see [Languages](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=NLSGP-GUID-D2FCFD55-EDC3-473F-9832-AAB564457830). The default value is an empty array.   
+`use_float16` | Specifies whether or not to convert the exported onnx model to float16. The default value is `False`.   
 
-This table describes the built-in post_processors and their configuration parameters. 
+Properties of post_processors
 
-post_processor  |  Parameters  |  Description   
+This table describes the built-in post_processors and their configuration parameters.
+
+post_processor | Parameters | Description  
 ---|---|---  
-` Pooling ` |  <ul> <li>
-      * ` name ` : ` Pooling ` .  </li> <li>
-      * ` type ` : Valid values should be ` mean ` (Default), ` max ` , ` cls ` </li> </ul> |  The Pooling post_processor summarizes the output of the transformer model into a fixed-length vector.   
-` Normalize ` |  <ul> <li>
-        * ` name ` : Specify ` Normalize ` </li> </ul> |  The Normalize post_processor bounds the vector values to a range using L2 normalization.   
-` Dense ` |  <ul> <li>
-          * ` name ` : Dense </li> <li>
-          * ` in_features ` : Input feature size </li> <li>
-          * ` out_features ` : Output feature size </li> <li>
-          * ` bias ` : Whether to learn an additive bias. The default value is ` True ` . </li> <li>
-          * ` activation_function ` : Activation function of the dense layer. Currently only supports ` Tanh ` as the activation function. </li> </ul> |  Applies transformation to the incoming data.   
-  
+`Pooling` | 
+
+* `name`: `Pooling`.  <br>`type`: Valid values should be `mean`(Default), `max`, `cls`
+
+|  The Pooling post_processor summarizes the output of the transformer model into a fixed-length vector.  
+`Normalize` | 
+
+* `name`: Specify `Normalize`
+
+|  The Normalize post_processor bounds the vector values to a range using L2 normalization.  
+`Dense` | 
+
+* `name`: Dense <br>`in_features`: Input feature size <br>`out_features`: Output feature size <br>`bias`: Whether to learn an additive bias. The default value is `True`. <br>`activation_function`: Activation function of the dense layer. Currently only supports `Tanh` as the activation function. 
+
+|  Applies transformation to the incoming data.  
+
 Example: Configure post_processors 
 
-In this example, you override the post_processors in the sentence-transformers template with a ` Max ` Pooling post_processor followed by Normalization. 
-                    
-                                        ```
-                    config = EmbeddingModelConfig.from_template("text")
-                    config.post_processors = [{"name":"Pooling","type":"max"},{"name":"Normalize"}]
-                    ```
+In this example, you override the post_processors in the sentence-transformers template with a `Max` Pooling post_processor followed by Normalization. 
+```
+config = EmbeddingModelConfig.from_template("text")
+config.post_processors = [{"name":"Pooling","type":"max"},{"name":"Normalize"}]
+```
 
-EmbeddingModel 
 
-Use the ` EmbeddingModel ` class to convert transformer models to the ONNX format with post_processing steps embedded into the final model. 
+EmbeddingModel
 
-Parameters 
+Use the `EmbeddingModel` class to convert transformer models to the ONNX format with post_processing steps embedded into the final model. 
 
-This table describes the signature and properties of the ` EmbeddingModel ` class. 
+Parameters
 
-Functions  |  Parameters  |  Description   
+This table describes the signature and properties of the `EmbeddingModel` class. 
+
+Functions | Parameters | Description  
 ---|---|---  
-` EmbeddingModel(model_name,configuration=None,settings={}) ` |  <ul> <li>
-            * ` model_name ` : The name of the model to be used. For example, ` medicalai/ClinicalBERT ` </li> <li>
-            * ` configuration ` : An initialized ` EmbeddingModelConfig ` object. This parameter must be specified when using a template. If not specified, the model will be assumed to be a preconfigured model. </li> <li>
-            * ` settings ` : A dictionary of various settings that are global and control various operations such as logging levels and locations for files. </li> </ul> |  Creates a new instance of the ` EmbeddingModel ` class.   
-  
-Settings 
+`EmbeddingModel(model_name,configuration=None,settings={})` | 
 
-The settings object is a dictionary passed to the ` EmbeddingModel ` class. It provides global properties for the ` EmbeddingModel ` class that are used for non-model-specific operations, such as logging. 
+* `model_name`: The name of the model to be used. For example, `medicalai/ClinicalBERT`<br>`configuration`: An initialized `EmbeddingModelConfig` object. This parameter must be specified when using a template. If not specified, the model will be assumed to be a preconfigured model. <br>`settings`: A dictionary of various settings that are global and control various operations such as logging levels and locations for files. 
 
-Property  |  Default Value  |  Description   
+| Creates a new instance of the `EmbeddingModel` class.   
+
+Settings
+
+The settings object is a dictionary passed to the `EmbeddingModel` class. It provides global properties for the `EmbeddingModel` class that are used for non-model-specific operations, such as logging. 
+
+Property | Default Value | Description  
 ---|---|---  
-` cache_dir ` |  ` $HOME/.cache/OML ` |  The base directory used for downloads. Model files will be downloaded from the repository to directories relative to the ` cache_dir ` . If the ` cache_dir ` does not exist at time of execution, it will be created.   
-` logging_level ` |  ` ERROR ` |  The level for logging. Valid values are [‘DEBUG’, ‘INFO’, ‘WARNING’, ‘ERROR’, ‘CRITICAL’].  > **note:** This log level is also applied globally to all python packages and is also mapped to the ONNXRuntime libraries.   
-` force_download ` |  ` False ` |  Forces download of model files instead of reloading from cache.   
-` ignore_checksum_error ` |  ` False ` |  Ignores any errors caused by mismatch in checksums when using preconfigured models.   
-  
-Functions 
+`cache_dir` | `$HOME/.cache/OML` | The base directory used for downloads. Model files will be downloaded from the repository to directories relative to the ` cache_dir`. If the ` cache_dir` does not exist at time of execution, it will be created.   
+`logging_level` | `ERROR` | The level for logging. Valid values are [‘DEBUG’, ‘INFO’, ‘WARNING’, ‘ERROR’, ‘CRITICAL’].  > **note:** This log level is also applied globally to all python packages and is also mapped to the ONNXRuntime libraries.   
+`force_download` | `False` | Forces download of model files instead of reloading from cache.  
+`ignore_checksum_error` | `False` | Ignores any errors caused by mismatch in checksums when using preconfigured models.  
 
-This table describes the function and properties of the ` EmbeddingModel ` class. 
+Functions
 
-Function  |  Parameters  |  Description   
+This table describes the function and properties of the `EmbeddingModel` class. 
+
+Function | Parameters | Description  
 ---|---|---  
-` export2file(export_name,output_dir=None) ` |  <ul> <li>
-              * ` export_name(string) ` : The name of the file. The file will be saved with the file extension ` .onnx ` </li> <li>
-              * ` output_dir(string) ` : An optional output directory. If not specified the file will be saved to the current directory </li> </ul> |  Exports the model to a file.   
-` export2db(export_name) ` |  <ul> <li>
-                * ` export_name ` ( ` string ` ): The name that will be used for the mining model object. This name must be compliant with existing rules for object names in the database. </li> </ul> |  Exports the model to the database.   
-  
-Example: Preconfigured Model 
+`export2file(export_name,output_dir=None)` | 
 
-This example illustrates the preconfigured embedding model that comes with the Python package. You can use this model without any additional configurations. 
-                                
-                                                                ```
-                                "sentence-transformers/distiluse-base-multilingual-cased-v2": {
-                                        "max_seq_length": 128,
-                                        "do_lower_case": false,
-                                        "post_processors":[{"name":"Pooling","type":"mean"},{"name":"Dense","in_features":768, "out_features":512, "bias":true, "activation_function":"Tanh"}],
-                                        "quantize_model":true,
-                                        "distance_metrics": ["COSINE"],
-                                        "languages": ["ar", "bg", "ca", "cs", "dk", "d", "us", "el", "et", "fa", "sf", "f", "frc", "gu", "iw", "hi", "hr", "hu", "hy", "in", "i", "ja", "ko", "lt", "lv", "mk", "mr", "ms", "n", "nl", "pl", "pt", "ptb", "ro", "ru", "sk", "sl", "sq", "lsr", "s", "th", "tr", "uk", "ur", "vn", "zhs", "zht"]
-                                    }
-                                ```
+* `export_name(string)`: The name of the file. The file will be saved with the file extension `.onnx`<br>`output_dir(string)`: An optional output directory. If not specified the file will be saved to the current directory 
 
-**Parent topic:** [ Convert Pretrained Models to ONNX Format ](convert-trained-models-onnx-format.md)
+| Exports the model to a file.  
+`export2db(export_name)` | 
+
+* `export_name`(`string`): The name that will be used for the mining model object. This name must be compliant with existing rules for object names in the database. 
+
+| Exports the model to the database.  
+
+Example: Preconfigured Model
+
+This example illustrates the preconfigured embedding model that comes with the Python package. You can use this model without any additional configurations.
+```
+"sentence-transformers/distiluse-base-multilingual-cased-v2": {
+"max_seq_length": 128,
+"do_lower_case": false,
+"post_processors":[{"name":"Pooling","type":"mean"},{"name":"Dense","in_features":768, "out_features":512, "bias":true, "activation_function":"Tanh"}],
+"quantize_model":true,
+"distance_metrics": ["COSINE"],
+"languages": ["ar", "bg", "ca", "cs", "dk", "d", "us", "el", "et", "fa", "sf", "f", "frc", "gu", "iw", "hi", "hr", "hu", "hy", "in", "i", "ja", "ko", "lt", "lv", "mk", "mr", "ms", "n", "nl", "pl", "pt", "ptb", "ro", "ru", "sk", "sl", "sq", "lsr", "s", "th", "tr", "uk", "ur", "vn", "zhs", "zht"]
+}
+```
+
+
+**Parent topic:** [Convert Pretrained Models to ONNX Format](convert-trained-models-onnx-format.md)
