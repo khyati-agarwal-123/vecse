@@ -10,7 +10,7 @@ Certain features of the database may allow you to access services offered separa
 
 To generate a text response by prompting with the following image and the text question "`Describe this image?`", using an external LLM: 
 
-![Description of bird.jpg follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/bird.jpg)<br>[Descriptionof the illustration bird.jpg](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/bird.md)
+![Description of bird.jpg follows](img/bird.jpg)<br>[Descriptionof the illustration bird.jpg](img_text/bird.html)
 
 1. Connect to Oracle Database as a local user.
 1. Log in to SQL*Plus as the `SYS` user, connecting as `SYSDBA`:
