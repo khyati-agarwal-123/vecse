@@ -8,30 +8,17 @@ Parameters<br>This table describes the functions and properties of the `Embeddin
 
 Functions | Parameter Type | Returns | Description  
 ---|---|---|---  
-`from_template(name,**kwargs)` | 
-
-* `name` (`String`): The name of the template <br>`**kwargs`: template properties to override or add 
-
-| Instance of `EmbeddingModelConfig` | A static function that creates an `EmbeddingModelConfig` object based on a predefined template given by the name parameter. You can use named arguments to override the template properties.   
-`show_templates()` | NA | List of existing templates | A static function that returns a list of existing templates by name.  
-`show_preconfigured()` | 
-
-* `include_properties` (`bool,optional`): A flag indicating whether properties should be included in the results. Defaults to `False` so only names will be included by default.  <br>`model_name` (`str,optional`): A model name to filter by when including properties. This argument will be ignored if `include_properties` is `False`. Otherwise only the properties of this model will be included in the results. 
-
-| A list of preconfigured model names or properties. | Shows a list of preconfigured model names, or properties. By default, this function returns a list of names only. If the properties are required, pass the `include_properties` parameter as `True`. The returned list will contain a single dict where each key of the dict is the name of a preconfigured model and the value is the property set for that model. Finally, if only a single set of properties for a specific model is required, pass the name of the model in the `model_name` parameter (the `include_properties` parameter should also be `True`). This will return a list of a single dict with the properties for the specified model.   
+`from_template(name,**kwargs)` | * `name` (`String`): The name of the template <br>`**kwargs`: template properties to override or add | Instance of `EmbeddingModelConfig` | A static function that creates an `EmbeddingModelConfig` object based on a predefined template given by the name parameter. You can use named arguments to override the template properties.   
+`show_templates()` | NA | List of existing templates | A static function that returns a list of existing templates by name. 
+`show_preconfigured()` | * `include_properties` (`bool,optional`): A flag indicating whether properties should be included in the results. Defaults to `False` so only names will be included by default.  <br>`model_name` (`str,optional`): A model name to filter by when including properties. This argument will be ignored if `include_properties` is `False`. Otherwise only the properties of this model will be included in the results. | A list of preconfigured model names or properties. | Shows a list of preconfigured model names, or properties. By default, this function returns a list of names only. If the properties are required, pass the `include_properties` parameter as `True`. The returned list will contain a single dict where each key of the dict is the name of a preconfigured model and the value is the property set for that model. Finally, if only a single set of properties for a specific model is required, pass the name of the model in the `model_name` parameter (the `include_properties` parameter should also be `True`). This will return a list of a single dict with the properties for the specified model. 
 
 Template Properties
 
 The text template has configuration properties shown below:
-```
-"do_lower_case": true,
-"post_processors":[{"name":"Pooling","type":"mean"},{"name":"Normalize"}]
-```
+```"do_lower_case": true,"post_processors":[{"name":"Pooling","type":"mean"},{"name":"Normalize"}]```
 
 
-> **note:** 
-
-All other properties in the Properties table will take the default values. Any property without a default value must be provided when creating the `EmbeddingModelConfig` instance. 
+> **note:** All other properties in the Properties table will take the default values. Any property without a default value must be provided when creating the `EmbeddingModelConfig` instance. 
 
 Properties
 
@@ -53,21 +40,9 @@ This table describes the built-in post_processors and their configuration parame
 
 post_processor | Parameters | Description  
 ---|---|---  
-`Pooling` | 
-
-* `name`: `Pooling`.  <br>`type`: Valid values should be `mean`(Default), `max`, `cls`
-
-|  The Pooling post_processor summarizes the output of the transformer model into a fixed-length vector.  
-`Normalize` | 
-
-* `name`: Specify `Normalize`
-
-|  The Normalize post_processor bounds the vector values to a range using L2 normalization.  
-`Dense` | 
-
-* `name`: Dense <br>`in_features`: Input feature size <br>`out_features`: Output feature size <br>`bias`: Whether to learn an additive bias. The default value is `True`. <br>`activation_function`: Activation function of the dense layer. Currently only supports `Tanh` as the activation function. 
-
-|  Applies transformation to the incoming data.  
+`Pooling` | * `name`: `Pooling`.  <br>`type`: Valid values should be `mean`(Default), `max`, `cls`|  The Pooling post_processor summarizes the output of the transformer model into a fixed-length vector.  
+`Normalize` | * `name`: Specify `Normalize`|  The Normalize post_processor bounds the vector values to a range using L2 normalization.  
+`Dense` | * `name`: Dense <br>`in_features`: Input feature size <br>`out_features`: Output feature size <br>`bias`: Whether to learn an additive bias. The default value is `True`. <br>`activation_function`: Activation function of the dense layer. Currently only supports `Tanh` as the activation function. |  Applies transformation to the incoming data.  
 
 Example: Configure post_processors 
 
@@ -88,11 +63,7 @@ This table describes the signature and properties of the `EmbeddingModel` class.
 
 Functions | Parameters | Description  
 ---|---|---  
-`EmbeddingModel(model_name,configuration=None,settings={})` | 
-
-* `model_name`: The name of the model to be used. For example, `medicalai/ClinicalBERT`<br>`configuration`: An initialized `EmbeddingModelConfig` object. This parameter must be specified when using a template. If not specified, the model will be assumed to be a preconfigured model. <br>`settings`: A dictionary of various settings that are global and control various operations such as logging levels and locations for files. 
-
-| Creates a new instance of the `EmbeddingModel` class.   
+`EmbeddingModel(model_name,configuration=None,settings={})` | * `model_name`: The name of the model to be used. For example, `medicalai/ClinicalBERT`<br>`configuration`: An initialized `EmbeddingModelConfig` object. This parameter must be specified when using a template. If not specified, the model will be assumed to be a preconfigured model. <br>`settings`: A dictionary of various settings that are global and control various operations such as logging levels and locations for files. | Creates a new instance of the `EmbeddingModel` class.   
 
 Settings
 
@@ -111,16 +82,8 @@ This table describes the function and properties of the `EmbeddingModel` class.
 
 Function | Parameters | Description  
 ---|---|---  
-`export2file(export_name,output_dir=None)` | 
-
-* `export_name(string)`: The name of the file. The file will be saved with the file extension `.onnx`<br>`output_dir(string)`: An optional output directory. If not specified the file will be saved to the current directory 
-
-| Exports the model to a file.  
-`export2db(export_name)` | 
-
-* `export_name`(`string`): The name that will be used for the mining model object. This name must be compliant with existing rules for object names in the database. 
-
-| Exports the model to the database.  
+`export2file(export_name,output_dir=None)` | * `export_name(string)`: The name of the file. The file will be saved with the file extension `.onnx`<br>`output_dir(string)`: An optional output directory. If not specified the file will be saved to the current directory | Exports the model to a file.  
+`export2db(export_name)` | * `export_name`(`string`): The name that will be used for the mining model object. This name must be compliant with existing rules for object names in the database. | Exports the model to the database.  
 
 Example: Preconfigured Model
 
