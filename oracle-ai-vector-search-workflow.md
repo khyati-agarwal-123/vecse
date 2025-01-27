@@ -6,7 +6,7 @@ This is illustrated in the following diagram:
 
 Figure 2-2 Oracle AI Vector Search Use Case Flowchart
 
-<br>![Description of Figure 2-2 follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/23_7_ai_vector_workflow.png)<br>[Descriptionof "Figure 2-2 Oracle AI Vector Search Use Case Flowchart"](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/23_7_ai_vector_workflow.md)<br>> **note:** Find all of our Interactive Architecture Diagrams on the [Oracle Help Center](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=aliad_home). 
+<br>![Description of Figure 2-2 follows](/img/23_7_ai_vector_workflow.png)<br>[Descriptionof "Figure 2-2 Oracle AI Vector Search Use Case Flowchart"](/img_text/23_7_ai_vector_workflow.md)<br>> **note:** Find all of our Interactive Architecture Diagrams on the [Oracle Help Center](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=aliad_home). 
 
 Oracle AI Vector Search is designed for Artificial Intelligence (AI) workloads. It allows you to query data based on semantics rather than keywords. The preceding diagram shows the possible steps you must take to manage vector embeddings with Oracle AI Vector Search.<br>**Primary workflow steps:**
 
