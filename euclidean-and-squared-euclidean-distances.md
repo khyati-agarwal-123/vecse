@@ -6,4 +6,4 @@ This metric is sensitive to both the vector's size and it's direction.
 
 With Euclidean distances, comparing squared distances is equivalent to comparing distances. So, when ordering is more important than the distance values themselves, the Squared Euclidean distance is very useful as it is faster to calculate than the Euclidean distance (avoiding the square-root calculation).
 
-<br>![Description of euclidian_similarity.png follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/euclidian_similarity.png)<br>[Descriptionof the illustration euclidian_similarity.png](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/euclidian_similarity.md)<br>**Parent topic:** [Vector Distance Metrics](vector-distance-metrics.md)
+<br>![Description of euclidian_similarity.png follows](/img/euclidian_similarity.png)<br>[Descriptionof the illustration euclidian_similarity.png](/img_text/euclidian_similarity.md)<br>**Parent topic:** [Vector Distance Metrics](vector-distance-metrics.md)
