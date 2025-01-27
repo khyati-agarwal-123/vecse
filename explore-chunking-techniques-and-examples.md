@@ -321,7 +321,7 @@ This example is similar to [Example 4-4](explore-chunking-techniques-and-example
 
 The first chunk ends at the maximum 40 words (after `workloads`). The second chunk overlaps with the last 5 words including parentheses of the first chunk, and ends after `unstructured`. The overlapping words are underlined below. The third chunk overlaps with the last 5 words, which are also underlined. 
 
-![Description of chunking_eg10.eps follows](/chunking_eg10.png)<br>[Descriptionof the illustration chunking_eg10.eps](/img_text/chunking_eg10.md)
+![Description of chunking_eg10.eps follows](/img/chunking_eg10.png)<br>[Descriptionof the illustration chunking_eg10.eps](/img_text/chunking_eg10.md)
 
 Syntax:
 ```
@@ -463,7 +463,7 @@ The first chunk extends 8 more characters due to the two indented lines of 4 spa
 
 This example shows that the chunk length (normally in bytes) can differ from the chunk text's size. The `CHUNK_OFFSET` and `CHUNK_LENGTH` represent the original source location of the chunk. 
 
-![Description of chunking_eg14.eps follows]/img/chunking_eg14.png)<br>[Descriptionof the illustration chunking_eg14.eps](/img_text/chunking_eg14.md)
+![Description of chunking_eg14.eps follows](/img/chunking_eg14.png)<br>[Descriptionof the illustration chunking_eg14.eps](/img_text/chunking_eg14.md)
 
 Syntax:
 ```
