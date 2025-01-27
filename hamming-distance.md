@@ -9,4 +9,4 @@ The Hamming distance between two vectors represents the number of dimensions whe
 
 It's important to note that the bit strings need to be of equal length for the comparison to make sense. The Hamming metric is mainly used with binary vectors for error detection over networks.
 
-<br>![Description of hamming_similarity2.png follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/hamming_similarity2.png)<br>[Descriptionof the illustration hamming_similarity2.png](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/hamming_similarity2.md)<br>**Parent topic:** [Vector Distance Metrics](vector-distance-metrics.md)
+<br>![Description of hamming_similarity2.png follows](/img/hamming_similarity2.png)<br>[Descriptionof the illustration hamming_similarity2.png](/img_text/hamming_similarity2.md)<br>**Parent topic:** [Vector Distance Metrics](vector-distance-metrics.md)
