@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of vector_dimension_count.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/vector_dimension_count.gif)<br>[Descriptionof the illustration vector_dimension_count.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/vector_dimension_count.md)
+<br>![Description of vector_dimension_count.eps follows](/img/vector_dimension_count.gif)<br>[Descriptionof the illustration vector_dimension_count.eps](/img_text/vector_dimension_count.md)
 
 <br>Purpose
 
