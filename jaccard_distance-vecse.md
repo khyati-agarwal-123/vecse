@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of jaccard_distance_syntax.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/jaccard_distance_syntax.gif)<br>[Descriptionof the illustration jaccard_distance_syntax.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/jaccard_distance_syntax.md)
+<br>![Description of jaccard_distance_syntax.eps follows](/img/jaccard_distance_syntax.gif)<br>[Descriptionof the illustration jaccard_distance_syntax.eps](/img_text/jaccard_distance_syntax.md)
 
 <br>Parameters
 
