@@ -6,4 +6,4 @@ Imagine yourself in the streets of Manhattan trying to go from point A to point 
 
 This metric is most useful for vectors describing objects on a uniform grid, such as city blocks, power grids, or a chessboard. It can be useful for higher dimensional vector spaces too. Compared to the Euclidean metric, the Manhattan metric is faster for calculations and you can use it advantageously for higher dimensional vector spaces.
 
-<br>![Description of manhattan_similarity2.png follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/manhattan_similarity2.png)<br>[Descriptionof the illustration manhattan_similarity2.png](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/manhattan_similarity2.md)<br>**Parent topic:** [Vector Distance Metrics](vector-distance-metrics.md)
+<br>![Description of manhattan_similarity2.png follows](/img/manhattan_similarity2.png)<br>[Descriptionof the illustration manhattan_similarity2.png](/img_text/manhattan_similarity2.md)<br>**Parent topic:** [Vector Distance Metrics](vector-distance-metrics.md)
