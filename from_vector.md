@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of from_vector.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/from_vector.gif)<br>[Descriptionof the illustration from_vector.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/from_vector.md)
+<br>![Description of from_vector.eps follows](/img/from_vector.gif)<br>[Descriptionof the illustration from_vector.eps](/img_text/from_vector.md)
 
 <br>Purpose<br>`FROM_VECTOR` optionally takes a `RETURNING` clause to specify the data type of the returned value. <br>If `VARCHAR2` is specified without size, the size of the returned value size is 32767. <br>You can optionally specify the text format of the output in the `FORMAT` clause, using the tokens `SPARSE` or `DENSE`. Note that the input vector storage format does not need to match the specified output format. <br>There is no support to convert to `CHAR`, `NCHAR`, and `NVARCHAR2`. <br>`FROM_VECTOR` is synonymous with `VECTOR_SERIALIZE`. 
 
