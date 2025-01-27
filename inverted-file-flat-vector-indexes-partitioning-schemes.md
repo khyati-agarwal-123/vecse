@@ -13,7 +13,7 @@ A **global IVF index** is composed of two tables:
 
 This is illustrated by the following diagram:
 
-![Description of global_ivf_index.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/global_ivf_index.png)<br>[Descriptionof the illustration global_ivf_index.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/global_ivf_index.md)
+![Description of global_ivf_index.eps follows](/img/global_ivf_index.png)<br>[Descriptionof the illustration global_ivf_index.eps](/img_text/global_ivf_index.md)
 
 This structure is used to accelerate searches in the index by identifying first the centroid that is the closest to your query vector, and then use the corresponding centroid id to prune unnecessary partitions.
 
@@ -30,11 +30,11 @@ This is illustrated by the following graphic, where the base table has three par
 
 
 
-![Description of local_ivf_index_usecase1.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/local_ivf_index_usecase1.png)<br>[Descriptionof the illustration local_ivf_index_usecase1.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/local_ivf_index_usecase1.md)Coming back to our initial example where you search the top-10 houses in California similar to a vectorized picture; your query benefits from partition pruning on the base table and Centroids table (California) as they are both partitioned by state. In addition, and once the closest centroid is identified in that partition, the query simply needs to scan the corresponding centroid cluster subpartition in the Centroid Partitions table without having to scan other centroid subpartitions. 
+![Description of local_ivf_index_usecase1.eps follows](/img/local_ivf_index_usecase1.png)<br>[Descriptionof the illustration local_ivf_index_usecase1.eps](/img_text/local_ivf_index_usecase1.md)Coming back to our initial example where you search the top-10 houses in California similar to a vectorized picture; your query benefits from partition pruning on the base table and Centroids table (California) as they are both partitioned by state. In addition, and once the closest centroid is identified in that partition, the query simply needs to scan the corresponding centroid cluster subpartition in the Centroid Partitions table without having to scan other centroid subpartitions. 
 
 Another possibility is for the base table to be composite partitioned. Here is a graphical representation corresponding to that case. The Centroids table is list-partitioned according to base table subpartitions. Each partition in the Centroids table containing all centroid vectors found in the corresponding base table subpartition. The Centroid Partitions table is list-partitioned by base table subpartition id, and is further subpartitioned by centroid id: 
 
-![Description of local_ivf_index_usecase2.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/local_ivf_index_usecase2.png)<br>[Descriptionof the illustration local_ivf_index_usecase2.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/local_ivf_index_usecase2.md)
+![Description of local_ivf_index_usecase2.eps follows](/img/local_ivf_index_usecase2.png)<br>[Descriptionof the illustration local_ivf_index_usecase2.eps](/img_text/local_ivf_index_usecase2.md)
 
 > **note:** 
 
