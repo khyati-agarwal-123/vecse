@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of vector_norm.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/vector_norm.gif)<br>[Descriptionof the illustration vector_norm.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/vector_norm.md)
+<br>![Description of vector_norm.eps follows](/img/vector_norm.gif)<br>[Descriptionof the illustration vector_norm.eps](/img_text/vector_norm.md)
 
 <br>Parameters
 
