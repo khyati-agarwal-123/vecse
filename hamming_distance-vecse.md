@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of hamming_distance_syntax.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/hamming_distance_syntax.gif)<br>[Descriptionof the illustration hamming_distance_syntax.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/hamming_distance_syntax.md)
+<br>![Description of hamming_distance_syntax.eps follows](/img/hamming_distance_syntax.gif)<br>[Descriptionof the illustration hamming_distance_syntax.eps](/img_text/hamming_distance_syntax.md)
 
 <br>Parameters
 
