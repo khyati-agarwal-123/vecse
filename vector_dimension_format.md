@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of vector_dimension_format.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/vector_dimension_format.gif)<br>[Descriptionof the illustration vector_dimension_format.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/vector_dimension_format.md)
+<br>![Description of vector_dimension_format.eps follows](/img/vector_dimension_format.gif)<br>[Descriptionof the illustration vector_dimension_format.eps](/img_text/vector_dimension_format.md)
 
 <br>Parameters
 
