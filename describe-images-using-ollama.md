@@ -10,7 +10,7 @@ Certain features of the database may allow you to access services offered separa
 
 To describe the contents of an image, by prompting with the following image of a bird and the text question "`Describe this image?`", by calling a local LLM using Ollama: 
 
-![Description of bird.jpg follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/bird.jpg)<br>[Descriptionof the illustration bird.jpg](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/bird.md)
+![Description of bird.jpg follows](/img/bird.jpg)<br>[Descriptionof the illustration bird.jpg](/img_text/bird.md)
 
 1. Connect to Oracle Database as a local user.
 1. Log in to SQL*Plus as the `SYS` user, connecting as `SYSDBA`:
