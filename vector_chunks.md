@@ -4,39 +4,39 @@ Use `VECTOR_CHUNKS` to split plain text into smaller chunks to generate vector e
 
 Syntax
 
-<br>![Description of vector_chunks.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/vector_chunks.gif)<br>[Descriptionof the illustration vector_chunks.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/vector_chunks.md)
+<br>![Description of vector_chunks.eps follows](/img/vector_chunks.gif)<br>[Descriptionof the illustration vector_chunks.eps](/img_text/vector_chunks.md)
 
 <br>*chunks_table_arguments*::= 
 
-<br>![Description of chunks_table_arguments.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunks_table_arguments.gif)<br>[Descriptionof the illustration chunks_table_arguments.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunks_table_arguments.md)
+<br>![Description of chunks_table_arguments.eps follows](/img/chunks_table_arguments.gif)<br>[Descriptionof the illustration chunks_table_arguments.eps](/img_text/chunks_table_arguments.md)
 
 <br>*chunking_spec*::= 
 
-<br>![Description of chunking_spec.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_spec.gif)<br>[Descriptionof the illustration chunking_spec.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_spec.md)
+<br>![Description of chunking_spec.eps follows](/img/chunking_spec.gif)<br>[Descriptionof the illustration chunking_spec.eps](/img_text/chunking_spec.md)
 
 <br>*split_characters_list*::= 
 
-<br>![Description of split_characters_list.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/split_characters_list.gif)<br>[Descriptionof the illustration split_characters_list.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/split_characters_list.md)
+<br>![Description of split_characters_list.eps follows](/img/split_characters_list.gif)<br>[Descriptionof the illustration split_characters_list.eps](/img_text/split_characters_list.md)
 
 <br>*custom_split_characters_list*
 
-<br>![Description of custom_split_characters_list.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/custom_split_characters_list.gif)<br>[Descriptionof the illustration custom_split_characters_list.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/custom_split_characters_list.md)
+<br>![Description of custom_split_characters_list.eps follows](/img/custom_split_characters_list.gif)<br>[Descriptionof the illustration custom_split_characters_list.eps](/img_text/custom_split_characters_list.md)
 
 <br>*normalization_spec*
 
-<br>![Description of normalization_spec.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/normalization_spec.gif)<br>[Descriptionof the illustration normalization_spec.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/normalization_spec.md)
+<br>![Description of normalization_spec.eps follows](/img/normalization_spec.gif)<br>[Descriptionof the illustration normalization_spec.eps](/img_text/normalization_spec.md)
 
 <br>*custom_normalization_spec*
 
-<br>![Description of custom_normalization_spec.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/custom_normalization_spec.gif)<br>[Descriptionof the illustration custom_normalization_spec.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/custom_normalization_spec.md)
+<br>![Description of custom_normalization_spec.eps follows](/img/custom_normalization_spec.gif)<br>[Descriptionof the illustration custom_normalization_spec.eps](/img_text/custom_normalization_spec.md)
 
 <br>*normalization_mode*
 
-<br>![Description of normalization_mode.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/normalization_mode.gif)<br>[Descriptionof the illustration normalization_mode.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/normalization_mode.md)
+<br>![Description of normalization_mode.eps follows](/img/normalization_mode.gif)<br>[Descriptionof the illustration normalization_mode.eps](/img_text/normalization_mode.md)
 
 <br>*chunking_mode*::= 
 
-<br>![Description of chunking_mode.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_mode.gif)<br>[Descriptionof the illustration chunking_mode.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_mode.md)
+<br>![Description of chunking_mode.eps follows](img/chunking_mode.gif)<br>[Descriptionof the illustration chunking_mode.eps](/img_text/chunking_mode.md)
 
 <br>Purpose<br>`VECTOR_CHUNKS` is a function that can only appear in the `FROM` clause of `SELECT`. It takes a row of textual input and outputs rows of chunk information with metadata. <br>The chunking output includes:
 
@@ -64,9 +64,7 @@ Input Data Type | Output Data Type | Output Offset
 `NCHAR` |  `NVARCHAR2` |  `byte`  
 `NCLOB` |  `NVARCHAR2` |  `character`  
 
-> **note:** 
-
-* For more information about data types, see *Data Types* in the SQL Reference Manual. 
+> **note:** * For more information about data types, see *Data Types* in the SQL Reference Manual. 
 
 * The `VARCHAR2` input data type is limited to `4000` bytes unless the `MAX_STRING_SIZE` parameter is set to `EXTENDED`, which increases the limit to `32767`. 
 
@@ -83,24 +81,11 @@ When specifying chunking parameters for this API, ensure that you provide these 
 
 Parameter | Description and Acceptable Values  
 ---|---  
-`BY` |  Specifies the mode for splitting your data, that is, to split by counting the number of characters, words, or vocabulary tokens.<br>**Valid values**: <br>* `CHARACTERS` (or `CHARS`): <br>Splits by counting the number of characters. <br>`WORDS`: <br>Splits by counting the number of words.<br>Words are defined as sequences of alphabetic characters, sequences of digits, individual punctuation marks, or symbols. For segmented languages without whitespace word boundaries (such as Chinese, Japanese, or Thai), each native character is considered a word (that is, unigram). <br>`VOCABULARY`: <br>Splits by counting the number of vocabulary tokens.<br>Vocabulary tokens are words or word pieces, recognized by the vocabulary of the tokenizer that your embedding model uses. You can load your vocabulary file using the `VECTOR_CHUNKS` helper API `DBMS_VECTOR_CHAIN.CREATE_VOCABULARY`. <br>**Note**: For accurate results, ensure that the chosen model matches the vocabulary file used for chunking. If you are not using a vocabulary file, then ensure that the input length is defined within the token limits of your model. 
-<br>**Default value**: `WORDS`  
-`MAX` |  Specifies a limit on the maximum size of each chunk. This setting splits the input text at a fixed point where the maximum limit occurs in the larger text. The units of `MAX` correspond to the `BY` mode, that is, to split data when it reaches the maximum size limit of a certain number of characters, words, numbers, punctuation marks, or vocabulary tokens. <br>**Valid values**: <br>* `BY CHARACTERS`: `50` to `4000` characters  <br>`BY WORDS`: `10` to `1000` words  <br>`BY VOCABULARY`: `10` to `1000` tokens 
-<br>**Default value**: `100`  
-`SPLIT [BY]` |  Specifies where to split the input text when it reaches the maximum size limit. This helps to keep related data together by defining appropriate boundaries for chunks. <br>**Valid values**: <br>* `NONE`: <br>Splits at the `MAX` limit of characters, words, or vocabulary tokens.  <br>`NEWLINE`, `BLANKLINE`, and `SPACE`: <br>These are single-split character conditions that split at the last split character before the `MAX` value. <br>Use `NEWLINE` to split at the end of a line of text. Use `BLANKLINE` to split at the end of a blank line (sequence of characters, such as two newlines). Use `SPACE` to split at the end of a blank space.  <br>`RECURSIVELY`: <br>This is a multiple-split character condition that breaks the input text using an ordered list of characters (or sequences). <br>`RECURSIVELY` is predefined as `BLANKLINE`, `NEWLINE`, `SPACE`, `NONE` in this order: <br>1\. If the input text is more than the `MAX` value, then split by the first split character. <br>2\. If that fails, then split by the second split character. <br>3\. And so on. <br>4\. If no split characters exist, then split by `MAX` wherever it appears in the text.  <br>`SENTENCE`: <br>This is an end-of-sentence split condition that breaks the input text at a sentence boundary.<br>This condition automatically determines sentence boundaries by using knowledge of the input language's sentence punctuation and contextual rules. This language-specific condition relies mostly on end-of-sentence (EOS) punctuations and common abbreviations. <br>Contextual rules are based on word information, so this condition is only valid when splitting the text by words or vocabulary (not by characters). <br>**Note**: This condition obeys the `BY WORD` and `MAX` settings, and thus may not determine accurate sentence boundaries in some cases. For example, when a sentence is larger than the `MAX` value, it splits the sentence at `MAX`. Similarly, it includes multiple sentences in the text only when they fit within the `MAX` limit.  <br>`CUSTOM`: <br>Splits based on a custom list of characters strings, for example, markup tags. You can provide custom sequences up to a limit of `16` split character strings, with a maximum length of `10` each.  Provide valid text literals as follows:
-```
-VECTOR_CHUNKS(c. doc, BY character SPLIT CUSTOM ('' , '
-```
-
-
-')) vc 
-
-**Default value**: `RECURSIVELY`
-
+`BY` |  Specifies the mode for splitting your data, that is, to split by counting the number of characters, words, or vocabulary tokens.<br>**Valid values**: <br>* `CHARACTERS` (or `CHARS`): <br>Splits by counting the number of characters. <br>`WORDS`: <br>Splits by counting the number of words.<br>Words are defined as sequences of alphabetic characters, sequences of digits, individual punctuation marks, or symbols. For segmented languages without whitespace word boundaries (such as Chinese, Japanese, or Thai), each native character is considered a word (that is, unigram). <br>`VOCABULARY`: <br>Splits by counting the number of vocabulary tokens.<br>Vocabulary tokens are words or word pieces, recognized by the vocabulary of the tokenizer that your embedding model uses. You can load your vocabulary file using the `VECTOR_CHUNKS` helper API `DBMS_VECTOR_CHAIN.CREATE_VOCABULARY`. <br>**Note**: For accurate results, ensure that the chosen model matches the vocabulary file used for chunking. If you are not using a vocabulary file, then ensure that the input length is defined within the token limits of your model. <br>**Default value**: `WORDS`  
+`MAX` |  Specifies a limit on the maximum size of each chunk. This setting splits the input text at a fixed point where the maximum limit occurs in the larger text. The units of `MAX` correspond to the `BY` mode, that is, to split data when it reaches the maximum size limit of a certain number of characters, words, numbers, punctuation marks, or vocabulary tokens. <br>**Valid values**: <br>* `BY CHARACTERS`: `50` to `4000` characters  <br>`BY WORDS`: `10` to `1000` words  <br>`BY VOCABULARY`: `10` to `1000` tokens <br>**Default value**: `100`  
+`SPLIT [BY]` |  Specifies where to split the input text when it reaches the maximum size limit. This helps to keep related data together by defining appropriate boundaries for chunks. <br>**Valid values**: <br>* `NONE`: <br>Splits at the `MAX` limit of characters, words, or vocabulary tokens.  <br>`NEWLINE`, `BLANKLINE`, and `SPACE`: <br>These are single-split character conditions that split at the last split character before the `MAX` value. <br>Use `NEWLINE` to split at the end of a line of text. Use `BLANKLINE` to split at the end of a blank line (sequence of characters, such as two newlines). Use `SPACE` to split at the end of a blank space.  <br>`RECURSIVELY`: <br>This is a multiple-split character condition that breaks the input text using an ordered list of characters (or sequences). <br>`RECURSIVELY` is predefined as `BLANKLINE`, `NEWLINE`, `SPACE`, `NONE` in this order: <br>1\. If the input text is more than the `MAX` value, then split by the first split character. <br>2\. If that fails, then split by the second split character. <br>3\. And so on. <br>4\. If no split characters exist, then split by `MAX` wherever it appears in the text.  <br>`SENTENCE`: <br>This is an end-of-sentence split condition that breaks the input text at a sentence boundary.<br>This condition automatically determines sentence boundaries by using knowledge of the input language's sentence punctuation and contextual rules. This language-specific condition relies mostly on end-of-sentence (EOS) punctuations and common abbreviations. <br>Contextual rules are based on word information, so this condition is only valid when splitting the text by words or vocabulary (not by characters). <br>**Note**: This condition obeys the `BY WORD` and `MAX` settings, and thus may not determine accurate sentence boundaries in some cases. For example, when a sentence is larger than the `MAX` value, it splits the sentence at `MAX`. Similarly, it includes multiple sentences in the text only when they fit within the `MAX` limit.  <br>`CUSTOM`: <br>Splits based on a custom list of characters strings, for example, markup tags. You can provide custom sequences up to a limit of `16` split character strings, with a maximum length of `10` each.  Provide valid text literals as follows:<br>```VECTOR_CHUNKS(c. doc, BY character SPLIT CUSTOM ('' , '```')) vc <br>**Default value**: `RECURSIVELY`
 `OVERLAP` |  Specifies the amount (as a positive integer literal or zero) of the preceding text that the chunk should contain, if any. This helps in logically splitting up related text (such as a sentence) by including some amount of the preceding chunk text.  The amount of overlap depends on how the maximum size of the chunk is measured (in characters, words, or vocabulary tokens). The overlap begins at the specified `SPLIT` condition (for example, at `NEWLINE`).  **Valid value**: `5%` to `20%` of `MAX` **Default value**: `0`  
-`LANGUAGE` |  Specifies the language of your input data. This clause is important, especially when your text contains certain characters (for example, punctuations or abbreviations) that may be interpreted differently in another language. **Valid values**: 
-
-* NLS-supported language name or its abbreviation, as listed in [*Oracle Database Globalization Support Guide*](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=NLSPG-GUID-D2FCFD55-EDC3-473F-9832-AAB564457830). 
+`LANGUAGE` |  Specifies the language of your input data. This clause is important, especially when your text contains certain characters (for example, punctuations or abbreviations) that may be interpreted differently in another language. **Valid values**: * NLS-supported language name or its abbreviation, as listed in [*Oracle Database Globalization Support Guide*](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=NLSPG-GUID-D2FCFD55-EDC3-473F-9832-AAB564457830). 
 * Custom language name or its abbreviation, as listed in [Supported Languages and Data File Locations](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/23/vecse&id=VECSE-GUID-8C8AAE2F-E64A-470F-B109-BE1AC2D6E498). You use the `DBMS_VECTOR_CHAIN.CREATE_LANG_DATA` chunker helper API to load language-specific data (abbreviation tokens) into the database, for your specified language. 
 
 You must use double quotation marks (`"`) for any language name with spaces. For example:  `LANGUAGE "simplified chinese"` For one-word language names, quotation marks are not needed. For example:  `LANGUAGE american` **Default value**: `NLS_LANGUAGE` from session   
