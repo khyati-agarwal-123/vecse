@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of inner_product.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/inner_product.gif)<br>[Descriptionof the illustration inner_product.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/inner_product.md)
+<br>![Description of inner_product.eps follows](/img/inner_product.gif)<br>[Descriptionof the illustration inner_product.eps](/img_text/inner_product.md)
 
 <br>Parameters
 
