@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of cosine_distance.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/cosine_distance.gif)<br>[Descriptionof the illustration cosine_distance.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/cosine_distance.md)
+<br>![Description of cosine_distance.eps follows](/img/cosine_distance.gif)<br>[Descriptionof the illustration cosine_distance.eps](/img_text/cosine_distance.md)
 
 <br>Parameters
 
