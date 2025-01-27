@@ -6,7 +6,7 @@ As an example, and given a certain query vector, you can calculate its distance 
 
 Figure 8-1 Exact Search
 
-<br>![Description of Figure 8-1 follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/flat-index.png)<br>[Descriptionof "Figure 8-1 Exact Search"](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/flat-index.md)<br>With an exact search, you compare the query vector `vq` against every other vector in your space by calculating its distance to each vector. After calculating all of these distances, the search returns the nearest `k` of those as the nearest matches. This is called a k-nearest neighbors (kNN) search. 
+<br>![Description of Figure 8-1 follows]/img/flat-index.png)<br>[Descriptionof "Figure 8-1 Exact Search"](/img_text/flat-index.md)<br>With an exact search, you compare the query vector `vq` against every other vector in your space by calculating its distance to each vector. After calculating all of these distances, the search returns the nearest `k` of those as the nearest matches. This is called a k-nearest neighbors (kNN) search. 
 
 For example, the Euclidean similarity search involves retrieving the top-k nearest vectors in your space relative to the Euclidean distance metric and a query vector. Here's an example that retrieves the top 10 vectors from the `vector_tab` table that are the nearest to `query_vector` using the following exact similarity search query: 
 ```
