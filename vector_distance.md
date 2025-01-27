@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of vector_distance.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/vector_distance.gif)<br>[Descriptionof the illustration vector_distance.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/vector_distance.md)
+<br>![Description of vector_distance.eps follows](/img/vector_distance.gif)<br>[Descriptionof the illustration vector_distance.eps](/img_text/vector_distance.md)
 
 <br>Purpose<br>`VECTOR_DISTANCE` takes two vectors as parameters. You can optionally specify a distance metric to calculate the distance. If you do not specify a distance metric, then the default distance metric is cosine. If the input vectors are `BINARY` vectors, the default metric is hamming . <br>You can optionally use the following shorthand vector distance functions: 
 
