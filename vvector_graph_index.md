@@ -9,18 +9,14 @@ Column Name | Data Type | Description
 `PARTITION_NAME` |  `VARCHAR2(129)` |  Object partition name (set to `NULL` for non-partitioned objects)   
 `INDEX_OBJN` |  `NUMBER` |  Index object number  
 `ANCHOR_ADDRESS` |  `RAW(8)` |  The address of the anchor structure of the in-memory neighbor graph index in the vector pool  
-`INDEX_GRAPH_TYPE` |  `VARCHAR2(129)` |  Type of the constructed graph of this index. Possible values: 
-
-* `HNSW`: Hierarchical Navigable Small Worlds. Currently only this graph is supported. 
-
-
+`INDEX_GRAPH_TYPE` |  `VARCHAR2(129)` |  Type of the constructed graph of this index. Possible values: <br>* `HNSW`: Hierarchical Navigable Small Worlds. Currently only this graph is supported. 
 `NUM_LAYERS` |  `NUMBER` |  Number of layers in the constructed graph  
 `NUM_VECTORS` |  `NUMBER` |  Number of indexed vectors in the vector graph index  
 `SPARSE_LAYER_VECTORS` |  `NUMBER` |  The total number of vectors in the sparse layers. Note that a sparse layer is defined as any layer above the bottom most layer.  
 `NUM_NEIGHBORS` |  `NUMBER` |  Maximum number of neighbors a vector can have in the sparse layers  
 `EFCONSTRUCTION` |  `NUMBER` |  Maximum number of closest vector candidates considered at each step of the search during insertion  
 `TOTAL_EDGES` |  `NUMBER` |  Number of total edges in the constructed graph as of the latest snapshot  
-`REF_COUNT` | `NUMBER` |  Number used to track readers of the inmemory neighbor graph index. The inmemory neighbor graph index can only be dropped once the `refcount` is 0\.   
+`REF_COUNT` | `NUMBER` |  Number used to track readers of the inmemory neighbor graph index. The inmemory neighbor graph index can only be dropped once the `refcount` is 0\. 
 `QUERY_DIST_COUNT` |  `NUMBER` |  Number of distance computations done as part of queries that used the inmemory neighbor graph index  
 `CREATION_DIST_COUNT` |  `NUMBER` |  Number of distance computations done as part of the inmemory neighbor graph index creation  
 `PRUNED_NEIGHBORS` |  `NUMBER` |  Number of neighbors pruned out during the neighbor selection phase of the inmemory neighbor graph index creation  
