@@ -21,7 +21,7 @@ Sequence of Chains<br>Chainable utility functions are designed to be flexible an
 
 
 
-![Description of pdf_to_text_to_chunks_to_embeddings.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/pdf_to_text_to_chunks_to_embeddings.jpg)<br>[Descriptionof the illustration pdf_to_text_to_chunks_to_embeddings.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/pdf_to_text_to_chunks_to_embeddings.md)
+![Description of pdf_to_text_to_chunks_to_embeddings.eps follows](/img/pdf_to_text_to_chunks_to_embeddings.jpg)<br>[Descriptionof the illustration pdf_to_text_to_chunks_to_embeddings.eps](/img_text/pdf_to_text_to_chunks_to_embeddings.md)
 
 Common Use Cases
 
