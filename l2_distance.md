@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of l2_distance.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/l2_distance.gif)<br>[Descriptionof the illustration l2_distance.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/l2_distance.md)
+<br>![Description of l2_distance.eps follows](/img/l2_distance.gif)<br>[Descriptionof the illustration l2_distance.eps](/img_text/l2_distance.md)
 
 <br>Parameters
 
