@@ -4,7 +4,7 @@
 
 Syntax
 
-<br>![Description of vector_vecse.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/vector_vecse.gif)<br>[Descriptionof the illustration vector_vecse.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/vector_vecse.md)
+<br>![Description of vector_vecse.eps follows](/img/vector_vecse.gif)<br>[Descriptionof the illustration vector_vecse.eps](/img_text/vector_vecse.md)
 
 <br>Purpose
 
