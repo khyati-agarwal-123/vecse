@@ -4,7 +4,7 @@ Review these examples of all the supported chunking parameters. These examples c
 
 Here, you can see how the following sample text of five lines is split when you apply various chunking parameters to it:
 
-![Description of chunking_eg_sample_text.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg_sample_text.png)<br>[Descriptionof the illustration chunking_eg_sample_text.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg_sample_text.md)
+![Description of chunking_eg_sample_text.eps follows](/img/chunking_eg_sample_text.png)<br>[Descriptionof the illustration chunking_eg_sample_text.eps](/img_text/chunking_eg_sample_text.md)
 
 Note the following:
 
@@ -20,7 +20,7 @@ This example shows the simplest form of chunking, where you split the text by a 
 
 The text from the first chunk is split at an absolute maximum character of `200`, which divides the word `indexes` between the first two chunks. Similarly, you can see the word `Oracle` splitting between second and third chunks. 
 
-![Description of chunking_eg1.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg1.png)<br>[Descriptionof the illustration chunking_eg1.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg1.md)
+![Description of chunking_eg1.eps follows](/img/chunking_eg1.png)<br>[Descriptionof the illustration chunking_eg1.eps](/img_text/chunking_eg1.md)
 
 Syntax:
 ```
@@ -54,7 +54,7 @@ In this example, the text is split into four chunks at new lines, if possible, w
 
 The text from the first chunk is split after the second line because the third line would exceed the maximum. The third line fits within the maximum perfectly. The fourth and fifth line would also exceed the maximum, so it produces two chunks.
 
-![Description of chunking_eg2.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg2.png)<br>[Descriptionof the illustration chunking_eg2.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg2.md)
+![Description of chunking_eg2.eps follows](/img/chunking_eg2.png)<br>[Descriptionof the illustration chunking_eg2.eps](/img_text/chunking_eg2.md)
 
 Syntax:
 ```
@@ -86,7 +86,7 @@ In this example, the text is split into five chunks recursively using blank line
 
 The first chunk is split after the first blank line because including the text after the second blank line would exceed the maximum. The second passage exceeds the maximum on its own, so it is broken into two chunks at the new lines. Similarly, the third section is also broken into two chunks at the new lines.
 
-![Description of chunking_eg3.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg3.png)<br>[Descriptionof the illustration chunking_eg3.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg3.md)
+![Description of chunking_eg3.eps follows](/img/chunking_eg3.png)<br>[Descriptionof the illustration chunking_eg3.eps](/img_text/chunking_eg3.md)
 
 Syntax:
 ```
@@ -116,7 +116,7 @@ Example 4-4 BY words MAX 40 OVERLAP 0 SPLIT BY none
 
 In this example, the text is split into three chunks at an absolute maximum word of `40`, the third line after `wordloads` and the fifth line after `with`. 
 
-![Description of chunking_eg4.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg4.png)<br>[Descriptionof the illustration chunking_eg4.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg4.md)
+![Description of chunking_eg4.eps follows](/img/chunking_eg4.png)<br>[Descriptionof the illustration chunking_eg4.eps](/img_text/chunking_eg4.md)
 
 Syntax:
 ```
@@ -152,7 +152,7 @@ In this example, the text is split into chunks at new lines, if possible, within
 
 The first chunk (of 21 words) is split after the second line, as the third line would exceed the maximum number of words (21+33 words). The third and fourth lines fit within the maximum. The fifth line is 29 words, so fits in the last chunk.
 
-![Description of chunking_eg5.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg5.png)<br>[Descriptionof the illustration chunking_eg5.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg5.md)
+![Description of chunking_eg5.eps follows](/img/chunking_eg5.png)<br>[Descriptionof the illustration chunking_eg5.eps](/img_text/chunking_eg5.md)
 
 Syntax:
 ```
@@ -184,7 +184,7 @@ In this example, the chunks are split by words recursively using blank lines, ne
 
 The text after the second blank line exceeds the maximum words, so the first chunk ends at the first blank line. The second chunk (of 38 words) ends at the next blank line. The final chunk (of 35 words) consists of the rest of the input.
 
-![Description of chunking_eg6.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg6.png)<br>[Descriptionof the illustration chunking_eg6.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg6.md)
+![Description of chunking_eg6.eps follows](/img/chunking_eg6.png)<br>[Descriptionof the illustration chunking_eg6.eps](/img_text/chunking_eg6.md)
 
 Syntax:
 ```
@@ -214,7 +214,7 @@ Example 4-7 BY vocabulary MAX 40 OVERLAP 0 SPLIT BY none
 
 In this example, the text is split into four chunks at an absolute maximum vocabulary token of 40, which contrasts with the three chunks produced in [Example 4-4](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-A87E00B0-211B-4A8F-BFEB-011F18CA7BAF). This is because vocabulary tokens include pieces of words, so the chunk text is generally smaller than simple word splitting. 
 
-![Description of chunking_eg7.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg7.png)<br>[Descriptionof the illustration chunking_eg7.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg7.md)
+![Description of chunking_eg7.eps follows](/img/chunking_eg7.png)<br>[Descriptionof the illustration chunking_eg7.eps](/img_text/chunking_eg7.md)
 
 Syntax:
 ```
@@ -249,7 +249,7 @@ In this example, the text is split into five chunks with newlines, using an abso
 
 Vocabulary tokens include pieces of words, so the chunk text is generally smaller than simple word splitting. This example produces five chunks rather than three in [Example 4-5](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-B466EAF9-8FE5-4B98-88FB-747F117F477A), with the middle passage split into two, and the final word unable to fit into the fourth chunk. 
 
-![Description of chunking_eg8.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg8.png)<br>[Descriptionof the illustration chunking_eg8.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg8.md)
+![Description of chunking_eg8.eps follows](/img/chunking_eg8.png)<br>[Descriptionof the illustration chunking_eg8.eps](/img_text/chunking_eg8.md)
 
 Syntax:
 ```
@@ -285,7 +285,7 @@ In this example, the text is split into seven chunks recursively using blank lin
 
 Vocabulary tokens include pieces of words, so the chunk text is generally smaller than simple word splitting. This example produces seven chunks with the middle passage split into three and the final passage split into three. 
 
-![Description of chunking_eg9.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg9.png)<br>[Descriptionof the illustration chunking_eg9.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg9.md)
+![Description of chunking_eg9.eps follows](/img/chunking_eg9.png)<br>[Descriptionof the illustration chunking_eg9.eps](/img_text/chunking_eg9.md)
 
 Syntax:
 ```
@@ -321,7 +321,7 @@ This example is similar to [Example 4-4](explore-chunking-techniques-and-example
 
 The first chunk ends at the maximum 40 words (after `workloads`). The second chunk overlaps with the last 5 words including parentheses of the first chunk, and ends after `unstructured`. The overlapping words are underlined below. The third chunk overlaps with the last 5 words, which are also underlined. 
 
-![Description of chunking_eg10.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg10.png)<br>[Descriptionof the illustration chunking_eg10.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg10.md)
+![Description of chunking_eg10.eps follows](/chunking_eg10.png)<br>[Descriptionof the illustration chunking_eg10.eps](/img_text/chunking_eg10.md)
 
 Syntax:
 ```
@@ -355,7 +355,7 @@ This example is similar to [Example 4-5](explore-chunking-techniques-and-example
 
 The first chunk ends at the second line, as the third line would exceed the maximum 40 words. The second chunk starts with the second line of 5 words of the first chunk (underlined below) and ends at the third line. The third chunk has no overlap because the preceding line exceeds the maximum of 5.
 
-![Description of chunking_eg11.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg11.png)<br>[Descriptionof the illustration chunking_eg11.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg11.md)
+![Description of chunking_eg11.eps follows](/img/chunking_eg11.png)<br>[Descriptionof the illustration chunking_eg11.eps](/img_text/chunking_eg11.md)
 
 Syntax:
 ```
@@ -389,7 +389,7 @@ This example is similar to [Example 4-6](explore-chunking-techniques-and-example
 
 The text after the second blank line exceeds the maximum words, so the first chunk ends at the first blank line. The second chunk overlaps with 5 words (beginning on a space; underlined below) and includes the second line, but excludes the third line of 33 words. The third chunk overlaps 5 words and ends on the second blank line. The fourth chunk consumes the rest of the input.
 
-![Description of chunking_eg12.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg12.png)<br>[Descriptionof the illustration chunking_eg12.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg12.md)
+![Description of chunking_eg12.eps follows](/img/chunking_eg12.png)<br>[Descriptionof the illustration chunking_eg12.eps](/img_text/chunking_eg12.md)
 
 Syntax:
 ```
@@ -425,7 +425,7 @@ Example 4-13 BY chars MAX 200 OVERLAP 0 SPLIT BY none NORMALIZE none
 
 This example is the same as the first one ([Example 4-1](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-B9B2D553-AEA4-48C5-A4E2-B889B59CF53E)), to contrast with the next example ([Example 4-14](explore-chunking-techniques-and-examples.md#GUID-BFDE8B0A-6302-472C-AD8B-1BEB9AA2CB87__GUID-474059EF-2955-435A-A994-65BDDB19F394)) with normalization. 
 
-![Description of chunking_eg13.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg13.png)<br>[Descriptionof the illustration chunking_eg13.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg13.md)
+![Description of chunking_eg13.eps follows](/img/chunking_eg13.png)<br>[Descriptionof the illustration chunking_eg13.eps](/img_text/chunking_eg13.md)
 
 Syntax:
 ```
@@ -463,7 +463,7 @@ The first chunk extends 8 more characters due to the two indented lines of 4 spa
 
 This example shows that the chunk length (normally in bytes) can differ from the chunk text's size. The `CHUNK_OFFSET` and `CHUNK_LENGTH` represent the original source location of the chunk. 
 
-![Description of chunking_eg14.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg14.png)<br>[Descriptionof the illustration chunking_eg14.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg14.md)
+![Description of chunking_eg14.eps follows]/img/chunking_eg14.png)<br>[Descriptionof the illustration chunking_eg14.eps](/img_text/chunking_eg14.md)
 
 Syntax:
 ```
@@ -498,7 +498,7 @@ This example uses end-of-sentence splitting which uses language-specific data an
 
 You can use this technique to keep your text intact for chunks that contain many split sentences. Otherwise, the text may lose semantic context and may not be useful for queries that target specific information.
 
-![Description of chunking_eg15.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg15.png)<br>[Descriptionof the illustration chunking_eg15.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg15.md)
+![Description of chunking_eg15.eps follows](/img/chunking_eg15.png)<br>[Descriptionof the illustration chunking_eg15.eps](/img_text/chunking_eg15.md)
 
 Syntax:
 ```
@@ -530,7 +530,7 @@ In continuation with the preceding example, this example uses a Simplified Chine
 
 The output contains four chunks, each ending at the periods:
 
-![Description of chunking_eg16.eps follows](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img/chunking_eg16.png)<br>[Descriptionof the illustration chunking_eg16.eps](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/img_text/chunking_eg16.md)
+![Description of chunking_eg16.eps follows](/img/chunking_eg16.png)<br>[Descriptionof the illustration chunking_eg16.eps](/img_text/chunking_eg16.md)
 
 For the purpose of clarity, in this example, `documentation_tab` is a `CLOB` inserted with the following `ChineseDoc.txt` document:
 ```
