@@ -1,0 +1,148 @@
+name: Sync main → develop
+
+on:
+  # Only run after a PR into main is closed (merged)
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+  # Allow manual runs for testing
+  workflow_dispatch:
+
+# We need to be able to push to develop and open an issue.
+permissions:
+  contents: write
+  pull-requests: read
+  issues: write
+
+# Avoid overlapping runs per repo
+concurrency:
+  group: sync-main-develop-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    # Only continue if the PR was actually merged (not just closed)
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # We need full history to work across branches
+          fetch-depth: 0
+
+      - name: Configure Git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch all branches
+        run: |
+          git fetch origin +refs/heads/*:refs/remotes/origin/* --prune --no-tags
+
+      - name: Prepare develop branch (create if missing)
+        id: prep
+        run: |
+          set -eo pipefail
+          if git show-ref --verify --quiet refs/remotes/origin/develop; then
+            echo "Remote 'develop' exists."
+            git checkout -B develop origin/develop
+            echo "created=false" >> $GITHUB_OUTPUT
+          else
+            echo "Remote 'develop' does not exist. Creating from origin/main."
+            git checkout -B develop origin/main
+            echo "created=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Merge main → develop (detect conflicts)
+        id: merge
+        run: |
+          set -eo pipefail
+          # Try to merge origin/main into the current develop working tree
+          # Do NOT fail this step immediately; we want to detect conflicts and handle them.
+          git pull --no-tags --prune origin main --no-edit || true
+
+          if [ -f .git/MERGE_HEAD ]; then
+            echo "conflict=true" >> $GITHUB_OUTPUT
+          else
+            echo "conflict=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Abort on conflict and fail job
+        if: steps.merge.outputs.conflict == 'true'
+        run: |
+          echo "Merge conflict detected. Aborting and failing."
+          git merge --abort || true
+          git reset --hard
+          exit 1
+
+      - name: Push updated develop
+        if: steps.merge.outputs.conflict == 'false'
+        run: |
+          git push origin HEAD:develop
+
+      # If we reach here with a failure (i.e., conflicts), notify maintainers.
+      - name: Find maintainers (admins/maintain perms)
+        if: failure()
+        id: maints
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            // List collaborators and filter for admin/maintain roles
+            const collabs = await github.paginate(github.rest.repos.listCollaborators, {
+              owner, repo, per_page: 100
+            });
+            const maintainers = collabs
+              .filter(c => c.permissions && (c.permissions.admin || c.permissions.maintain))
+              .map(c => c.login);
+
+            // Fallback: include the merger/actor so at least someone is notified.
+            const actor = context.payload.pull_request.merged_by?.login || context.actor;
+            const unique = Array.from(new Set([...maintainers, actor]));
+            const mentionList = unique.slice(0, 10); // avoid over-mentioning
+
+            core.setOutput('mentions', mentionList.map(u => `@${u}`).join(' '));
+            core.setOutput('assignees', mentionList.join(','));
+      - name: Open Issue to notify maintainers
+        if: failure()
+        uses: actions/github-script@v7
+        env:
+          MENTIONS: ${{ steps.maints.outputs.mentions }}
+          ASSIGNEES: ${{ steps.maints.outputs.assignees }}
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const title = "⚠️ Merge conflicts pulling main → develop";
+            const mentions = process.env.MENTIONS || "";
+            const body = `
+${mentions}
+
+The automated sync workflow failed due to **merge conflicts** when pulling \`main\` into \`develop\` on **${new Date().toISOString()}**.
+
+Please resolve locally:
+
+\`\`\`bash
+git fetch origin
+git checkout develop
+git pull --ff-only            # update local develop
+git merge origin/main         # will show conflicts
+# resolve conflicts in your editor/IDE
+git add -A
+git commit                    # write a clear message
+git push origin develop
+\`\`\`
+
+After resolving, future merges to \`main\` will sync automatically.
+`;
+
+            const assignees = (process.env.ASSIGNEES || "")
+              .split(",")
+              .map(s => s.trim())
+              .filter(Boolean);
+
+            await github.rest.issues.create({
+              owner, repo, title, body, assignees
+            });
