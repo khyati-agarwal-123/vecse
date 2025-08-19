@@ -1,0 +1,72 @@
+name: Debug main → develop merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+  workflow_dispatch: # allow manual run
+
+permissions:
+  contents: read
+
+jobs:
+  debug-sync:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout all branches
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch all
+        run: |
+          git fetch origin +refs/heads/*:refs/remotes/origin/* --prune --no-tags
+          git branch -a
+          git remote -v
+
+      - name: Checkout develop or create from main
+        run: |
+          if git show-ref --verify --quiet refs/remotes/origin/develop; then
+            echo "✅ develop branch exists remotely"
+            git checkout -B develop origin/develop
+          else
+            echo "⚠️ develop branch missing — creating from main"
+            git checkout -B develop origin/main
+          fi
+          git log --oneline -n 5
+
+      - name: Attempt merge (debug only, do not push)
+        id: merge
+        run: |
+          set -x
+          git merge origin/main --no-edit || true
+
+          if [ -f .git/MERGE_HEAD ]; then
+            echo "conflict=true" >> $GITHUB_OUTPUT
+            echo "❌ Merge conflict detected"
+          else
+            echo "conflict=false" >> $GITHUB_OUTPUT
+            echo "✅ Merge would succeed"
+          fi
+
+      - name: Print git status
+        run: |
+          git status
+          git log --oneline --graph --decorate -n 10
+          echo "Conflict flag: ${{ steps.merge.outputs.conflict }}"
+
+      - name: Write summary
+        run: |
+          echo "### Debug Merge Report" >> $GITHUB_STEP_SUMMARY
+          echo "- Conflict: **${{ steps.merge.outputs.conflict }}**" >> $GITHUB_STEP_SUMMARY
+          echo "- Current branch: $(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_STEP_SUMMARY
+          echo "- Last commits:" >> $GITHUB_STEP_SUMMARY
+          git log --oneline -n 5 >> $GITHUB_STEP_SUMMARY
