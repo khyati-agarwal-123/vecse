@@ -1,6 +1,6 @@
 ## Access Third-Party Models for Vector Generation Leveraging Third-Party REST APIs {#GUID-F3C6AEAE-2995-4867-BE94-30907D6087BC}
 
-You can access third-party vector embedding models to generate vector embeddings from your data, outside the database by calling third-party REST APIs. hello not fine
+You can access third-party vector embedding models to generate vector embeddings from your data, outside the database by calling third-party REST APIs.
 
 The Vector Utility PL/SQL packages `DBMS_VECTOR` and `DBMS_VECTOR_CHAIN` (outlined in [Supplied Vector Utility PL/SQL Packages](supplied-vector-utility-pl-sql-packages.md#GUID-D73320C0-C2E3-4B67-A7C9-C0490DC9DE6C)) provide the third-party REST APIs that let you interact with external embedding models. 
 
