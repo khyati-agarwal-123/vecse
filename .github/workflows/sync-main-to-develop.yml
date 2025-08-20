@@ -1,102 +1,30 @@
-name: Debug Sync main → develop
+name: Sync main -> develop
 
 on:
   push:
     branches:
-      - main
-
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  issues: write
+      - main   # Trigger only on main branch commits
 
 jobs:
-  debug-sync:
+  sync-main-to-develop:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout all branches
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0   # fetch all branches
 
-      - name: Setup Git
+      - name: Set up Git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Debug before fetch
+      - name: Fetch all branches
         run: |
-          echo "### Branches before fetch"
-          git branch -a
-          echo
-          echo "### Remotes"
-          git remote -v
+          git fetch origin
+          git checkout develop
 
-      - name: Fetch develop
+      - name: Merge main into develop
         run: |
-          git fetch origin develop || true
-
-      - name: Debug after fetch
-        run: |
-          echo "### Branches after fetch"
-          git branch -a
-          echo
-          echo "### Remote branches"
-          git branch -r
-
-      - name: Checkout develop
-        run: |
-          if git branch -r | grep origin/develop; then
-            echo "Checking out develop from origin/develop"
-            git checkout develop || git checkout -b develop origin/develop
-            git reset --hard origin/develop
-          else
-            echo "No remote develop found, creating from main"
-            git checkout -b develop origin/main
-          fi
-
-      - name: Show status before merge
-        run: |
-          echo "### Current branch"
-          git branch --show-current
-          echo "### Last 5 commits on develop"
-          git log --oneline -n 5
-          echo "### Last 5 commits on main"
-          git log origin/main --oneline -n 5
-
-      - name: Try merge main into develop
-        id: merge
-        run: |
-          set -x
-          git merge origin/main --no-edit || true
-          if [ -f .git/MERGE_HEAD ]; then
-            echo "conflict=true" >> $GITHUB_OUTPUT
-          else
-            echo "conflict=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Debug merge result
-        run: |
-          if [ -f .git/MERGE_HEAD ]; then
-            echo ">>> Merge resulted in conflicts!"
-            git status
-          else
-            echo ">>> Merge clean"
-            git log --oneline -n 5
-          fi
-
-      - name: Abort on conflict (debug mode)
-        if: steps.merge.outputs.conflict == 'true'
-        run: |
-          echo "Merge conflict detected — aborting (debug mode)."
-          git merge --abort || true
-
-      - name: Final summary
-        run: |
-          echo "### Workflow Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- Actor: $GITHUB_ACTOR" >> $GITHUB_STEP_SUMMARY
-          echo "- Branch after run:" >> $GITHUB_STEP_SUMMARY
-          git branch --show-current >> $GITHUB_STEP_SUMMARY
-          echo "- Merge conflict? ${{ steps.merge.outputs.conflict }}" >> $GITHUB_STEP_SUMMARY
+          git pull origin main || exit 1
+          git push origin develop
