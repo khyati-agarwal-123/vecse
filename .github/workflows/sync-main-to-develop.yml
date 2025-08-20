@@ -1,4 +1,4 @@
-name: Sync main → develop
+name: Debug Sync main → develop
 
 on:
   pull_request:
@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   issues: write
 
 jobs:
-  sync:
+  debug-sync:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
@@ -27,23 +27,50 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      - name: Debug before fetch
+        run: |
+          echo "### Branches before fetch"
+          git branch -a
+          echo
+          echo "### Remotes"
+          git remote -v
+
       - name: Fetch develop
         run: |
           git fetch origin develop || true
 
+      - name: Debug after fetch
+        run: |
+          echo "### Branches after fetch"
+          git branch -a
+          echo
+          echo "### Remote branches"
+          git branch -r
+
       - name: Checkout develop
         run: |
           if git branch -r | grep origin/develop; then
-            git checkout develop
+            echo "Checking out develop from origin/develop"
+            git checkout develop || git checkout -b develop origin/develop
             git reset --hard origin/develop
           else
+            echo "No remote develop found, creating from main"
             git checkout -b develop origin/main
           fi
 
-      - name: Merge main into develop
+      - name: Show status before merge
+        run: |
+          echo "### Current branch"
+          git branch --show-current
+          echo "### Last 5 commits on develop"
+          git log --oneline -n 5
+          echo "### Last 5 commits on main"
+          git log origin/main --oneline -n 5
+
+      - name: Try merge main into develop
         id: merge
         run: |
-          set -eo pipefail
+          set -x
           git merge origin/main --no-edit || true
           if [ -f .git/MERGE_HEAD ]; then
             echo "conflict=true" >> $GITHUB_OUTPUT
@@ -51,40 +78,26 @@ jobs:
             echo "conflict=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Abort on conflict
+      - name: Debug merge result
+        run: |
+          if [ -f .git/MERGE_HEAD ]; then
+            echo ">>> Merge resulted in conflicts!"
+            git status
+          else
+            echo ">>> Merge clean"
+            git log --oneline -n 5
+          fi
+
+      - name: Abort on conflict (debug mode)
         if: steps.merge.outputs.conflict == 'true'
         run: |
-          echo "Merge conflict detected — aborting."
+          echo "Merge conflict detected — aborting (debug mode)."
           git merge --abort || true
-          exit 1
 
-      - name: Push develop
-        if: steps.merge.outputs.conflict == 'false'
+      - name: Final summary
         run: |
-          git push origin develop
-
-      - name: Notify maintainers on conflict
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { owner, repo } = context.repo;
-            const actor = context.actor;
-            await github.rest.issues.create({
-              owner,
-              repo,
-              title: "⚠️ Merge conflict: main → develop",
-              body: `Hi @${actor},
-
-The automatic merge from **main** into **develop** failed because of conflicts.
-Please resolve locally:
-
-\`\`\`bash
-git fetch origin
-git checkout develop
-git merge origin/main
-# resolve conflicts
-git push origin develop
-\`\`\`
-`
-            });
+          echo "### Workflow Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Actor: $GITHUB_ACTOR" >> $GITHUB_STEP_SUMMARY
+          echo "- Branch after run:" >> $GITHUB_STEP_SUMMARY
+          git branch --show-current >> $GITHUB_STEP_SUMMARY
+          echo "- Merge conflict? ${{ steps.merge.outputs.conflict }}" >> $GITHUB_STEP_SUMMARY
