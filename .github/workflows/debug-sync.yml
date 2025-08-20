@@ -1,9 +1,9 @@
 name: Debug main → develop merge
 
 on:
-  pull_request:
-    types: [closed]
-    branches: [main]
+  push:
+    branches:
+      - main
 
   workflow_dispatch: # allow manual run
 
